@@ -4,104 +4,328 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
+    <meta name="description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת. צורך בקלות מסמכים בפורמט Markdown והורד אותם כקובץ Markdown או PDF">
     <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript">
     <meta name="author" content="Dor Pascal">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#4a90e2">
     <meta property="og:title" content="עורך Markdown בעברית">
     <meta property="og:description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dorpascal.com/herbrew-markdown/">
+    <meta property="og:url" content="https://dorpascal.com/hebrew-markdown/">
     <meta property="og:image" content="https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png">
     <title>עורך Markdown בעברית</title>
-    <link rel="canonical" href="https://dorpascal.com/herbrew-markdown/">
+    <link rel="canonical" href="https://dorpascal.com/hebrew-markdown/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/icons8-markdown-duo-16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icons8-markdown-duo-32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/icons8-markdown-duo-96.png">
 
-    <!-- Apple Touch Icons -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/icons8-markdown-duo-57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/icons8-markdown-duo-60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/icons8-markdown-duo-72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/icons8-markdown-duo-76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/icons8-markdown-duo-114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/icons8-markdown-duo-120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/icons8-markdown-duo-144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icons8-markdown-duo-152.png">
+    <!-- Apple Touch Icon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/icons8-markdown-duo-180.png">
 
-    <!-- Microsoft Tile Icons -->
-    <meta name="msapplication-square70x70logo" content="/images/icons/icons8-markdown-duo-70.png">
-    <meta name="msapplication-square150x150logo" content="/images/icons/icons8-markdown-duo-150.png">
-    <meta name="msapplication-square310x310logo" content="/images/icons/icons8-markdown-duo-310.png">
+    <!-- Microsoft Tile Icon -->
     <meta name="msapplication-TileImage" content="/images/icons/icons8-markdown-duo-144.png">
-    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#4a90e2">
 
-    <!-- Android Icons -->
+    <!-- Android Icon -->
     <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icons8-markdown-duo-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icons8-markdown-duo-512.png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- json/ld schemas -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "עורך Markdown בעברית",
+            "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
+            "url": "https://dorpascal.com/hebrew-markdown/",
+            "applicationCategory": "Content",
+            "operatingSystem": "Web",
+            "browserRequirements": "HTML5",
+            "image": "https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png",
+            "author": {
+                "@type": "Person",
+                "name": "Dor Pascal"
+            }
+        }
+    </script>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "עורך Markdown בעברית",
+            "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
+            "applicationCategory": "Content",
+            "operatingSystem": "Web",
+            "browserRequirements": "HTML5",
+            "image": "https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png",
+            "author": {
+                "@type": "Person",
+                "name": "Dor Pascal"
+            }
+        }
+    </script>
+
+    <meta name="theme-color" content="#4a90e2">
     <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            min-height: 100vh;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
         }
-        h1 {
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        main {
+            display: flex;
+            flex-grow: 1;
+            padding: 1rem;
+        }
+
         #editor-container {
             display: flex;
             flex-grow: 1;
+            gap: 1rem;
+            height: calc(100vh - 200px);
         }
+
         #markdown-input, #preview {
             width: 50%;
-            height: 100%;
-            padding: 10px;
+            padding: 1rem;
             box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: white;
         }
+
         #markdown-input {
             resize: none;
             direction: rtl;
+            font-family: 'Courier New', Courier, monospace;
         }
+
         #preview {
-            border: 1px solid #ccc;
             overflow-y: auto;
         }
+
+        #toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #e9ecef;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        #help-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            #editor-container {
+                flex-direction: column;
+            }
+
+            #markdown-input, #preview {
+                width: 100%;
+                height: 50%;
+            }
+        }
     </style>
+        <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7HFKFX0PR');
+    </script>
 </head>
 <body>
-    <h1>עורך Markdown בעברית</h1>
-    <div id="editor-container">
-        <textarea id="markdown-input" placeholder="הקלד את הטקסט שלך כאן..."></textarea>
-        <div id="preview"></div>
+    <header>
+        <h1>עורך Markdown בעברית</h1>
+    </header>
+
+    <div id="toolbar">
+        <div>
+            <button class="btn" id="download-md"><i class="fas fa-download"></i> הורד כ-Markdown</button>
+            <button class="btn" id="download-pdf"><i class="fas fa-file-pdf"></i> הורד כ-PDF</button>
+        </div>
+        <button class="btn" id="help-btn"><i class="fas fa-question-circle"></i> עזרה</button>
     </div>
+
+    <main>
+        <div id="editor-container">
+            <textarea id="markdown-input" placeholder="הקלד את הטקסט שלך כאן..."></textarea>
+            <div id="preview"></div>
+        </div>
+    </main>
+
+    <div id="help-modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>עזרה - שימוש ב-Markdown</h2>
+            <ul>
+                <li><strong>כותרות:</strong> השתמש ב-# עבור כותרת ראשית, ## עבור כותרת משנית, וכן הלאה.</li>
+                <li><strong>הדגשה:</strong> הקף טקסט ב-* או _ עבור הדגשה רגילה, ** או __ עבור הדגשה חזקה.</li>
+                <li><strong>רשימות:</strong> השתמש ב-- או * בתחילת השורה עבור רשימה לא ממוספרת, או 1. עבור רשימה ממוספרת.</li>
+                <li><strong>קישורים:</strong> [טקסט הקישור](כתובת URL)</li>
+                <li><strong>תמונות:</strong> ![טקסט חלופי](כתובת URL של התמונה)</li>
+                <li><strong>ציטוטים:</strong> השתמש ב-> בתחילת השורה.</li>
+                <li><strong>קוד:</strong> הקף קוד בודד ב-`, או בלוק קוד ב-```.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>פותח על ידי <a href="https://dorpascal.com" target="_blank">דור פסקל</a> | <a href="https://github.com/Dor-sketch/hebrew-markdown-editor" target="_blank">קוד מקור ב-GitHub</a></p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script>
         const markdownInput = document.getElementById('markdown-input');
         const preview = document.getElementById('preview');
+        const downloadMdBtn = document.getElementById('download-md');
+        const downloadPdfBtn = document.getElementById('download-pdf');
+        const helpBtn = document.getElementById('help-btn');
+        const helpModal = document.getElementById('help-modal');
+        const closeBtn = document.querySelector('.close');
 
         function updatePreview() {
             const markdown = markdownInput.value;
-            if (typeof marked !== 'undefined') {
-                const html = marked.parse(markdown);
-                preview.innerHTML = html;
-            } else {
-                console.error('Marked library is not loaded');
-                preview.innerHTML = '<p>Error: Markdown parsing is currently unavailable.</p>';
-            }
+            preview.innerHTML = marked.parse(markdown);
         }
 
-        if (typeof marked === 'undefined') {
-            console.error('Marked library failed to load');
+        function downloadMarkdown() {
+            const content = markdownInput.value;
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'markdown_content.md';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function downloadPDF() {
+            const content = preview.innerHTML;
+            const opt = {
+                margin: 10,
+                filename: 'markdown_content.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(content).save();
         }
 
         markdownInput.addEventListener('input', updatePreview);
+        downloadMdBtn.addEventListener('click', downloadMarkdown);
+        downloadPdfBtn.addEventListener('click', downloadPDF);
+
+        helpBtn.onclick = function() {
+            helpModal.style.display = "block";
+        }
+
+        closeBtn.onclick = function() {
+            helpModal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == helpModal) {
+                helpModal.style.display = "none";
+            }
+        }
 
         // Initial preview update
         updatePreview();
