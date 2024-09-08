@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
+    <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript">
+    <meta name="author" content="Dor Pascal">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:title" content="עורך Markdown בעברית">
+    <meta property="og:description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dorpascal.com/herbrew-markdown/">
+    <meta property="og:image" content="https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png">
+    <title>עורך Markdown בעברית</title>
+    <link rel="canonical" href="https://dorpascal.com/herbrew-markdown/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/icons8-markdown-duo-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icons8-markdown-duo-32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/icons8-markdown-duo-96.png">
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/icons8-markdown-duo-57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/icons8-markdown-duo-60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/icons8-markdown-duo-72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/icons8-markdown-duo-76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/icons8-markdown-duo-114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/icons8-markdown-duo-120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/icons8-markdown-duo-144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/icons8-markdown-duo-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/icons8-markdown-duo-180.png">
+
+    <!-- Microsoft Tile Icons -->
+    <meta name="msapplication-square70x70logo" content="/images/icons/icons8-markdown-duo-70.png">
+    <meta name="msapplication-square150x150logo" content="/images/icons/icons8-markdown-duo-150.png">
+    <meta name="msapplication-square310x310logo" content="/images/icons/icons8-markdown-duo-310.png">
+    <meta name="msapplication-TileImage" content="/images/icons/icons8-markdown-duo-144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    <!-- Android Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icons8-markdown-duo-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icons8-markdown-duo-512.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        h1 {
+            text-align: center;
+        }
+        #editor-container {
+            display: flex;
+            flex-grow: 1;
+        }
+        #markdown-input, #preview {
+            width: 50%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #markdown-input {
+            resize: none;
+            direction: rtl;
+        }
+        #preview {
+            border: 1px solid #ccc;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>עורך Markdown בעברית</h1>
+    <div id="editor-container">
+        <textarea id="markdown-input" placeholder="הקלד את הטקסט שלך כאן..."></textarea>
+        <div id="preview"></div>
+    </div>
+
+    <script>
+        const markdownInput = document.getElementById('markdown-input');
+        const preview = document.getElementById('preview');
+
+        function updatePreview() {
+            const markdown = markdownInput.value;
+            const html = marked.parse(markdown);
+            preview.innerHTML = html;
+        }
+
+        markdownInput.addEventListener('input', updatePreview);
+
+        // Initial preview update
+        updatePreview();
+    </script>
+</body>
+</html>
