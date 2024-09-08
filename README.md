@@ -61,4 +61,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Dor Pascal - [My Website](https://dorpascal.com)
 
-Project Link: [https://github.com/Dor-sketch/hebrew-markdown/](https://github.com/yourusername/hebrew-markdown/)
+Project Link: [https://github.com/Dor-sketch/hebrew-markdown/](https://github.com/Dor-sketch/hebrew-markdown/)
