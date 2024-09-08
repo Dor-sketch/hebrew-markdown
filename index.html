@@ -43,8 +43,6 @@
     <!-- Android Icons -->
     <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icons8-markdown-duo-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/images/icons/icons8-markdown-duo-512.png">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -83,15 +81,24 @@
         <textarea id="markdown-input" placeholder="הקלד את הטקסט שלך כאן..."></textarea>
         <div id="preview"></div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
     <script>
         const markdownInput = document.getElementById('markdown-input');
         const preview = document.getElementById('preview');
 
         function updatePreview() {
             const markdown = markdownInput.value;
-            const html = marked.parse(markdown);
-            preview.innerHTML = html;
+            if (typeof marked !== 'undefined') {
+                const html = marked.parse(markdown);
+                preview.innerHTML = html;
+            } else {
+                console.error('Marked library is not loaded');
+                preview.innerHTML = '<p>Error: Markdown parsing is currently unavailable.</p>';
+            }
+        }
+
+        if (typeof marked === 'undefined') {
+            console.error('Marked library failed to load');
         }
 
         markdownInput.addEventListener('input', updatePreview);
