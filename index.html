@@ -90,7 +90,6 @@
         }
     </script>
 
-    <meta name="theme-color" content="#4a90e2">
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -182,7 +181,7 @@
             margin-right: 0.5rem;
         }
 
-        #help-modal {
+        .modal {
             display: none;
             position: fixed;
             z-index: 1;
@@ -214,6 +213,22 @@
             color: #000;
         }
 
+        .settings-group {
+            margin-bottom: 15px;
+        }
+
+        .settings-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .settings-group input, .settings-group select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
         footer {
             background-color: #333;
             color: white;
@@ -242,7 +257,8 @@
             }
         }
     </style>
-        <!-- Google Tag Manager -->
+
+    <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -260,6 +276,7 @@
         <div>
             <button class="btn" id="download-md"><i class="fas fa-download"></i> הורד כ-Markdown</button>
             <button class="btn" id="download-pdf"><i class="fas fa-file-pdf"></i> הורד כ-PDF</button>
+            <button class="btn" id="pdf-settings-btn"><i class="fas fa-cog"></i> הגדרות PDF</button>
         </div>
         <button class="btn" id="help-btn"><i class="fas fa-question-circle"></i> עזרה</button>
     </div>
@@ -271,7 +288,7 @@
         </div>
     </main>
 
-    <div id="help-modal">
+    <div id="help-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>עזרה - שימוש ב-Markdown</h2>
@@ -287,6 +304,42 @@
         </div>
     </div>
 
+    <div id="pdf-settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>הגדרות PDF</h2>
+            <div class="settings-group">
+                <label for="page-size">גודל דף:</label>
+                <select id="page-size">
+                    <option value="a4">A4</option>
+                    <option value="letter">Letter</option>
+                    <option value="legal">Legal</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="margin">שוליים (מ"מ):</label>
+                <input type="number" id="margin" value="10" min="0" max="50">
+            </div>
+            <div class="settings-group">
+                <label for="line-spacing">מרווח בין שורות:</label>
+                <input type="number" id="line-spacing" value="1.5" min="1" max="3" step="0.1">
+            </div>
+            <div class="settings-group">
+                <label for="font-family">גופן:</label>
+                <select id="font-family">
+                    <option value="Arial, sans-serif">Arial</option>
+                    <option value="'Times New Roman', serif">Times New Roman</option>
+                    <option value="'Courier New', monospace">Courier New</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label for="font-size">גודל גופן (פיקסלים):</label>
+                <input type="number" id="font-size" value="16" min="8" max="24">
+            </div>
+            <button class="btn" id="apply-settings">החל הגדרות</button>
+        </div>
+    </div>
+
     <footer>
         <p>פותח על ידי <a href="https://dorpascal.com" target="_blank">דור פסקל</a> | <a href="https://github.com/Dor-sketch/hebrew-markdown/" target="_blank">קוד מקור ב-GitHub</a></p>
     </footer>
@@ -294,14 +347,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script>
+<script>
         const markdownInput = document.getElementById('markdown-input');
         const preview = document.getElementById('preview');
         const downloadMdBtn = document.getElementById('download-md');
         const downloadPdfBtn = document.getElementById('download-pdf');
         const helpBtn = document.getElementById('help-btn');
         const helpModal = document.getElementById('help-modal');
-        const closeBtn = document.querySelector('.close');
+        const pdfSettingsBtn = document.getElementById('pdf-settings-btn');
+        const pdfSettingsModal = document.getElementById('pdf-settings-modal');
+        const applySettingsBtn = document.getElementById('apply-settings');
+        const closeBtns = document.querySelectorAll('.close');
+
+        let pdfSettings = {
+            pageSize: 'a4',
+            margin: 10,
+            lineSpacing: 1.5,
+            fontFamily: 'Arial, sans-serif',
+            fontSize: 16
+        };
 
         function updatePreview() {
             const markdown = markdownInput.value;
@@ -322,13 +386,15 @@
         function downloadPDF() {
             const content = preview.innerHTML;
 
-            // Create a wrapper div with RTL direction
+            // Create a wrapper div with RTL direction and apply settings
             const wrapper = document.createElement('div');
-            wrapper.style.width = '210mm';
-            wrapper.style.padding = '10mm';
+            wrapper.style.width = pdfSettings.pageSize === 'a4' ? '210mm' : '215.9mm';
+            wrapper.style.padding = `${pdfSettings.margin}mm`;
             wrapper.style.direction = 'rtl';
             wrapper.style.textAlign = 'right';
-            wrapper.style.fontFamily = 'Arial, sans-serif';
+            wrapper.style.fontFamily = pdfSettings.fontFamily;
+            wrapper.style.fontSize = `${pdfSettings.fontSize}px`;
+            wrapper.style.lineHeight = pdfSettings.lineSpacing;
             wrapper.innerHTML = content;
 
             // Temporarily append to body for rendering
@@ -345,12 +411,24 @@
                 const pdf = new jspdf.jsPDF({
                     orientation: 'portrait',
                     unit: 'mm',
-                    format: 'a4'
+                    format: pdfSettings.pageSize
                 });
 
                 const imgProps = pdf.getImageProperties(imgData);
                 const pdfWidth = pdf.internal.pageSize.getWidth();
                 const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                const pdfAuthor = 'Dor Pascal';
+                const pdfTitle = 'Created with Hebrew Markdown: https://dorpascal.com/hebrew-markdown/';
+
+                pdf.setProperties({
+                    title: pdfTitle,
+                    author: pdfAuthor,
+                    creator: pdfAuthor,
+                    subject: 'Markdown content',
+                    keywords: 'markdown, pdf, hebrew',
+                    creationDate: new Date(),
+                    modDate: new Date()
+                });
 
                 pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
                 pdf.save('markdown_content.pdf');
@@ -360,21 +438,37 @@
             });
         }
 
+        function openModal(modal) {
+            modal.style.display = "block";
+        }
+
+        function closeModal(modal) {
+            modal.style.display = "none";
+        }
+
+        function applyPdfSettings() {
+            pdfSettings.pageSize = document.getElementById('page-size').value;
+            pdfSettings.margin = parseInt(document.getElementById('margin').value);
+            pdfSettings.lineSpacing = parseFloat(document.getElementById('line-spacing').value);
+            pdfSettings.fontFamily = document.getElementById('font-family').value;
+            pdfSettings.fontSize = parseInt(document.getElementById('font-size').value);
+            closeModal(pdfSettingsModal);
+        }
+
         markdownInput.addEventListener('input', updatePreview);
         downloadMdBtn.addEventListener('click', downloadMarkdown);
         downloadPdfBtn.addEventListener('click', downloadPDF);
+        helpBtn.addEventListener('click', () => openModal(helpModal));
+        pdfSettingsBtn.addEventListener('click', () => openModal(pdfSettingsModal));
+        applySettingsBtn.addEventListener('click', applyPdfSettings);
 
-        helpBtn.onclick = function() {
-            helpModal.style.display = "block";
-        }
-
-        closeBtn.onclick = function() {
-            helpModal.style.display = "none";
-        }
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
+        });
 
         window.onclick = function(event) {
-            if (event.target == helpModal) {
-                helpModal.style.display = "none";
+            if (event.target.classList.contains('modal')) {
+                closeModal(event.target);
             }
         }
 
