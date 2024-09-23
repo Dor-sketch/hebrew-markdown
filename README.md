@@ -12,7 +12,7 @@ A lightweight, browser-based Hebrew markdown editor with real-time preview. This
 
 ## Demo
 
-[Live Demo](https://dorpascal.com/herbrew-markdown/)
+[Live Demo](https://dorpascal.com/hebrew-markdown/)
 
 ## Installation
 
