@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#f5f5f5"/>
+
+  <!-- App Window Frame -->
+  <rect x="150" y="65" width="900" height="500" rx="10" fill="white" stroke="#4a90e2" stroke-width="2"/>
+
+  <!-- Header Bar -->
+  <rect x="150" y="65" width="900" height="50" rx="10" fill="#4a90e2"/>
+  <text x="200" y="98" font-family="Arial, sans-serif" font-size="24" fill="white">בעברית Markdown עורך</text>
+
+  <!-- Editor Split View -->
+  <rect x="150" y="115" width="450" height="450" fill="#ffffff"/>
+  <rect x="600" y="115" width="450" height="450" fill="#f8f9fa"/>
+
+  <!-- Markdown Sample (Right Side - RTL) -->
+  <text x="550" y="155" font-family="Courier New, monospace" font-size="16" fill="#333333" text-anchor="end">
+    <tspan x="550" dy="0">כותרת ראשית #</tspan>
+    <tspan x="550" dy="25">כותרת משנית ##</tspan>
+    <tspan x="550" dy="25">**טקסט מודגש**</tspan>
+    <tspan x="550" dy="25">פריט ברשימה -</tspan>
+    <tspan x="550" dy="25">[קישור](https://example.com)</tspan>
+  </text>
+
+<!-- Preview (Left Side) -->
+  <text x="950" y="150" font-family="Arial, sans-serif" font-size="24" fill="#111111" text-anchor="end">כותרת ראשית</text>
+  <text x="950" y="190" font-family="Arial, sans-serif" font-size="20" fill="#333333" text-anchor="end">כותרת משנית</text>
+  <text x="950" y="220" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333333" text-anchor="end">טקסט מודגש</text>
+  <text x="950" y="250" font-family="Arial, sans-serif" font-size="16" fill="#333333" text-anchor="end">פריט ברשימה •</text>
+  <text x="950" y="280" font-family="Arial, sans-serif" font-size="16" fill="#4a90e2" text-decoration="underline" text-anchor="end">קישור</text>
+  <!-- Divider Line -->
+  <line x1="600" y1="115" x2="600" y2="565" stroke="#dee2e6" stroke-width="1"/>
+
+  <!-- Action Buttons -->
+  <g transform="translate(150, 580)">
+    <rect width="120" height="35" rx="5" fill="#4a90e2"/>
+    <text x="60" y="23" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">Markdown הורד</text>
+  </g>
+
+  <g transform="translate(280, 580)">
+    <rect width="100" height="35" rx="5" fill="#4a90e2"/>
+    <text x="50" y="23" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">PDF הורד</text>
+  </g>
+
+  <!-- Bottom Logo -->
+  <text x="600" y="610" font-family="Arial, sans-serif" font-size="16" fill="#666666" text-anchor="middle">Hebrew Markdown Editor</text>
+
+  <!-- Icon in Top Right -->
+  <circle cx="1000" cy="90" r="15" fill="white"/>
+  <text x="1000" y="97" font-family="Arial, sans-serif" font-size="20" fill="#4a90e2" text-anchor="middle">מ</text>
+</svg>

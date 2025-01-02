@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת. צורך בקלות מסמכים בפורמט Markdown והורד אותם כקובץ Markdown או PDF">
+    <meta name="description"
+        content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת. צורך בקלות מסמכים בפורמט Markdown והורד אותם כקובץ Markdown או PDF">
     <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript">
     <meta name="author" content="Dor Pascal">
     <meta name="robots" content="index, follow">
@@ -13,7 +15,7 @@
     <meta property="og:description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://dorpascal.com/hebrew-markdown/">
-    <meta property="og:image" content="https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png">
+    <meta property="og:image" content="https://dorpascal.com/hebrew-markdown/images/og-image.webp">
     <title>עורך Markdown בעברית</title>
     <link rel="canonical" href="https://dorpascal.com/hebrew-markdown/">
 
@@ -44,7 +46,7 @@
             "applicationCategory": "Content",
             "operatingSystem": "Web",
             "browserRequirements": "HTML5",
-            "image": "https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png",
+            "image": "https://dorpascal.com/hebrew-markdown/images/og-image.webp",
             "author": {
                 "@type": "Person",
                 "name": "Dor Pascal"
@@ -90,7 +92,7 @@
         }
     </script>
 
-  <style>
+    <style>
         :root {
             --primary-color: #4a90e2;
             --secondary-color: #f5f5f5;
@@ -139,7 +141,8 @@
             height: calc(100vh - 180px);
         }
 
-        #markdown-input, #preview {
+        #markdown-input,
+        #preview {
             width: 50%;
             padding: 1rem;
             border: 1px solid var(--border-color);
@@ -231,7 +234,8 @@
             margin-bottom: 5px;
         }
 
-        .settings-group input, .settings-group select {
+        .settings-group input,
+        .settings-group select {
             width: 100%;
             padding: 5px;
             border-radius: 4px;
@@ -261,7 +265,8 @@
                 height: auto;
             }
 
-            #markdown-input, #preview {
+            #markdown-input,
+            #preview {
                 width: 100%;
                 height: 300px;
             }
@@ -298,7 +303,7 @@
             }
         }
     </style>
-        <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -308,6 +313,7 @@
     </script>
     <!-- End Google Tag Manager -->
 </head>
+
 <body>
     <header>
         <h1>עורך Markdown בעברית</h1>
@@ -336,7 +342,8 @@
             <ul>
                 <li><strong>כותרות:</strong> השתמש ב-# עבור כותרת ראשית, ## עבור כותרת משנית, וכן הלאה.</li>
                 <li><strong>הדגשה:</strong> הקף טקסט ב-* או _ עבור הדגשה רגילה, ** או __ עבור הדגשה חזקה.</li>
-                <li><strong>רשימות:</strong> השתמש ב-- או * בתחילת השורה עבור רשימה לא ממוספרת, או 1. עבור רשימה ממוספרת.</li>
+                <li><strong>רשימות:</strong> השתמש ב-- או * בתחילת השורה עבור רשימה לא ממוספרת, או 1. עבור רשימה
+                    ממוספרת.</li>
                 <li><strong>קישורים:</strong> [טקסט הקישור](כתובת URL)</li>
                 <li><strong>תמונות:</strong> ![טקסט חלופי](כתובת URL של התמונה)</li>
                 <li><strong>ציטוטים:</strong> השתמש ב-> בתחילת השורה.</li>
@@ -382,13 +389,14 @@
     </div>
 
     <footer>
-        <p>פותח על ידי <a href="https://dorpascal.com" target="_blank">דור פסקל</a> | <a href="https://github.com/Dor-sketch/hebrew-markdown/" target="_blank">קוד מקור ב-GitHub</a></p>
+        <p>פותח על ידי <a href="https://dorpascal.com" target="_blank">דור פסקל</a> | <a
+                href="https://github.com/Dor-sketch/hebrew-markdown/" target="_blank">קוד מקור ב-GitHub</a></p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script>
+    <script>
         const markdownInput = document.getElementById('markdown-input');
         const preview = document.getElementById('preview');
         const downloadMdBtn = document.getElementById('download-md');
@@ -424,61 +432,122 @@
             URL.revokeObjectURL(url);
         }
 
-        function downloadPDF() {
+        async function downloadPDF() {
             const content = preview.innerHTML;
 
-            // Create a wrapper div with RTL direction and apply settings
-            const wrapper = document.createElement('div');
-            wrapper.style.width = pdfSettings.pageSize === 'a4' ? '210mm' : '215.9mm';
-            wrapper.style.padding = `${pdfSettings.margin}mm`;
-            wrapper.style.direction = 'rtl';
-            wrapper.style.textAlign = 'right';
-            wrapper.style.fontFamily = pdfSettings.fontFamily;
-            wrapper.style.fontSize = `${pdfSettings.fontSize}px`;
-            wrapper.style.lineHeight = pdfSettings.lineSpacing;
-            wrapper.innerHTML = content;
+            // Create a temporary container for content measurement
+            const container = document.createElement('div');
+            container.style.width = pdfSettings.pageSize === 'a4' ? '210mm' : '215.9mm';
+            container.style.padding = `${pdfSettings.margin}mm`;
+            container.style.direction = 'rtl';
+            container.style.textAlign = 'right';
+            container.style.fontFamily = pdfSettings.fontFamily;
+            container.style.fontSize = `${pdfSettings.fontSize}px`;
+            container.style.lineHeight = pdfSettings.lineHeight;
+            container.style.position = 'absolute';
+            container.style.left = '-9999px';
+            container.innerHTML = content;
+            document.body.appendChild(container);
 
-            // Temporarily append to body for rendering
-            document.body.appendChild(wrapper);
-
-            html2canvas(wrapper, {
-                scale: 2,
-                useCORS: true,
-                logging: false
-            }).then(canvas => {
-                document.body.removeChild(wrapper);
-
-                const imgData = canvas.toDataURL('image/png');
+            try {
                 const pdf = new jspdf.jsPDF({
                     orientation: 'portrait',
                     unit: 'mm',
                     format: pdfSettings.pageSize
                 });
 
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pdf.internal.pageSize.getWidth();
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                const pdfAuthor = 'Dor Pascal';
-                const pdfTitle = 'Created with Hebrew Markdown: https://dorpascal.com/hebrew-markdown/';
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = pdfSettings.margin;
+                const usableWidth = pageWidth - (2 * margin);
+                const usableHeight = pageHeight - (4 * margin);
 
+                // Split content into pages
+                const contentHeight = container.offsetHeight;
+                const contentHeightMM = contentHeight * 0.264583; // Convert px to mm
+                const totalPages = Math.ceil(contentHeightMM / usableHeight);
+
+                // Clone the original content nodes
+                const contentNodes = Array.from(container.childNodes);
+
+                // Create and add each page
+                for (let pageNum = 0; pageNum < totalPages; pageNum++) {
+                    if (pageNum > 0) {
+                        pdf.addPage();
+                    }
+
+                    // Create a wrapper for the current page's content
+                    const pageWrapper = document.createElement('div');
+                    pageWrapper.style.width = container.style.width;
+                    pageWrapper.style.padding = container.style.padding;
+                    pageWrapper.style.direction = container.style.direction;
+                    pageWrapper.style.textAlign = container.style.textAlign;
+                    pageWrapper.style.fontFamily = container.style.fontFamily;
+                    pageWrapper.style.fontSize = container.style.fontSize;
+                    pageWrapper.style.lineHeight = container.style.lineHeight;
+                    pageWrapper.style.position = 'absolute';
+                    pageWrapper.style.left = '-9999px';
+
+                    // Calculate the content slice for this page
+                    const startPos = pageNum * usableHeight;
+                    const endPos = Math.min((pageNum + 1) * usableHeight, contentHeightMM);
+
+                    // Create a container for the current page slice
+                    const pageContent = document.createElement('div');
+                    pageContent.style.position = 'relative';
+                    pageContent.style.height = `${usableHeight}mm`;
+                    pageContent.style.overflow = 'hidden';
+
+                    // Clone and position the content for this page
+                    contentNodes.forEach(node => {
+                        const clone = node.cloneNode(true);
+                        // Only set transform for element nodes
+                        if (clone.nodeType === Node.ELEMENT_NODE) {
+                            clone.style.transform = `translateY(-${startPos}mm)`;
+                        }
+                        pageContent.appendChild(clone);
+                    });
+
+                    pageWrapper.appendChild(pageContent);
+                    document.body.appendChild(pageWrapper);
+
+                    // Generate canvas for current page
+                    const canvas = await html2canvas(pageWrapper, {
+                        scale: 2,
+                        useCORS: true,
+                        logging: false,
+                        windowHeight: pageWrapper.scrollHeight
+                    });
+
+                    // Add page content to PDF
+                    const imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', margin, margin, usableWidth, usableHeight);
+
+                    // Clean up page wrapper
+                    document.body.removeChild(pageWrapper);
+                }
+
+                // Set PDF metadata
                 pdf.setProperties({
-                    title: pdfTitle,
-                    author: pdfAuthor,
-                    creator: pdfAuthor,
+                    title: 'Hebrew Markdown Document',
+                    author: 'Hebrew Markdown Editor',
+                    creator: 'Hebrew Markdown Editor',
                     subject: 'Markdown content',
                     keywords: 'markdown, pdf, hebrew',
-                    creationDate: new Date(),
-                    modDate: new Date()
+                    creationDate: new Date()
                 });
 
-                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                // Save the PDF
                 pdf.save('markdown_content.pdf');
-            }).catch(error => {
+
+            } catch (error) {
                 console.error('Error generating PDF:', error);
                 alert('אירעה שגיאה בעת יצירת ה-PDF. אנא נסה שנית או צור קשר עם מנהל המערכת.');
-            });
+            } finally {
+                // Clean up the temporary container
+                document.body.removeChild(container);
+            }
         }
-
         function openModal(modal) {
             modal.style.display = "block";
         }
@@ -507,7 +576,7 @@
             btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
         });
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target.classList.contains('modal')) {
                 closeModal(event.target);
             }
@@ -517,4 +586,5 @@
         updatePreview();
     </script>
 </body>
+
 </html>
