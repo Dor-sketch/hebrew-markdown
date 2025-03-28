@@ -92,499 +92,1842 @@
         }
     </script>
 
+    <!-- Inter font for modern Apple-like UI -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CodeMirror with themes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/nord.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/solarized.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/ayu-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/idea.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/xq-light.min.css">
+
+    <!-- KaTeX for math rendering -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+
     <style>
         :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f5f5f5;
-            --text-color: #333;
-            --border-color: #ddd;
+            /* Modern color palette - enhanced */
+            --background: #ffffff;
+            --surface-1: #f7f9fc;
+            --surface-2: #eef2f7;
+            --card: #ffffff;
+            --primary: #0066ff;
+            --primary-light: #e6f0ff;
+            --primary-dark: #0055d4;
+            --secondary: #5d5cd6;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --text-tertiary: #a1a1a6;
+            --border: #d2d2d7;
+            --divider: #e5e5ea;
+            --accent-red: #ff3b30;
+            --accent-orange: #ff9500;
+            --accent-yellow: #ffcc00;
+            --accent-green: #34c759;
+            --accent-blue: #5ac8fa;
+            --accent-indigo: #5856d6;
+            --accent-purple: #af52de;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
+
+            /* Sizing */
+            --border-radius-sm: 6px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --border-radius-xl: 16px;
+
+            /* Shadows - enhanced */
+            --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.03), 0px 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0px 12px 24px rgba(0, 0, 0, 0.05), 0px 4px 6px rgba(0, 0, 0, 0.03);
+            --shadow-focus: 0 0 0 3px rgba(0, 102, 255, 0.3);
+            --shadow-card: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.02);
+
+            /* Animation */
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Editor modes */
+            --editor-width: 50%;
+            --preview-width: 50%;
+        }
+
+        /* Dark mode colors - enhanced */
+        [data-theme="dark"] {
+            --background: #111111;
+            --surface-1: #1e1e1e;
+            --surface-2: #2a2a2a;
+            --card: #2c2c2c;
+            --primary: #1a8cff;
+            --primary-light: #153b6b;
+            --primary-dark: #409cff;
+            --secondary: #6e6aef;
+            --text-primary: #f5f5f7;
+            --text-secondary: #babac0;
+            --text-tertiary: #757578;
+            --border: #3a3a3c;
+            --divider: #38383a;
+            --accent-red: #ff453a;
+            --accent-orange: #ff9f0a;
+            --accent-yellow: #ffd60a;
+            --accent-green: #32d74b;
+            --accent-blue: #64d2ff;
+            --accent-indigo: #5e5ce6;
+            --accent-purple: #bf5af2;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
+            font-family: var(--font-family);
+            background-color: var(--background);
+            color: var(--text-primary);
+            line-height: 1.5;
+            height: 100vh;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            background-color: var(--secondary-color);
-            color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
         }
 
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-
-        main {
+        /* Header - Clean and minimal - enhanced */
+        .app-header {
             display: flex;
-            flex-grow: 1;
-            padding: 1rem;
-        }
-
-        #editor-container {
-            display: flex;
-            flex-grow: 1;
-            gap: 1rem;
-            height: calc(100vh - 180px);
-        }
-
-        #markdown-input,
-        #preview {
-            width: 50%;
-            padding: 1rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background-color: white;
-            overflow-y: auto;
-        }
-
-        #markdown-input {
-            resize: none;
-            direction: rtl;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        #toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
             align-items: center;
-            padding: 0.5rem;
-            background-color: #e9ecef;
-            border-bottom: 1px solid var(--border-color);
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background-color: var(--card);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: background-color var(--transition-normal);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 20;
         }
 
-        .btn-group {
+        .app-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            align-items: center;
+            gap: var(--spacing-sm);
         }
 
-        .btn {
-            padding: 0.5rem 1rem;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
+        .app-title i {
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        /* Controls group - enhanced */
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            background-color: var(--surface-1);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-sm);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .control-group:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Modern toggle switch - enhanced */
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background-color: var(--surface-2);
+            border-radius: 14px;
+            transition: background-color var(--transition-normal);
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            padding: 0 2px;
+            overflow: hidden;
+        }
+
+        .toggle-switch[data-active="true"] {
+            background-color: var(--primary);
+        }
+
+        .toggle-handle {
+            position: absolute;
+            right: 2px;
+            width: 24px;
+            height: 24px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-normal);
+            z-index: 1;
+        }
+
+        .toggle-switch[data-active="true"] .toggle-handle {
+            transform: translateX(-22px);
+        }
+
+        /* Add sun and moon icons */
+        .toggle-switch::before,
+        .toggle-switch::after {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            transition: opacity var(--transition-normal);
+        }
+
+        .toggle-switch::before {
+            content: "\f185"; /* sun */
+            right: 6px;
+            color: #ffcc00;
+            opacity: 1;
+        }
+
+        .toggle-switch::after {
+            content: "\f186"; /* moon */
+            left: 6px;
+            color: #ffffff;
+            opacity: 0;
+        }
+
+        .toggle-switch[data-active="true"]::before {
+            opacity: 0;
+        }
+
+        .toggle-switch[data-active="true"]::after {
+            opacity: 1;
+        }
+
+        .switch-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* View mode tabs - enhanced */
+        .view-modes {
+            display: flex;
+            align-items: center;
+            background-color: var(--surface-1);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xs);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .view-mode-btn {
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 6px var(--spacing-md);
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-mode-btn:hover {
+            color: var(--text-primary);
+            background-color: var(--surface-2);
+        }
+
+        .view-mode-btn.active {
+            color: white;
+            background-color: var(--primary);
+        }
+
+        .view-mode-btn i {
+            font-size: 0.95em;
+        }
+
+        /* Theme selector - enhanced */
+        .theme-selector {
+            position: relative;
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--card);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+            display: none;
+            z-index: 30;
+            min-width: 200px;
+            max-width: 260px;
+            overflow-y: auto;
+            max-height: 400px;
+            border: 1px solid var(--border);
+        }
+
+        .theme-selector.open .theme-dropdown {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+            margin-bottom: 2px;
+        }
+
+        .theme-option:hover {
+            background-color: var(--surface-1);
+        }
+
+        .theme-option.active {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .theme-option.active::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--primary);
+            font-size: 0.9em;
+        }
+
+        .theme-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-left: var(--spacing-sm);
+        }
+
+        /* Toolbar - Minimal and clean - enhanced */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xs) var(--spacing-md);
+            background-color: var(--surface-1);
+            border-bottom: 1px solid var(--divider);
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            transition: background-color var(--transition-normal);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .toolbar::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .tool-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0 var(--spacing-xs);
+            background-color: var(--card);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .tool-group:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .tool-divider {
+            width: 1px;
+            height: 24px;
+            background-color: var(--divider);
+            margin: 0 var(--spacing-xs);
+            transition: background-color var(--transition-normal);
+        }
+
+        /* Modern, minimal buttons - enhanced */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: none;
+            color: var(--text-secondary);
+            border-radius: var(--border-radius-sm);
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: var(--primary);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1) translate(-50%, -50%);
+            transform-origin: 50% 50%;
         }
 
         .btn:hover {
-            background-color: #357abd;
+            background-color: var(--surface-1);
+            color: var(--text-primary);
+        }
+
+        .btn:active::after {
+            animation: ripple 0.6s ease-out;
+        }
+
+        @keyframes ripple {
+            0% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(20) translate(-50%, -50%);
+                opacity: 0;
+            }
+        }
+
+        [data-theme="dark"] .btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:active {
+            background-color: var(--surface-2);
+        }
+
+        [data-theme="dark"] .btn:active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn.primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background-color: var(--primary-dark);
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn.primary:active {
+            transform: translateY(0);
         }
 
         .btn i {
-            margin-right: 0.5rem;
+            font-size: 16px;
         }
 
-        .modal {
+        .btn .tooltip {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 50%;
+            transform: translateX(50%);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius-sm);
+            background-color: var(--card);
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            box-shadow: var(--shadow-md);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-fast), visibility var(--transition-fast);
+            z-index: 10;
+            pointer-events: none;
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Main content area - enhanced */
+        .content-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            background-color: var(--background);
+            transition: all var(--transition-normal);
+        }
+
+        /* Editor and preview panels - enhanced */
+        .editor-panel, .preview-panel {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            transition: all var(--transition-normal);
+        }
+
+        .editor-panel {
+            max-width: var(--editor-width);
+        }
+
+        .preview-panel {
+            max-width: var(--preview-width);
+        }
+
+        [data-view-mode="editor-only"] .editor-panel {
+            max-width: 100%;
+        }
+
+        [data-view-mode="editor-only"] .preview-panel {
+            max-width: 0;
             display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
+        }
+
+        [data-view-mode="preview-only"] .editor-panel {
+            max-width: 0;
+            display: none;
+        }
+
+        [data-view-mode="preview-only"] .preview-panel {
+            max-width: 100%;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background-color: var(--surface-1);
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .panel-header i {
+            margin-left: 6px;
+            color: var(--primary);
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+        }
+
+        .editor-container {
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            overflow-y: auto;
+            position: relative;
         }
 
-        .modal-content {
-            background-color: white;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 4px;
-            width: 90%;
-            max-width: 500px;
+        .divider {
+            width: 1px;
+            background-color: var(--divider);
+            transition: background-color var(--transition-normal);
+            flex-shrink: 0;
         }
 
-        .close {
-            color: #aaa;
-            float: left;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+        /* Modern CodeMirror styling - enhanced */
+        .CodeMirror {
+            height: 100% !important;
+            direction: rtl;
+            font-family: var(--font-mono);
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--card);
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+            z-index: 1;
+            padding: var(--spacing-md);
         }
 
-        .close:hover {
-            color: #000;
-        }
-
-        .settings-group {
-            margin-bottom: 15px;
-        }
-
-        .settings-group label {
+        /* Special styling for code blocks to switch direction */
+        .CodeMirror .cm-comment {
+            direction: ltr !important;
+            text-align: left !important;
+            unicode-bidi: plaintext;
             display: block;
-            margin-bottom: 5px;
         }
 
-        .settings-group input,
-        .settings-group select {
-            width: 100%;
-            padding: 5px;
+         .CodeMirror-line * {
+         padding-right: unset !important;
+         }
+
+
+        .CodeMirror-linenumber {
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 0 var(--spacing-xs);
+        }
+
+        /* Special styling for math blocks to switch direction */
+        .CodeMirror .cm-math-block,
+        .CodeMirror .cm-math-inline,
+        .CodeMirror span[class*="cm-math"] {
+            direction: ltr !important;
+            text-align: left !important;
+            unicode-bidi: plaintext;
+            display: inline-block;
+        }
+
+        /* Ensure all $ and $$ markers are also LTR */
+        .CodeMirror .cm-formatting-math {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        /* Need to add ltr to lines containing math */
+        .CodeMirror-line:has(.cm-math-block),
+        .CodeMirror-line:has(.cm-math-inline) {
+            direction: ltr !important;
+        }
+
+        /* Preview content styling - enhanced */
+        .preview-content {
+            padding: var(--spacing-2xl);
+            color: var(--text-primary);
+            direction: rtl;
+            font-family: var(--font-family);
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .preview-content h1,
+        .preview-content h2,
+        .preview-content h3,
+        .preview-content h4,
+        .preview-content h5,
+        .preview-content h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.75em;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .preview-content h1 {
+            font-size: 2.5rem;
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 0.3em;
+            margin-top: 0.8em;
+        }
+
+        .preview-content h2 {
+            font-size: 1.75rem;
+            border-bottom: 1px solid var(--divider);
+            padding-bottom: 0.3em;
+            margin-top: 1.25em;
+        }
+
+        .preview-content h3 {
+            font-size: 1.4rem;
+        }
+
+        .preview-content h4 {
+            font-size: 1.25rem;
+        }
+
+        .preview-content p {
+            margin-bottom: 1.25em;
+        }
+
+        .preview-content blockquote {
+            border-right: 4px solid var(--primary);
+            margin: 1.5em 0;
+            padding: 0.8em 1.4em;
+            background-color: var(--surface-1);
+            border-radius: var(--border-radius-md);
+            font-style: italic;
+        }
+
+        [data-theme="dark"] .preview-content blockquote {
+            background-color: var(--surface-2);
+        }
+
+        /* Ensure code blocks are always LTR - enhanced */
+        .preview-content pre {
+            background-color: var(--surface-1);
+            padding: 1.2em;
+            border-radius: var(--border-radius-md);
+            overflow-x: auto;
+            margin: 1.5em 0;
+            direction: ltr !important;
+            text-align: left !important;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            tab-size: 2;
+            box-shadow: var(--shadow-sm);
+        }
+
+        [data-theme="dark"] .preview-content pre {
+            background-color: var(--surface-2);
+        }
+
+        .preview-content code {
+            font-family: var(--font-mono);
+            background-color: var(--surface-1);
+            padding: 0.2em 0.4em;
             border-radius: 4px;
-            border: 1px solid #ddd;
+            font-size: 0.9em;
+            direction: ltr;
+            display: inline-block;
         }
 
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: auto;
+        [data-theme="dark"] .preview-content code {
+            background-color: var(--surface-2);
         }
 
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
+        .preview-content pre code {
+            background: none;
+            padding: 0;
+            border-radius: 0;
+            display: block;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        /* Table styling - enhanced */
+        .preview-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
 
+        .preview-content table th,
+        .preview-content table td {
+            padding: 0.8em 1.2em;
+            border: 1px solid var(--divider);
+            text-align: right;
+        }
+
+        .preview-content table th {
+            background-color: var(--surface-1);
+            font-weight: 600;
+        }
+
+        .preview-content table tr:nth-child(even) {
+            background-color: var(--surface-1);
+        }
+
+        [data-theme="dark"] .preview-content table tr:nth-child(even) {
+            background-color: var(--surface-2);
+        }
+
+        .preview-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-md);
+            margin: 1.5em 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Lists - enhanced */
+        .preview-content ul,
+        .preview-content ol {
+            margin: 1.25em 1.5em 1.25em 0;
+        }
+
+        .preview-content li {
+            margin-bottom: 0.5em;
+            position: relative;
+        }
+
+        .preview-content ul li::marker {
+            color: var(--primary);
+        }
+
+        .preview-content ol li::marker {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Task lists - enhanced */
+        .preview-content ul li input[type="checkbox"] {
+            margin-left: 0.5em;
+            accent-color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .preview-content ul li input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: var(--text-tertiary);
+        }
+
+        /* Math specific styling - enhanced */
+        .katex-display {
+            margin: 1.5em 0;
+            overflow-x: auto;
+            overflow-y: hidden;
+            direction: ltr !important;
+            padding: 1em;
+            background-color: var(--surface-1);
+            border-radius: var(--border-radius-md);
+        }
+
+        [data-theme="dark"] .katex-display {
+            background-color: var(--surface-2);
+        }
+
+        .katex {
+            font-size: 1.1em;
+            direction: ltr !important;
+        }
+
+        .katex-error {
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+            padding: 0.8em;
+            border-radius: var(--border-radius-sm);
+            margin: 1em 0;
+        }
+
+        /* Status bar - enhanced */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--spacing-xs) var(--spacing-lg);
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-top: 1px solid var(--divider);
+            transition: background-color var(--transition-normal);
+        }
+
+        .status-bar i {
+            margin-left: 5px;
+            color: var(--primary);
+        }
+
+        /* Focus states */
+        .btn:focus,
+        .toggle-switch:focus,
+        .view-mode-btn:focus,
+        .theme-btn:focus {
+            outline: none;
+            box-shadow: var(--shadow-focus);
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            #editor-container {
+            :root {
+                --editor-width: 100%;
+                --preview-width: 100%;
+            }
+
+            .content-container {
                 flex-direction: column;
-                height: auto;
             }
 
-            #markdown-input,
-            #preview {
+            .divider {
+                height: 1px;
                 width: 100%;
-                height: 300px;
+                display: none;
             }
 
-            .btn-group {
-                justify-content: center;
-                width: 100%;
-                margin-bottom: 0.5rem;
+            .toolbar {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: var(--spacing-xs) var(--spacing-sm);
             }
 
-            #toolbar {
-                flex-direction: column;
-                align-items: stretch;
+            .tool-group {
+                flex-shrink: 0;
             }
 
-            .modal-content {
-                width: 95%;
-                margin: 5% auto;
+            .header-controls {
+                gap: var(--spacing-sm);
+            }
+
+            .control-group {
+                flex-shrink: 0;
+            }
+
+            .view-mode-btn {
+                padding: 6px var(--spacing-sm);
+                font-size: 13px;
+            }
+
+            .preview-content {
+                padding: var(--spacing-lg);
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.2rem;
+            .app-title span {
+                display: none;
             }
 
-            .btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-
-            #markdown-input {
-                font-size: 16px;
+            .switch-label {
+                display: none;
             }
         }
+
+        /* Loading indicator - enhanced */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .loading-spinner::before {
+            content: "\f021";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 32px;
+            color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-spinner::after {
+            content: "טוען...";
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        [data-theme="dark"] .loading {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        /* New blinking cursor element for modern feel */
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 20px;
+            background-color: var(--primary);
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
-    <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-T7HFKFX0PR');
-    </script>
-    <!-- End Google Tag Manager -->
 </head>
 
 <body>
-    <header>
-        <h1>עורך Markdown בעברית</h1>
-    </header>
+    <div class="app-container" data-view-mode="split">
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="app-title">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <span>עורך Markdown מודרני</span>
+            </div>
 
-    <div id="toolbar">
-        <div class="btn-group">
-            <button class="btn" id="download-md"><i class="fas fa-download"></i> הורד כ-Markdown</button>
-            <button class="btn" id="download-pdf"><i class="fas fa-file-pdf"></i> הורד כ-PDF</button>
-            <button class="btn" id="pdf-settings-btn"><i class="fas fa-cog"></i> הגדרות PDF</button>
+            <div class="header-controls">
+                <!-- View Mode Selector -->
+                <div class="view-modes">
+                    <button class="view-mode-btn" data-mode="editor-only">
+                        <i class="fa-solid fa-code"></i>
+                        עריכה
+                    </button>
+                    <button class="view-mode-btn active" data-mode="split">
+                        <i class="fa-solid fa-columns"></i>
+                        מפוצל
+                    </button>
+                    <button class="view-mode-btn" data-mode="preview-only">
+                        <i class="fa-solid fa-eye"></i>
+                        תצוגה
+                    </button>
+                </div>
+
+                <!-- Theme Selector -->
+                <div class="control-group theme-selector">
+                    <button class="btn theme-btn" id="theme-select-btn">
+                        <i class="fa-solid fa-palette"></i>
+                        <span class="tooltip">ערכות נושא</span>
+                    </button>
+                    <div class="theme-dropdown slide-in">
+                        <h4 style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">ערכות נושא לעורך</h4>
+                        <div class="theme-option active" data-theme="default">
+                            <span>ברירת מחדל</span>
+                            <div class="theme-color" style="background-color: #f8f9fa;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="material">
+                            <span>מטיריאל</span>
+                            <div class="theme-color" style="background-color: #263238;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="dracula">
+                            <span>דרקולה</span>
+                            <div class="theme-color" style="background-color: #282a36;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="nord">
+                            <span>נורד</span>
+                            <div class="theme-color" style="background-color: #2e3440;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="solarized">
+                            <span>סולאריז</span>
+                            <div class="theme-color" style="background-color: #fdf6e3;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="ayu-dark">
+                            <span>איו כהה</span>
+                            <div class="theme-color" style="background-color: #0a0e14;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="idea">
+                            <span>אידיאה</span>
+                            <div class="theme-color" style="background-color: #ffffff;"></div>
+                        </div>
+                        <div class="theme-option" data-theme="xq-light">
+                            <span>XQ בהיר</span>
+                            <div class="theme-color" style="background-color: #ffffff;"></div>
+                        </div>
+                        <div style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);"></div>
+                        <div class="theme-option" data-theme="auto">
+                            <span>אוטומטי לפי מצב</span>
+                            <div style="display: flex;">
+                                <div class="theme-color" style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;"></div>
+                                <div class="theme-color" style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Toggle -->
+                <div class="control-group">
+                    <span class="switch-label">מצב כהה</span>
+                    <div class="toggle-switch" id="theme-toggle" tabindex="0" role="button" aria-pressed="false" data-active="false">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="tool-group">
+                <button class="btn" data-command="bold" title="מודגש">
+                    <i class="fa-solid fa-bold"></i>
+                    <span class="tooltip">מודגש (Ctrl+B)</span>
+                </button>
+                <button class="btn" data-command="italic" title="נטוי">
+                    <i class="fa-solid fa-italic"></i>
+                    <span class="tooltip">נטוי (Ctrl+I)</span>
+                </button>
+                <button class="btn" data-command="strikethrough" title="קו חוצה">
+                    <i class="fa-solid fa-strikethrough"></i>
+                    <span class="tooltip">קו חוצה</span>
+                </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <div class="tool-group">
+                <button class="btn" data-command="heading1" title="כותרת 1">
+                    <i class="fa-solid fa-heading"></i>
+                    <span class="tooltip">כותרת 1</span>
+                </button>
+                <button class="btn" data-command="heading2" title="כותרת 2">
+                    <i class="fa-solid fa-heading" style="font-size: 0.9em;"></i>
+                    <span class="tooltip">כותרת 2</span>
+                </button>
+                <button class="btn" data-command="heading3" title="כותרת 3">
+                    <i class="fa-solid fa-heading" style="font-size: 0.8em;"></i>
+                    <span class="tooltip">כותרת 3</span>
+                </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <div class="tool-group">
+                <button class="btn" data-command="bulletList" title="רשימת תבליטים">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span class="tooltip">רשימת תבליטים</span>
+                </button>
+                <button class="btn" data-command="numberedList" title="רשימה ממוספרת">
+                    <i class="fa-solid fa-list-ol"></i>
+                    <span class="tooltip">רשימה ממוספרת</span>
+                </button>
+                <button class="btn" data-command="taskList" title="רשימת משימות">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span class="tooltip">רשימת משימות</span>
+                </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <div class="tool-group">
+                <button class="btn" data-command="link" title="קישור">
+                    <i class="fa-solid fa-link"></i>
+                    <span class="tooltip">קישור (Ctrl+K)</span>
+                </button>
+                <button class="btn" data-command="image" title="תמונה">
+                    <i class="fa-solid fa-image"></i>
+                    <span class="tooltip">תמונה</span>
+                </button>
+                <button class="btn" data-command="code" title="קוד">
+                    <i class="fa-solid fa-code"></i>
+                    <span class="tooltip">קוד</span>
+                </button>
+                <button class="btn" data-command="blockquote" title="ציטוט">
+                    <i class="fa-solid fa-quote-right"></i>
+                    <span class="tooltip">ציטוט</span>
+                </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <div class="tool-group">
+                <button class="btn" data-command="table" title="טבלה">
+                    <i class="fa-solid fa-table"></i>
+                    <span class="tooltip">טבלה</span>
+                </button>
+                <button class="btn" data-command="inlineMath" title="נוסחה מוטמעת">
+                    <i class="fa-solid fa-square-root-variable"></i>
+                    <span class="tooltip">נוסחה מוטמעת ($)</span>
+                </button>
+                <button class="btn" data-command="blockMath" title="נוסחה בבלוק">
+                    <i class="fa-solid fa-superscript"></i>
+                    <span class="tooltip">נוסחה בבלוק ($$)</span>
+                </button>
+            </div>
+
+            <div class="tool-divider"></div>
+
+            <div class="tool-group">
+                <button class="btn" id="clear-btn" title="נקה">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span class="tooltip">נקה</span>
+                </button>
+                <button class="btn primary" id="save-btn" title="שמור">
+                    <i class="fa-solid fa-save"></i>
+                    <span class="tooltip">שמור (Ctrl+S)</span>
+                </button>
+            </div>
         </div>
-        <button class="btn" id="help-btn"><i class="fas fa-question-circle"></i> עזרה</button>
+
+        <!-- Main content -->
+        <div class="content-container">
+            <!-- Editor panel -->
+            <div class="editor-panel">
+                <div class="panel-header">
+                    <span><i class="fa-solid fa-code"></i> עריכה</span>
+                </div>
+                <div class="panel-content">
+                    <div class="editor-container">
+                        <textarea id="editor"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Preview panel -->
+            <div class="preview-panel">
+                <div class="panel-header">
+                    <span><i class="fa-solid fa-eye"></i> תצוגה מקדימה</span>
+                </div>
+                <div class="panel-content">
+                    <div class="preview-content" id="preview"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <div id="stats"><i class="fa-solid fa-chart-simple"></i> 0 מילים | 0 תווים</div>
+            <div id="cursor-position"><i class="fa-solid fa-location-dot"></i> שורה 1, עמודה 1</div>
+        </div>
     </div>
 
-    <main>
-        <div id="editor-container">
-            <textarea id="markdown-input" placeholder="הקלד את הטקסט שלך כאן..."></textarea>
-            <div id="preview"></div>
-        </div>
-    </main>
-
-    <div id="help-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>עזרה - שימוש ב-Markdown</h2>
-            <ul>
-                <li><strong>כותרות:</strong> השתמש ב-# עבור כותרת ראשית, ## עבור כותרת משנית, וכן הלאה.</li>
-                <li><strong>הדגשה:</strong> הקף טקסט ב-* או _ עבור הדגשה רגילה, ** או __ עבור הדגשה חזקה.</li>
-                <li><strong>רשימות:</strong> השתמש ב-- או * בתחילת השורה עבור רשימה לא ממוספרת, או 1. עבור רשימה
-                    ממוספרת.</li>
-                <li><strong>קישורים:</strong> [טקסט הקישור](כתובת URL)</li>
-                <li><strong>תמונות:</strong> ![טקסט חלופי](כתובת URL של התמונה)</li>
-                <li><strong>ציטוטים:</strong> השתמש ב-> בתחילת השורה.</li>
-                <li><strong>קוד:</strong> הקף קוד בודד ב-`, או בלוק קוד ב-```.</li>
-            </ul>
-        </div>
+    <!-- Loading spinner -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
     </div>
 
-    <div id="pdf-settings-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>הגדרות PDF</h2>
-            <div class="settings-group">
-                <label for="page-size">גודל דף:</label>
-                <select id="page-size">
-                    <option value="a4">A4</option>
-                    <option value="letter">Letter</option>
-                    <option value="legal">Legal</option>
-                </select>
-            </div>
-            <div class="settings-group">
-                <label for="margin">שוליים (מ"מ):</label>
-                <input type="number" id="margin" value="10" min="0" max="50">
-            </div>
-            <div class="settings-group">
-                <label for="line-spacing">מרווח בין שורות:</label>
-                <input type="number" id="line-spacing" value="1.5" min="1" max="3" step="0.1">
-            </div>
-            <div class="settings-group">
-                <label for="font-family">גופן:</label>
-                <select id="font-family">
-                    <option value="Arial, sans-serif">Arial</option>
-                    <option value="'Times New Roman', serif">Times New Roman</option>
-                    <option value="'Courier New', monospace">Courier New</option>
-                </select>
-            </div>
-            <div class="settings-group">
-                <label for="font-size">גודל גופן (פיקסלים):</label>
-                <input type="number" id="font-size" value="16" min="8" max="24">
-            </div>
-            <button class="btn" id="apply-settings">החל הגדרות</button>
-        </div>
-    </div>
+    <!-- Scripts -->
+    <!-- CodeMirror for editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/continuelist.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/mode/overlay.min.js"></script>
 
-    <footer>
-        <p>פותח על ידי <a href="https://dorpascal.com" target="_blank">דור פסקל</a> | <a
-                href="https://github.com/Dor-sketch/hebrew-markdown/" target="_blank">קוד מקור ב-GitHub</a></p>
-    </footer>
+    <!-- KaTeX for Math -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Marked.js for Markdown -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+
+    <!-- DOMPurify for security -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
+
     <script>
-        const markdownInput = document.getElementById('markdown-input');
-        const preview = document.getElementById('preview');
-        const downloadMdBtn = document.getElementById('download-md');
-        const downloadPdfBtn = document.getElementById('download-pdf');
-        const helpBtn = document.getElementById('help-btn');
-        const helpModal = document.getElementById('help-modal');
-        const pdfSettingsBtn = document.getElementById('pdf-settings-btn');
-        const pdfSettingsModal = document.getElementById('pdf-settings-modal');
-        const applySettingsBtn = document.getElementById('apply-settings');
-        const closeBtns = document.querySelectorAll('.close');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading spinner when page is loaded
+            const loadingElement = document.getElementById('loading');
+            loadingElement.style.display = 'none';
 
-        let pdfSettings = {
-            pageSize: 'a4',
-            margin: 10,
-            lineSpacing: 1.5,
-            fontFamily: 'Arial, sans-serif',
-            fontSize: 16
-        };
+            // Simple markdown mode that tags code and math sections with more specific classes
+            CodeMirror.defineMode("markdownWithCodeMath", function(config) {
+                // Get the underlying markdown mode
+                const markdownMode = CodeMirror.getMode(config, "markdown");
 
-        function updatePreview() {
-            const markdown = markdownInput.value;
-            preview.innerHTML = marked.parse(markdown);
-        }
-
-        function downloadMarkdown() {
-            const content = markdownInput.value;
-            const blob = new Blob([content], { type: 'text/markdown' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'markdown_content.md';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        async function downloadPDF() {
-            const content = preview.innerHTML;
-
-            // Create a temporary container for content measurement
-            const container = document.createElement('div');
-            container.style.width = pdfSettings.pageSize === 'a4' ? '210mm' : '215.9mm';
-            container.style.padding = `${pdfSettings.margin}mm`;
-            container.style.direction = 'rtl';
-            container.style.textAlign = 'right';
-            container.style.fontFamily = pdfSettings.fontFamily;
-            container.style.fontSize = `${pdfSettings.fontSize}px`;
-            container.style.lineHeight = pdfSettings.lineHeight;
-            container.style.position = 'absolute';
-            container.style.left = '-9999px';
-            container.innerHTML = content;
-            document.body.appendChild(container);
-
-            try {
-                const pdf = new jspdf.jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: pdfSettings.pageSize
-                });
-
-                const pageWidth = pdf.internal.pageSize.getWidth();
-                const pageHeight = pdf.internal.pageSize.getHeight();
-                const margin = pdfSettings.margin;
-                const usableWidth = pageWidth - (2 * margin);
-                const usableHeight = pageHeight - (4 * margin);
-
-                // Split content into pages
-                const contentHeight = container.offsetHeight;
-                const contentHeightMM = contentHeight * 0.264583; // Convert px to mm
-                const totalPages = Math.ceil(contentHeightMM / usableHeight);
-
-                // Clone the original content nodes
-                const contentNodes = Array.from(container.childNodes);
-
-                // Create and add each page
-                for (let pageNum = 0; pageNum < totalPages; pageNum++) {
-                    if (pageNum > 0) {
-                        pdf.addPage();
-                    }
-
-                    // Create a wrapper for the current page's content
-                    const pageWrapper = document.createElement('div');
-                    pageWrapper.style.width = container.style.width;
-                    pageWrapper.style.padding = container.style.padding;
-                    pageWrapper.style.direction = container.style.direction;
-                    pageWrapper.style.textAlign = container.style.textAlign;
-                    pageWrapper.style.fontFamily = container.style.fontFamily;
-                    pageWrapper.style.fontSize = container.style.fontSize;
-                    pageWrapper.style.lineHeight = container.style.lineHeight;
-                    pageWrapper.style.position = 'absolute';
-                    pageWrapper.style.left = '-9999px';
-
-                    // Calculate the content slice for this page
-                    const startPos = pageNum * usableHeight;
-                    const endPos = Math.min((pageNum + 1) * usableHeight, contentHeightMM);
-
-                    // Create a container for the current page slice
-                    const pageContent = document.createElement('div');
-                    pageContent.style.position = 'relative';
-                    pageContent.style.height = `${usableHeight}mm`;
-                    pageContent.style.overflow = 'hidden';
-
-                    // Clone and position the content for this page
-                    contentNodes.forEach(node => {
-                        const clone = node.cloneNode(true);
-                        // Only set transform for element nodes
-                        if (clone.nodeType === Node.ELEMENT_NODE) {
-                            clone.style.transform = `translateY(-${startPos}mm)`;
+                // Create an overlay that catches code and math
+                const overlay = {
+                    startState: function() {
+                        return {
+                            inCodeBlock: false,
+                            inMathBlock: false,
+                            inMath: false
+                        };
+                    },
+                    token: function(stream, state) {
+                        // Code blocks
+                        if (stream.match(/^```/)) {
+                            state.inCodeBlock = !state.inCodeBlock;
+                            return "comment";
                         }
-                        pageContent.appendChild(clone);
-                    });
 
-                    pageWrapper.appendChild(pageContent);
-                    document.body.appendChild(pageWrapper);
+                        if (state.inCodeBlock) {
+                            stream.skipToEnd();
+                            return "comment";
+                        }
 
-                    // Generate canvas for current page
-                    const canvas = await html2canvas(pageWrapper, {
-                        scale: 2,
-                        useCORS: true,
-                        logging: false,
-                        windowHeight: pageWrapper.scrollHeight
-                    });
+                        // Math blocks
+                        if (stream.match(/^\$\$/)) {
+                            state.inMathBlock = !state.inMathBlock;
+                            return state.inMathBlock ? "math-block formatting-math" : "math-block formatting-math";
+                        }
 
-                    // Add page content to PDF
-                    const imgData = canvas.toDataURL('image/png');
-                    pdf.addImage(imgData, 'PNG', margin, margin, usableWidth, usableHeight);
+                        if (state.inMathBlock) {
+                            stream.skipToEnd();
+                            return "math-block";
+                        }
 
-                    // Clean up page wrapper
-                    document.body.removeChild(pageWrapper);
+                        // Inline math
+                        if (stream.match(/^\$/)) {
+                            state.inMath = !state.inMath;
+                            return state.inMath ? "math-inline formatting-math" : "math-inline formatting-math";
+                        }
+
+                        if (state.inMath) {
+                            // Look for closing $
+                            let match = stream.match(/^[^\$]+\$/, false);
+                            if (match) {
+                                // Consume up to but not including the closing $
+                                stream.match(/^[^\$]+/);
+                                return "math-inline";
+                            } else {
+                                stream.skipToEnd();
+                                return "math-inline";
+                            }
+                        }
+
+                        // If we're not in a special section, skip this token
+                        stream.skipToEnd();
+                        return null;
+                    }
+                };
+
+                return CodeMirror.overlayMode(markdownMode, overlay);
+            });
+
+            // Define available editor themes
+            const editorThemes = {
+                'default': {
+                    theme: 'default',
+                    isDark: false
+                },
+                'material': {
+                    theme: 'material',
+                    isDark: true
+                },
+                'dracula': {
+                    theme: 'dracula',
+                    isDark: true
+                },
+                'nord': {
+                    theme: 'nord',
+                    isDark: true
+                },
+                'solarized': {
+                    theme: 'solarized',
+                    isDark: false
+                },
+                'ayu-dark': {
+                    theme: 'ayu-dark',
+                    isDark: true
+                },
+                'idea': {
+                    theme: 'idea',
+                    isDark: false
+                },
+                'xq-light': {
+                    theme: 'xq-light',
+                    isDark: false
+                },
+                'auto': {
+                    theme: 'default', // Will be changed based on dark mode
+                    isDark: false,
+                    isAuto: true
+                }
+            };
+
+            // Initialize state variables
+            let currentTheme = localStorage.getItem('editorTheme') || 'default';
+            let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+            let currentViewMode = localStorage.getItem('viewMode') || 'split';
+
+            // Initialize CodeMirror with our custom mode
+            const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
+                mode: "markdownWithCodeMath",
+                lineNumbers: true,
+                lineWrapping: true,
+                scrollbarStyle: null,
+                direction: 'rtl',
+                rtlMoveVisually: true,
+                theme: getEditorTheme(),
+                autofocus: true,
+                viewportMargin: Infinity,
+                extraKeys: {
+                    'Enter': 'newlineAndIndentContinueMarkdownList',
+                    'Ctrl-B': function(cm) { insertMarkdown(cm, 'bold'); },
+                    'Ctrl-I': function(cm) { insertMarkdown(cm, 'italic'); },
+                    'Ctrl-K': function(cm) { insertMarkdown(cm, 'link'); },
+                    'Ctrl-S': function(cm) { saveDocument(); }
+                }
+            });
+
+            // Function to get the correct editor theme based on current settings
+            function getEditorTheme() {
+                const themeInfo = editorThemes[currentTheme];
+
+                // If auto theme, pick based on dark mode
+                if (themeInfo.isAuto) {
+                    return isDarkMode ? 'material' : 'default';
                 }
 
-                // Set PDF metadata
-                pdf.setProperties({
-                    title: 'Hebrew Markdown Document',
-                    author: 'Hebrew Markdown Editor',
-                    creator: 'Hebrew Markdown Editor',
-                    subject: 'Markdown content',
-                    keywords: 'markdown, pdf, hebrew',
-                    creationDate: new Date()
+                return themeInfo.theme;
+            }
+
+            // Set up the view mode
+            setViewMode(currentViewMode);
+
+            // Sample content
+            const sampleContent = `# עורך Markdown מודרני
+
+ברוך הבא לעורך Markdown המודרני בעברית. עורך זה תומך בכל תכונות Markdown ובנוסחאות מתמטיות, עם ממשק מינימליסטי בהשראת מוצרי Apple.
+
+## תכונות המערכת
+
+* עיצוב נקי ומודרני בהשראת מוצרי Apple
+* תמיכה מלאה בעברית (RTL)
+* עיצוב טקסט **מודגש**, *נטוי* ו~~קו חוצה~~
+* תמיכה ברשימות ממוספרות ולא ממוספרות
+* אפשרות להוספת [קישורים](https://example.com) ותמונות
+* תחביר קוד עם הדגשת תחביר
+* מצב כהה ובהיר עם מגוון ערכות נושא לעורך
+
+## תמיכה בנוסחאות מתמטיות
+
+ניתן להשתמש בנוסחאות מתמטיות בתוך השורה כמו $E = mc^2$ או בתור בלוק:
+
+$$
+\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}
+$$
+
+## קוד מקור
+
+\`\`\`javascript
+// דוגמת קוד בג'אווהסקריפט
+function hello() {
+    console.log("שלום עולם!");
+    return true;
+}
+
+// טיפול באירועים
+document.addEventListener('click', function() {
+    const message = "נלחץ כפתור!";
+    console.log(message);
+});
+\`\`\`
+
+## טבלאות
+
+| שם      | גיל | עיר         |
+|---------|-----|-------------|
+| ישראל   | 30  | תל אביב     |
+| שרה     | 25  | ירושלים     |
+| דוד     | 40  | חיפה        |
+
+## רשימת משימות
+
+- [x] עיצוב מודרני
+- [x] תמיכה בנוסחאות מתמטיות
+- [x] עימוד קוד
+- [ ] ייצוא ל-PDF
+- [ ] תמיכה בתמונות מקומיות
+
+נסה לערוך את הטקסט ולראות את התצוגה המקדימה בזמן אמת!`;
+
+            editor.setValue(sampleContent);
+
+            // Configure Marked renderer for RTL
+            const renderer = new marked.Renderer();
+
+            // Custom table renderer for RTL tables
+            renderer.table = function(header, body) {
+                return `<table class="rtl-table" dir="rtl">\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n`;
+            };
+
+            // Custom list renderer for RTL lists
+            renderer.list = function(body, ordered, start) {
+                const type = ordered ? 'ol' : 'ul';
+                const startAttr = (ordered && start && start !== 1) ? ` start="${start}"` : '';
+                return `<${type}${startAttr} dir="rtl">${body}</${type}>`;
+            };
+
+            // Custom list item renderer for RTL
+            renderer.listitem = function(text, task, checked) {
+                if (task) {
+                    return `<li style="direction: rtl; text-align: right;"><input type="checkbox" ${checked ? 'checked' : ''} disabled> <span>${text}</span></li>`;
+                }
+                return `<li style="direction: rtl; text-align: right;">${text}</li>`;
+            };
+
+            // Custom code block renderer to ensure LTR
+            renderer.code = function(code, infostring, escaped) {
+                const lang = (infostring || '').match(/\S*/)[0];
+
+                // Add explicit LTR direction to code blocks
+                return `<pre dir="ltr" style="direction: ltr; text-align: left;"><code class="language-${lang}">${escaped ? code : escape(code)}</code></pre>`;
+            };
+
+            // Custom inline code renderer
+            renderer.codespan = function(code) {
+                return `<code dir="ltr" style="direction: ltr;">${code}</code>`;
+            };
+
+            // Setup Marked
+            marked.setOptions({
+                renderer: renderer,
+                headerIds: true,
+                gfm: true,
+                breaks: false,
+                pedantic: false,
+                sanitize: false,
+                smartLists: true,
+                smartypants: false,
+                xhtml: false
+            });
+
+            // Helper function to escape HTML
+            function escape(html) {
+                return html
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            }
+
+            // Function to process math expressions
+            function processMath(text) {
+                // Replace block math
+                text = text.replace(/\$\$([\s\S]*?)\$\$/g, function(match, equation) {
+                    try {
+                        return `<div class="katex-display" dir="ltr">${katex.renderToString(equation, { displayMode: true, throwOnError: false })}</div>`;
+                    } catch (error) {
+                        return `<div class="katex-error">Error in equation: ${error.message}</div>`;
+                    }
                 });
 
-                // Save the PDF
-                pdf.save('markdown_content.pdf');
+                // Replace inline math
+                text = text.replace(/\$((?!\$)[\s\S]*?)\$/g, function(match, equation) {
+                    try {
+                        return `<span dir="ltr" style="display: inline-block;">${katex.renderToString(equation, { displayMode: false, throwOnError: false })}</span>`;
+                    } catch (error) {
+                        return `<span class="katex-error">Error in equation: ${error.message}</span>`;
+                    }
+                });
 
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-                alert('אירעה שגיאה בעת יצירת ה-PDF. אנא נסה שנית או צור קשר עם מנהל המערכת.');
-            } finally {
-                // Clean up the temporary container
-                document.body.removeChild(container);
+                return text;
             }
-        }
-        function openModal(modal) {
-            modal.style.display = "block";
-        }
 
-        function closeModal(modal) {
-            modal.style.display = "none";
-        }
+            // Function to update preview
+            function updatePreview() {
+                const markdown = editor.getValue();
 
-        function applyPdfSettings() {
-            pdfSettings.pageSize = document.getElementById('page-size').value;
-            pdfSettings.margin = parseInt(document.getElementById('margin').value);
-            pdfSettings.lineSpacing = parseFloat(document.getElementById('line-spacing').value);
-            pdfSettings.fontFamily = document.getElementById('font-family').value;
-            pdfSettings.fontSize = parseInt(document.getElementById('font-size').value);
-            closeModal(pdfSettingsModal);
-        }
+                // First parse markdown
+                let html = marked.parse(markdown);
 
-        markdownInput.addEventListener('input', updatePreview);
-        downloadMdBtn.addEventListener('click', downloadMarkdown);
-        downloadPdfBtn.addEventListener('click', downloadPDF);
-        helpBtn.addEventListener('click', () => openModal(helpModal));
-        pdfSettingsBtn.addEventListener('click', () => openModal(pdfSettingsModal));
-        applySettingsBtn.addEventListener('click', applyPdfSettings);
+                // Then process math expressions
+                html = processMath(html);
 
-        closeBtns.forEach(btn => {
-            btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
+                // Sanitize HTML
+                const sanitizedHtml = DOMPurify.sanitize(html, {
+                    ADD_TAGS: ['math', 'mrow', 'mi', 'mo', 'mn', 'msup', 'msub', 'mfrac'],
+                    ADD_ATTR: ['display', 'dir', 'style']
+                });
+
+                // Update preview
+                document.getElementById('preview').innerHTML = sanitizedHtml;
+
+                // Update document stats
+                updateStats(markdown);
+            }
+
+            // Function to update document stats
+            function updateStats(text) {
+                const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+                const chars = text.length;
+                const cursor = editor.getCursor();
+
+                document.getElementById('stats').innerHTML = `<i class="fa-solid fa-chart-simple"></i> ${words} מילים | ${chars} תווים`;
+                document.getElementById('cursor-position').innerHTML = `<i class="fa-solid fa-location-dot"></i> שורה ${cursor.line + 1}, עמודה ${cursor.ch + 1}`;
+            }
+
+            // Function to insert markdown syntax
+            function insertMarkdown(cm, type) {
+                const selection = cm.getSelection();
+                let replacement = '';
+
+                switch (type) {
+                    case 'bold':
+                        replacement = `**${selection || 'טקסט מודגש'}**`;
+                        break;
+                    case 'italic':
+                        replacement = `*${selection || 'טקסט נטוי'}*`;
+                        break;
+                    case 'strikethrough':
+                        replacement = `~~${selection || 'טקסט עם קו חוצה'}~~`;
+                        break;
+                    case 'heading1':
+                        replacement = `# ${selection || 'כותרת ראשית'}`;
+                        break;
+                    case 'heading2':
+                        replacement = `## ${selection || 'כותרת משנית'}`;
+                        break;
+                    case 'heading3':
+                        replacement = `### ${selection || 'כותרת שלישית'}`;
+                        break;
+                    case 'link':
+                        replacement = `[${selection || 'טקסט קישור'}](http://example.com)`;
+                        break;
+                    case 'image':
+                        replacement = `![${selection || 'תיאור תמונה'}](http://example.com/image.jpg)`;
+                        break;
+                    case 'code':
+                        replacement = selection ? `\`${selection}\`` : "```\nקוד כאן\n```";
+                        break;
+                    case 'blockquote':
+                        replacement = `> ${selection || 'ציטוט'}`;
+                        break;
+                    case 'bulletList':
+                        replacement = `* ${selection || 'פריט ברשימה'}`;
+                        break;
+                    case 'numberedList':
+                        replacement = `1. ${selection || 'פריט ברשימה'}`;
+                        break;
+                    case 'taskList':
+                        replacement = `- [ ] ${selection || 'משימה לביצוע'}`;
+                        break;
+                    case 'inlineMath':
+                        replacement = `$${selection || 'E = mc^2'}$`;
+                        break;
+                    case 'blockMath':
+                        replacement = `$$\n${selection || '\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}'}\n$$`;
+                        break;
+                    case 'table':
+                        replacement = `| כותרת 1 | כותרת 2 | כותרת 3 |\n| ------- | ------- | ------- |\n| תוכן 1  | תוכן 2  | תוכן 3  |\n| תוכן 4  | תוכן 5  | תוכן 6  |`;
+                        break;
+                    default:
+                        replacement = selection;
+                }
+
+                cm.replaceSelection(replacement);
+                updatePreview();
+            }
+
+            // Function to set the view mode
+            function setViewMode(mode) {
+                const appContainer = document.querySelector('.app-container');
+                const viewBtns = document.querySelectorAll('.view-mode-btn');
+
+                // Update container data attribute
+                appContainer.setAttribute('data-view-mode', mode);
+
+                // Update active button
+                viewBtns.forEach(btn => {
+                    if (btn.getAttribute('data-mode') === mode) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+
+                // Store in localStorage
+                localStorage.setItem('viewMode', mode);
+                currentViewMode = mode;
+
+                // Refresh editor when switching view modes
+                setTimeout(() => {
+                    editor.refresh();
+                    updatePreview();
+                }, 100);
+            }
+
+            // Function to set dark mode
+            function setDarkMode(enabled) {
+                const themeToggle = document.getElementById('theme-toggle');
+
+                // Update dark mode state
+                isDarkMode = enabled;
+
+                // Update toggle visual state
+                themeToggle.setAttribute('data-active', enabled);
+                themeToggle.setAttribute('aria-pressed', enabled);
+
+                // Set body data-theme attribute
+                if (enabled) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.removeItem('darkMode');
+                }
+
+                // Update editor theme if using auto theme
+                if (editorThemes[currentTheme].isAuto) {
+                    editor.setOption('theme', getEditorTheme());
+                }
+            }
+
+            // Function to set editor theme
+            function setEditorTheme(themeName) {
+                if (!editorThemes[themeName]) return;
+
+                // Update active theme
+                currentTheme = themeName;
+
+                // Update editor theme
+                editor.setOption('theme', getEditorTheme());
+
+                // Store in localStorage
+                localStorage.setItem('editorTheme', themeName);
+
+                // Update theme option UI
+                document.querySelectorAll('.theme-option').forEach(option => {
+                    if (option.getAttribute('data-theme') === themeName) {
+                        option.classList.add('active');
+                    } else {
+                        option.classList.remove('active');
+                    }
+                });
+            }
+
+            // Add event listeners to toolbar buttons
+            document.querySelectorAll('.btn[data-command]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const command = this.getAttribute('data-command');
+                    insertMarkdown(editor, command);
+                    editor.focus();
+                });
+            });
+
+            // View mode buttons
+            document.querySelectorAll('.view-mode-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const mode = this.getAttribute('data-mode');
+                    setViewMode(mode);
+                });
+            });
+
+            // Theme dropdown toggle
+            const themeBtn = document.getElementById('theme-select-btn');
+            const themeSelector = document.querySelector('.theme-selector');
+
+            themeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                themeSelector.classList.toggle('open');
+            });
+
+            // Close theme dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!themeSelector.contains(e.target)) {
+                    themeSelector.classList.remove('open');
+                }
+            });
+
+            // Theme options
+            document.querySelectorAll('.theme-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    setEditorTheme(theme);
+                    themeSelector.classList.remove('open');
+                });
+            });
+
+            // Set active theme option
+            document.querySelectorAll('.theme-option').forEach(option => {
+                if (option.getAttribute('data-theme') === currentTheme) {
+                    option.classList.add('active');
+                } else {
+                    option.classList.remove('active');
+                }
+            });
+
+            // Clear button
+            document.getElementById('clear-btn').addEventListener('click', function() {
+                if (confirm('האם אתה בטוח שברצונך לנקות את כל התוכן?')) {
+                    editor.setValue('');
+                    editor.focus();
+                }
+            });
+
+            // Save button
+            document.getElementById('save-btn').addEventListener('click', saveDocument);
+
+            function saveDocument() {
+                const content = editor.getValue();
+                const filename = 'markdown_document.md';
+
+                const blob = new Blob([content], { type: 'text/markdown' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+
+                URL.revokeObjectURL(url);
+            }
+
+            // Dark mode toggle
+            const themeToggle = document.getElementById('theme-toggle');
+
+            themeToggle.addEventListener('click', function() {
+                const isActive = this.getAttribute('data-active') === 'true';
+                setDarkMode(!isActive);
+            });
+
+            // Keyboard navigation for toggle
+            themeToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // Check for saved theme preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                setDarkMode(true);
+            }
+
+            // Update preview and stats when editor changes
+            editor.on('change', updatePreview);
+            editor.on('cursorActivity', function() {
+                updateStats(editor.getValue());
+            });
+
+            // Handle window resize events to make the editor responsive
+            window.addEventListener('resize', function() {
+                editor.refresh();
+            });
+
+            // Initial update
+            updatePreview();
         });
-
-        window.onclick = function (event) {
-            if (event.target.classList.contains('modal')) {
-                closeModal(event.target);
-            }
-        }
-
-        // Initial preview update
-        updatePreview();
     </script>
 </body>
-
 </html>
