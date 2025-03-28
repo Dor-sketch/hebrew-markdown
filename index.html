@@ -701,8 +701,6 @@
         .CodeMirror .cm-comment {
             direction: ltr !important;
             text-align: left !important;
-            unicode-bidi: plaintext;
-            display: block;
         }
 
          .CodeMirror-line * {
@@ -723,8 +721,6 @@
         .CodeMirror span[class*="cm-math"] {
             direction: ltr !important;
             text-align: left !important;
-            unicode-bidi: plaintext;
-            display: inline-block;
         }
 
         /* Ensure all $ and $$ markers are also LTR */
@@ -737,6 +733,24 @@
         .CodeMirror-line:has(.cm-math-block),
         .CodeMirror-line:has(.cm-math-inline) {
             direction: ltr !important;
+        }
+
+                .CodeMirror-line:has(.cm-comment),
+        .CodeMirror-line:has(.cm-comment) {
+            direction: ltr !important;
+        }
+
+
+
+        /* Target only code blocks within that specific path */
+        body > div.app-container > div.content-container > div.editor-panel > div.panel-content > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code.CodeMirror-rtl > div:has(.cm-comment),
+        body > div.app-container > div.content-container > div.editor-panel > div.panel-content > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code.CodeMirror-rtl > div:has(.cm-formatting-code-block) {
+            direction: ltr !important;
+            text-align: left !important;
+        }
+
+        .CodeMirror-rtl pre {
+            direction: unset;
         }
 
         /* Preview content styling - enhanced */
