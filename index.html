@@ -1493,6 +1493,8 @@
                 theme: getEditorTheme(),
                 autofocus: true,
                 viewportMargin: Infinity,
+                inputStyle: 'contenteditable',
+                specialChars: /[\u0000-\u001f\u007f-\u009f\u00ad\u061C\u200E\u200F\u2028\u2029\ufeff\u2066\u2067\u2068\u2069]/,
                 extraKeys: {
                     'Enter': 'newlineAndIndentContinueMarkdownList',
                     'Ctrl-B': function(cm) { insertMarkdown(cm, 'bold'); },
