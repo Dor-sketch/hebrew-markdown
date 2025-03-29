@@ -726,7 +726,8 @@
             background-color: var(--card);
             transition: background-color var(--transition-normal), color var(--transition-normal);
             z-index: 1;
-            padding: var(--spacing-md);
+            padding: 0;
+            padding-right: var(--spacing-lg);
         }
 
         /* Special styling for code blocks to switch direction */
@@ -738,14 +739,6 @@
          .CodeMirror-line * {
          padding-right: unset !important;
          }
-
-
-        .CodeMirror-linenumber {
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            padding: 0 var(--spacing-xs);
-        }
 
         /* Special styling for math blocks to switch direction */
         .CodeMirror .cm-math-block,
@@ -1148,6 +1141,47 @@
             from, to { opacity: 1; }
             50% { opacity: 0; }
         }
+
+        /* Update the divider to be draggable */
+.divider {
+    width: 6px; /* Make divider wider for easier grabbing */
+    background-color: var(--divider);
+    transition: background-color var(--transition-normal);
+    flex-shrink: 0;
+    cursor: col-resize; /* Show resize cursor */
+    position: relative;
+    z-index: 15; /* Ensure it's above other elements for interaction */
+}
+
+.divider:hover,
+.divider.dragging {
+    background-color: var(--primary);
+}
+
+/* Add a visible handle in the center of the divider for better UX */
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 40px;
+    width: 4px;
+    background-color: var(--primary);
+    border-radius: var(--border-radius-sm);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.divider:hover::after {
+    opacity: 0.7;
+}
+
+/* When dragging, show visual feedback */
+.app-container.resizing {
+    cursor: col-resize;
+    user-select: none;
+}
     </style>
 </head>
 
@@ -1524,7 +1558,7 @@
 
             const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
                 mode: "markdownWithCodeMath",
-                lineNumbers: true,
+                lineNumbers: false,
                 lineWrapping: true,
                 scrollbarStyle: null,
                 direction: 'rtl',
@@ -2142,7 +2176,139 @@ document.addEventListener('click', function() {
 
             // Initial update
             updatePreview();
+
+        function initResizablePanels() {
+            const appContainer = document.querySelector('.app-container');
+            const divider = document.querySelector('.divider');
+            const editorPanel = document.querySelector('.editor-panel');
+            const previewPanel = document.querySelector('.preview-panel');
+
+            if (!divider || !editorPanel || !previewPanel) {
+                return;
+            }
+
+            let isResizing = false;
+            let startX, startWidth;
+
+            // Load saved panel widths from localStorage
+            const savedEditorWidth = localStorage.getItem('editorPanelWidth');
+            const savedPreviewWidth = localStorage.getItem('previewPanelWidth');
+
+            if (savedEditorWidth && savedPreviewWidth) {
+                document.documentElement.style.setProperty('--editor-width', savedEditorWidth);
+                document.documentElement.style.setProperty('--preview-width', savedPreviewWidth);
+            }
+
+            // Mouse down event on the divider
+            divider.addEventListener('mousedown', startResize);
+
+            // Touch start event for mobile
+            divider.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                startWidth = editorPanel.getBoundingClientRect().width;
+                startResize(e);
+            });
+
+            function startResize(e) {
+                if (currentViewMode !== 'split') return;
+
+                isResizing = true;
+                if (e.type !== 'touchstart') {
+                    startX = e.clientX;
+                    startWidth = editorPanel.getBoundingClientRect().width;
+                }
+
+                // Add classes for styling during drag
+                divider.classList.add('dragging');
+                appContainer.classList.add('resizing');
+
+                // Prevent text selection during resize
+                document.body.style.userSelect = 'none';
+
+                e.preventDefault();
+            }
+
+            // Mouse move event - calculate and set new widths
+            document.addEventListener('mousemove', resize);
+
+            // Touch move event for mobile
+            document.addEventListener('touchmove', function(e) {
+                if (!isResizing) return;
+
+                const touchX = e.touches[0].clientX;
+                doResize(touchX);
+                e.preventDefault(); // Prevent scrolling
+            });
+
+            function resize(e) {
+                if (!isResizing) return;
+                doResize(e.clientX);
+            }
+
+            function doResize(clientX) {
+                // Calculate the new width based on mouse/touch movement
+                const containerWidth = appContainer.clientWidth;
+                const newWidth = startWidth - (clientX - startX);
+
+                // Calculate percentages with limits
+                const editorPercent = Math.min(Math.max((newWidth / containerWidth) * 100, 20), 80);
+                const previewPercent = 100 - editorPercent;
+
+                // Update CSS variables
+                document.documentElement.style.setProperty('--editor-width', `${editorPercent}%`);
+                document.documentElement.style.setProperty('--preview-width', `${previewPercent}%`);
+
+                // Refresh CodeMirror
+                editor.refresh();
+            }
+
+            // Mouse up and touch end events - finalize resize
+            function stopResize() {
+                if (!isResizing) return;
+
+                isResizing = false;
+
+                // Remove drag-related classes
+                divider.classList.remove('dragging');
+                appContainer.classList.remove('resizing');
+
+                // Re-enable text selection
+                document.body.style.userSelect = '';
+
+                // Get final widths
+                const editorWidth = getComputedStyle(document.documentElement).getPropertyValue('--editor-width');
+                const previewWidth = getComputedStyle(document.documentElement).getPropertyValue('--preview-width');
+
+                // Save to localStorage
+                localStorage.setItem('editorPanelWidth', editorWidth);
+                localStorage.setItem('previewPanelWidth', previewWidth);
+
+                // Final refresh of editor
+                editor.refresh();
+            }
+
+            document.addEventListener('mouseup', stopResize);
+            document.addEventListener('touchend', stopResize);
+            document.addEventListener('touchcancel', stopResize);
+        }
+
+        // Modify the existing setViewMode function to reinitialize resizable panels when needed
+        const originalSetViewMode = setViewMode;
+        setViewMode = function(mode) {
+            // Call the original function first
+            originalSetViewMode(mode);
+
+            // If we switched to split view, make sure panels are resizable
+            if (mode === 'split') {
+                // Need a small delay to ensure DOM is updated
+                setTimeout(initResizablePanels, 100);
+            }
+        };
+
+        // Initialize resizable panels
+        initResizablePanels();
         });
+        // Add this code to your existing JavaScript, just before the closing script tag
     </script>
 </body>
 </html>
