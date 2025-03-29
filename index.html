@@ -226,8 +226,6 @@
 
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
@@ -240,13 +238,13 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             overflow: hidden;
+            margin: 0;
         }
 
         .app-container {
             display: flex;
             flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
+            height: 100%;
         }
 
         /* Header - Clean and minimal - enhanced */
@@ -262,6 +260,8 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 20;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            height: var(--spacing-2xl);
         }
 
         .app-title {
@@ -312,7 +312,7 @@
         }
 
         .control-group:hover {
-            transform: translateY(-1px);
+            /* transform: translateY(-1px); */
             box-shadow: var(--shadow-md);
         }
 
@@ -433,11 +433,6 @@
 
         .view-mode-btn i {
             font-size: 0.95em;
-        }
-
-        /* Theme selector - enhanced */
-        .theme-selector {
-            position: relative;
         }
 
         .theme-dropdown {
@@ -758,7 +753,7 @@
             height: 100% !important;
             direction: rtl;
             font-family: var(--font-mono);
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--card);
@@ -1103,7 +1098,7 @@
         }
 
         @media (max-width: 480px) {
-            .app-title span {
+            .app-title {
                 display: none;
             }
 
@@ -1278,11 +1273,6 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .app-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
             .app-title {
                 margin-bottom: var(--spacing-xs);
             }
@@ -1306,8 +1296,8 @@
             }
 
             .header-controls {
-                flex-wrap: wrap;
                 gap: var(--spacing-xs);
+                overflow-x: auto;
             }
 
             .view-modes {
@@ -1347,7 +1337,6 @@
             }
 
             .header-controls {
-                flex-direction: column;
                 align-items: flex-start;
                 gap: var(--spacing-xs);
             }
@@ -1392,7 +1381,7 @@
         <!-- App Header -->
         <header class="app-header">
             <div class="app-title">
-                <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal">
+                <a href="https://dorpascal.com/hebrew-markdown/" aria-label="Hebrew Markdown">
                     <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                         <!-- Premium gradients and effects -->
                         <defs>
@@ -2398,6 +2387,17 @@ document.addEventListener('click', function() {
             z-index: 30;
             left: 50% !important;
             transform: translateX(-50%) !important;
+            font-size: 16px !important;
+        }
+
+        .CodeMirror-dialog input {
+            width: 100%;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--border) !important;
+            border-radius: var(--border-radius-sm) !important;
+            background-color: var(--surface-1) !important;
+            color: var(--text-primary) !important;
+            font-size: 16px !important;
         }
 
         .CodeMirror-dialog-top {
