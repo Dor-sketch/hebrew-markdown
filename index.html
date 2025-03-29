@@ -117,13 +117,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
 
     <style>
+        @font-face {
+            font-display: swap;
+            font-family: 'Space Grotesk';
+            font-style: normal;
+            src: url('https:dorpascal.com/fonts/space-grotesk-v21-latin-regular.woff2') format('woff2');
+        }
+
+
         :root {
             /* Modern color palette - enhanced */
             --background: #ffffff;
             --surface-1: #f7f9fc;
             --surface-2: #eef2f7;
             --card: #ffffff;
-            --primary: #0066ff;
+            --primary: #0070f3;
             --primary-light: #e6f0ff;
             --primary-dark: #0055d4;
             --secondary: #5d5cd6;
@@ -143,6 +151,7 @@
             /* Typography */
             --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Arial Hebrew', Arial, sans-serif;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            --font-display: 'Space Grotesk', sans-serif;
 
             /* Spacing */
             --spacing-xs: 4px;
@@ -181,7 +190,7 @@
             --surface-1: #1e1e1e;
             --surface-2: #2a2a2a;
             --card: #2c2c2c;
-            --primary: #1a8cff;
+            --primary: #4b8185;
             --primary-light: #153b6b;
             --primary-dark: #409cff;
             --secondary: #6e6aef;
@@ -254,6 +263,13 @@
             margin: 0;
             font-size: 1em;
             color: var(--text-primary);
+        }
+
+        h1,
+        h2,
+        h3,
+        #credit {
+            font-family: var(--font-display);
         }
 
         .app-title i {
@@ -395,6 +411,7 @@
 
         .view-mode-btn.active {
             color: white;
+            background-color: var(--primary);
         }
 
         .view-mode-btn i {
@@ -812,7 +829,7 @@
             font-size: 2.5rem;
             border-bottom: 1px solid var(--divider);
             padding-bottom: 0.3em;
-            margin-top: 0.8em;
+            margin-top: 0;
         }
 
         .preview-content h2 {
@@ -1051,9 +1068,10 @@
                 flex-shrink: 0;
             }
 
-            .view-mode-btn {
+            .view-mode-btn,
+            .switch-label {
                 padding: 6px var(--spacing-sm);
-                font-size: 13px;
+                font-size: 9px;
             }
 
             .preview-content {
@@ -1225,10 +1243,18 @@
         }
 
         #logo {
-            width: 28px;
-            height: 28px;
+            width: 40px;
+            height: 40px;
             margin-left: 8px;
             transition: transform var(--transition-fast);
+            fill: url(#gold-gradient);
+            transform-origin: center;
+            cursor: pointer;
+            z-index: 10;
+            position: relative;
+            filter: drop-shadow(2px 4px 6px black);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 23.7%;
         }
 
         #logo:hover {
@@ -1250,6 +1276,20 @@
                 font-size: .8em;
             }
 
+            .btn {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+                padding: 0;
+                margin: 0;
+                border-radius: var(--border-radius-md);
+                background-color: var(--surface-1);
+                color: var(--text-secondary);
+                transition: background-color var(--transition-fast), color var(--transition-fast);
+                box-shadow: var(--shadow-sm);
+                cursor: pointer;
+            }
+
             .header-controls {
                 flex-wrap: wrap;
                 gap: var(--spacing-xs);
@@ -1263,11 +1303,17 @@
         @media (max-width: 480px) {
             .app-header {
                 padding: var(--spacing-xs);
+                align-items: center;
+            }
+
+            .control-group {
+                padding: 0;
+                flex-direction: row;
+                gap: var(--spacing-xs);
             }
 
             .header-controls {
-                flex-direction: column;
-                align-items: flex-start;
+                align-items: center;
                 gap: var(--spacing-xs);
             }
 
@@ -1278,11 +1324,11 @@
 
         @media (max-width: 320px) {
             .app-title h1 {
-                font-size: 1.5em;
+                font-size: .5em;
             }
 
             .app-title i {
-                font-size: 1.5em;
+                font-size: .5em;
             }
 
             .header-controls {
@@ -1295,6 +1341,30 @@
                 margin-bottom: 0;
             }
         }
+
+        #credit {
+            /* font-size: 12px; */
+            color: var(--text-secondary);
+            text-align: center;
+            /* margin-top: var(--spacing-xs); */
+        }
+
+        #credit a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-normal);
+        }
+
+        #credit a:hover {
+            color: var(--text-primary);
+        }
+
+        #credit svg {
+            width: 10px;
+            height: 10px;
+            fill: var(--text-secondary);
+            transition: fill var(--transition-normal);
+        }
     </style>
 </head>
 
@@ -1303,60 +1373,60 @@
         <!-- App Header -->
         <header class="app-header">
             <div class="app-title">
-                <h1>Hebrew Markdown</h1>
-                <svg alt="Logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                    <!-- Premium gradients and effects -->
-                    <defs>
-                        <!-- Rich background gradient with premium dark blue tones -->
-                        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#010B18" />
-                            <stop offset="50%" stop-color="#0A1528" />
-                            <stop offset="100%" stop-color="#0F172A" />
-                        </linearGradient>
+                <a href="https://dorpascal.com" target="_blank" aria-label="Dor Pascal">
+                    <svg alt="Logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                        <!-- Premium gradients and effects -->
+                        <defs>
+                            <!-- Rich background gradient with premium dark blue tones -->
+                            <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#010B18" />
+                                <stop offset="50%" stop-color="#0A1528" />
+                                <stop offset="100%" stop-color="#0F172A" />
+                            </linearGradient>
 
-                        <!-- Luxury gold accent gradient -->
-                        <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#FDE68A" />
-                            <stop offset="50%" stop-color="#F59E0B" />
-                            <stop offset="100%" stop-color="#B45309" />
-                        </linearGradient>
+                            <!-- Luxury gold accent gradient -->
+                            <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FDE68A" />
+                                <stop offset="50%" stop-color="#F59E0B" />
+                                <stop offset="100%" stop-color="#B45309" />
+                            </linearGradient>
 
-                        <!-- Premium blue gradient -->
-                        <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#0EA5E9" />
-                            <stop offset="50%" stop-color="#0284C7" />
-                            <stop offset="100%" stop-color="#0369A1" />
-                        </linearGradient>
+                            <!-- Premium blue gradient -->
+                            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0EA5E9" />
+                                <stop offset="50%" stop-color="#0284C7" />
+                                <stop offset="100%" stop-color="#0369A1" />
+                            </linearGradient>
 
-                        <!-- Enhanced glow effects -->
-                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur stdDeviation="3" result="blur" />
-                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                        </filter>
+                            <!-- Enhanced glow effects -->
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
 
-                        <!-- Premium drop shadow -->
-                        <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                            <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
-                            <feOffset dx="1" dy="1" result="offsetblur" />
-                            <feFlood flood-color="#000000" flood-opacity="0.2" />
-                            <feComposite in2="offsetblur" operator="in" />
-                            <feMerge>
-                                <feMergeNode />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
+                            <!-- Premium drop shadow -->
+                            <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+                                <feOffset dx="1" dy="1" result="offsetblur" />
+                                <feFlood flood-color="#000000" flood-opacity="0.2" />
+                                <feComposite in2="offsetblur" operator="in" />
+                                <feMerge>
+                                    <feMergeNode />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
 
-                        <!-- Subtle inner shadow -->
-                        <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                            <stop offset="85%" stop-color="transparent" />
-                            <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
-                        </radialGradient>
-                    </defs>
+                            <!-- Subtle inner shadow -->
+                            <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                                <stop offset="85%" stop-color="transparent" />
+                                <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
+                            </radialGradient>
+                        </defs>
 
-                    <!-- Main app icon background - true iOS-style squircle with ~33% roundness (iPhone-like) -->
-                    <g filter="url(#drop-shadow)">
-                        <!-- The key is using this specific curve that has no visible transition between straight and curved sections -->
-                        <path d="M50,25
+                        <!-- Main app icon background - true iOS-style squircle with ~33% roundness (iPhone-like) -->
+                        <g filter="url(#drop-shadow)">
+                            <!-- The key is using this specific curve that has no visible transition between straight and curved sections -->
+                            <path d="M50,25
              C50,25 25,25 25,50
              L25,150
              C25,175 50,175 50,175
@@ -1365,8 +1435,8 @@
              L175,50
              C175,25 150,25 150,25 Z" fill="url(#bg-gradient)" />
 
-                        <!-- Inner shadow overlay -->
-                        <path d="M50,25
+                            <!-- Inner shadow overlay -->
+                            <path d="M50,25
              C50,25 25,25 25,50
              L25,150
              C25,175 50,175 50,175
@@ -1374,12 +1444,12 @@
              C175,175 175,150 175,150
              L175,50
              C175,25 150,25 150,25 Z" fill="url(#innerShadow)" opacity="0.4" />
-                    </g>
+                        </g>
 
-                    <!-- Main content elements - enlarged and centered -->
-                    <g filter="url(#glow)">
-                        <!-- Left-pointing arrow -->
-                        <path d="M80,100
+                        <!-- Main content elements - enlarged and centered -->
+                        <g filter="url(#glow)">
+                            <!-- Left-pointing arrow -->
+                            <path d="M80,100
              C80,96 80,92 80,88
              L60,88
              C60,86 60,82 60,78
@@ -1389,16 +1459,18 @@
              L80,112
              C80,108 80,104 80,100 Z" fill="url(#blue-gradient)" />
 
-                        <!-- Enlarged Markdown "M" logo, placed in center-right -->
-                        <path d="M95 125V70h14l16 22 16-22h14v55h-14V92l-16 20-16-20v33z" fill="url(#blue-gradient)" />
-                    </g>
+                            <!-- Enlarged Markdown "M" logo, placed in center-right -->
+                            <path d="M95 125V70h14l16 22 16-22h14v55h-14V92l-16 20-16-20v33z"
+                                fill="url(#blue-gradient)" />
+                        </g>
 
-                    <!-- Subtle highlights in true Apple style -->
-                    <!-- Top reflection -->
-                    <path d="M35,40 Q100,30 165,40" fill="none" stroke="#ffffff" stroke-width="1"
-                        stroke-opacity="0.3" />
-                </svg>
-
+                        <!-- Subtle highlights in true Apple style -->
+                        <!-- Top reflection -->
+                        <path d="M35,40 Q100,30 165,40" fill="none" stroke="#ffffff" stroke-width="1"
+                            stroke-opacity="0.3" />
+                    </svg>
+                </a>
+                <h1>Hebrew Markdown</h1>
             </div>
 
             <div class="header-controls">
@@ -1626,12 +1698,26 @@
                 </div>
             </div>
         </div>
+        <!-- Status Bar -->
+        <footer class="status-bar" aria-label="Editor status bar">
+            <div id="stats" title="Word and character count">
+                <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                <span>0 מילים | 0 תווים</span>
+            </div>
 
-        <!-- Status bar -->
-        <div class="status-bar">
-            <div id="stats"><i class="fa-solid fa-chart-simple"></i> 0 מילים | 0 תווים</div>
-            <div id="cursor-position"><i class="fa-solid fa-location-dot"></i> שורה 1, עמודה 1</div>
-        </div>
+            <div id="credit" title="Visit Dor Pascal's website">
+                <a href="https://dorpascal.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Dor Pascal's personal website">
+                    By Dor Pascal
+                </a>
+            </div>
+
+            <div id="cursor-position" title="Current cursor position">
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>שורה 1, עמודה 1</span>
+            </div>
+        </footer>
+
     </div>
 
     <!-- Loading spinner -->
