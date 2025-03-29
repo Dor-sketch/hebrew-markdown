@@ -10,7 +10,8 @@
     <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript">
     <meta name="author" content="Dor Pascal">
     <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#4a90e2">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <meta property="og:title" content="עורך Markdown בעברית">
     <meta property="og:description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
     <meta property="og:type" content="website">
@@ -192,6 +193,7 @@
             --accent-blue: #64d2ff;
             --accent-indigo: #5e5ce6;
             --accent-purple: #bf5af2;
+            color-scheme: dark;
         }
 
         * {
@@ -482,20 +484,20 @@
         .toolbar.hidden {
             display: none;
         }
-        
+
         /* Or for a smoother transition: */
         .toolbar {
             max-height: 50px; /* Adjust based on your toolbar height */
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
-        
+
         .toolbar.hidden {
             max-height: 0;
             padding: 0;
             border-bottom: none;
         }
-        
+
         .toolbar::-webkit-scrollbar {
             display: none; /* Chrome, Safari, Opera */
         }
@@ -1940,6 +1942,12 @@ document.addEventListener('click', function() {
                 // Update editor theme if using auto theme
                 if (editorThemes[currentTheme].isAuto) {
                     editor.setOption('theme', getEditorTheme());
+                }
+
+                // update page color-theme meta tag
+                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+                if (metaThemeColor) {
+                    metaThemeColor.setAttribute('content', enabled ? '#121212' : '#ffffff');
                 }
             }
 
