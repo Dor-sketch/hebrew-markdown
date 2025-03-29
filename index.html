@@ -230,7 +230,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: var(--spacing-xs) var(--spacing-md);
             background-color: var(--card);
             border-bottom: 1px solid var(--border);
             box-shadow: var(--shadow-sm);
@@ -246,10 +246,6 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-            background-image: url(./images/icon.svg);
-            background-size: 36px 36px;
-            background-repeat: no-repeat;
-            background-position: left center;
             padding-left: 34px;
             text-decoration: none;
             transition: color var(--transition-normal);
@@ -338,14 +334,16 @@
         }
 
         .toggle-switch::before {
-            content: "\f185"; /* sun */
+            content: "\f185";
+            /* sun */
             right: 6px;
             color: #ffcc00;
             opacity: 1;
         }
 
         .toggle-switch::after {
-            content: "\f186"; /* moon */
+            content: "\f186";
+            /* moon */
             left: 6px;
             color: #ffffff;
             opacity: 0;
@@ -477,7 +475,8 @@
             background-color: var(--surface-1);
             border-bottom: 1px solid var(--divider);
             overflow-x: auto;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
+            /* Firefox */
             flex-wrap: wrap;
             gap: var(--spacing-xs);
             transition: background-color var(--transition-normal);
@@ -492,7 +491,8 @@
 
         /* Or for a smoother transition: */
         .toolbar {
-            max-height: 50px; /* Adjust based on your toolbar height */
+            max-height: 50px;
+            /* Adjust based on your toolbar height */
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
@@ -504,7 +504,8 @@
         }
 
         .toolbar::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
+            /* Chrome, Safari, Opera */
         }
 
         .tool-group {
@@ -575,6 +576,7 @@
             0% {
                 opacity: 0.7;
             }
+
             100% {
                 transform: scale(20) translate(-50%, -50%);
                 opacity: 0;
@@ -649,7 +651,8 @@
         }
 
         /* Editor and preview panels - enhanced */
-        .editor-panel, .preview-panel {
+        .editor-panel,
+        .preview-panel {
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -741,9 +744,9 @@
             text-align: left !important;
         }
 
-         .CodeMirror-line * {
-         padding-right: unset !important;
-         }
+        .CodeMirror-line * {
+            padding-right: unset !important;
+        }
 
         /* Special styling for math blocks to switch direction */
         .CodeMirror .cm-math-block,
@@ -765,7 +768,7 @@
             direction: ltr !important;
         }
 
-                .CodeMirror-line:has(.cm-comment),
+        .CodeMirror-line:has(.cm-comment),
         .CodeMirror-line:has(.cm-comment) {
             direction: ltr !important;
         }
@@ -773,8 +776,8 @@
 
 
         /* Target only code blocks within that specific path */
-        body > div.app-container > div.content-container > div.editor-panel > div.panel-content > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code.CodeMirror-rtl > div:has(.cm-comment),
-        body > div.app-container > div.content-container > div.editor-panel > div.panel-content > div > div > div.CodeMirror-scroll > div.CodeMirror-sizer > div > div > div > div.CodeMirror-code.CodeMirror-rtl > div:has(.cm-formatting-code-block) {
+        body>div.app-container>div.content-container>div.editor-panel>div.panel-content>div>div>div.CodeMirror-scroll>div.CodeMirror-sizer>div>div>div>div.CodeMirror-code.CodeMirror-rtl>div:has(.cm-comment),
+        body>div.app-container>div.content-container>div.editor-panel>div.panel-content>div>div>div.CodeMirror-scroll>div.CodeMirror-sizer>div>div>div>div.CodeMirror-code.CodeMirror-rtl>div:has(.cm-formatting-code-block) {
             direction: ltr !important;
             text-align: left !important;
         }
@@ -952,7 +955,7 @@
             transform: scale(1.1);
         }
 
-        .preview-content ul li input[type="checkbox"]:checked + span {
+        .preview-content ul li input[type="checkbox"]:checked+span {
             text-decoration: line-through;
             color: var(--text-tertiary);
         }
@@ -1033,6 +1036,9 @@
                 overflow-x: auto;
                 justify-content: flex-start;
                 padding: var(--spacing-xs) var(--spacing-sm);
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
             }
 
             .tool-group {
@@ -1059,6 +1065,7 @@
             .editor-panel {
                 max-width: 100% !important;
             }
+
             .preview-panel {
                 max-width: 100% !important;
             }
@@ -1114,7 +1121,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         [data-theme="dark"] .loading {
@@ -1123,13 +1132,25 @@
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .fade-in {
@@ -1150,50 +1171,128 @@
         }
 
         @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
+
+            from,
+            to {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         /* Update the divider to be draggable */
-.divider {
-    width: 6px; /* Make divider wider for easier grabbing */
-    background-color: var(--divider);
-    transition: background-color var(--transition-normal);
-    flex-shrink: 0;
-    cursor: col-resize; /* Show resize cursor */
-    position: relative;
-    z-index: 15; /* Ensure it's above other elements for interaction */
-}
+        .divider {
+            width: 6px;
+            /* Make divider wider for easier grabbing */
+            background-color: var(--divider);
+            transition: background-color var(--transition-normal);
+            flex-shrink: 0;
+            cursor: col-resize;
+            /* Show resize cursor */
+            position: relative;
+            z-index: 15;
+            /* Ensure it's above other elements for interaction */
+        }
 
-.divider:hover,
-.divider.dragging {
-    background-color: var(--primary);
-}
+        .divider:hover,
+        .divider.dragging {
+            background-color: var(--primary);
+        }
 
-/* Add a visible handle in the center of the divider for better UX */
-.divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 40px;
-    width: 4px;
-    background-color: var(--primary);
-    border-radius: var(--border-radius-sm);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-}
+        /* Add a visible handle in the center of the divider for better UX */
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            height: 40px;
+            width: 4px;
+            background-color: var(--primary);
+            border-radius: var(--border-radius-sm);
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
 
-.divider:hover::after {
-    opacity: 0.7;
-}
+        .divider:hover::after {
+            opacity: 0.7;
+        }
 
-/* When dragging, show visual feedback */
-.app-container.resizing {
-    cursor: col-resize;
-    user-select: none;
-}
+        /* When dragging, show visual feedback */
+        .app-container.resizing {
+            cursor: col-resize;
+            user-select: none;
+        }
+
+        #logo {
+            width: 28px;
+            height: 28px;
+            margin-left: 8px;
+            transition: transform var(--transition-fast);
+        }
+
+        #logo:hover {
+            transform: rotate(360deg);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .app-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .app-title {
+                margin-bottom: var(--spacing-xs);
+            }
+
+            .header-controls {
+                flex-wrap: wrap;
+                gap: var(--spacing-xs);
+            }
+
+            .view-modes {
+                margin-bottom: var(--spacing-xs);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .app-header {
+                padding: var(--spacing-xs);
+            }
+
+            .header-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-xs);
+            }
+
+            .view-modes {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .app-title h1 {
+                font-size: 1.5em;
+            }
+
+            .app-title i {
+                font-size: 1.5em;
+            }
+
+            .header-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-xs);
+            }
+
+            .view-modes {
+                margin-bottom: 0;
+            }
+        }
     </style>
 </head>
 
@@ -1203,6 +1302,101 @@
         <header class="app-header">
             <div class="app-title">
                 <h1>Hebrew Markdown</h1>
+                <svg alt="Logo" id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <!-- Premium gradients and effects -->
+                    <defs>
+                        <!-- Rich background gradient with premium dark blue tones -->
+                        <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#010B18" />
+                            <stop offset="50%" stop-color="#0A1528" />
+                            <stop offset="100%" stop-color="#0F172A" />
+                        </linearGradient>
+
+                        <!-- Luxury gold accent gradient -->
+                        <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#FDE68A" />
+                            <stop offset="50%" stop-color="#F59E0B" />
+                            <stop offset="100%" stop-color="#B45309" />
+                        </linearGradient>
+
+                        <!-- Premium blue gradient -->
+                        <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0EA5E9" />
+                            <stop offset="50%" stop-color="#0284C7" />
+                            <stop offset="100%" stop-color="#0369A1" />
+                        </linearGradient>
+
+                        <!-- Enhanced glow effects -->
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+
+                        <!-- Premium drop shadow -->
+                        <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+                            <feOffset dx="1" dy="1" result="offsetblur" />
+                            <feFlood flood-color="#000000" flood-opacity="0.2" />
+                            <feComposite in2="offsetblur" operator="in" />
+                            <feMerge>
+                                <feMergeNode />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+
+                        <!-- Subtle inner shadow -->
+                        <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                            <stop offset="85%" stop-color="transparent" />
+                            <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- Main app icon background - true iOS-style squircle with ~33% roundness (iPhone-like) -->
+                    <g filter="url(#drop-shadow)">
+                        <!-- The key is using this specific curve that has no visible transition between straight and curved sections -->
+                        <path d="M50,25
+             C50,25 25,25 25,50
+             L25,150
+             C25,175 50,175 50,175
+             L150,175
+             C175,175 175,150 175,150
+             L175,50
+             C175,25 150,25 150,25 Z" fill="url(#bg-gradient)" />
+
+                        <!-- Inner shadow overlay -->
+                        <path d="M50,25
+             C50,25 25,25 25,50
+             L25,150
+             C25,175 50,175 50,175
+             L150,175
+             C175,175 175,150 175,150
+             L175,50
+             C175,25 150,25 150,25 Z" fill="url(#innerShadow)" opacity="0.4" />
+                    </g>
+
+                    <!-- Main content elements - enlarged and centered -->
+                    <g filter="url(#glow)">
+                        <!-- Left-pointing arrow -->
+                        <path d="M80,100
+             C80,96 80,92 80,88
+             L60,88
+             C60,86 60,82 60,78
+             C56,84 44,92 35,100
+             C44,108 56,116 60,122
+             C60,118 60,114 60,112
+             L80,112
+             C80,108 80,104 80,100 Z" fill="url(#blue-gradient)" />
+
+                        <!-- Enlarged Markdown "M" logo, placed in center-right -->
+                        <path d="M95 125V70h14l16 22 16-22h14v55h-14V92l-16 20-16-20v33z" fill="url(#blue-gradient)" />
+                    </g>
+
+                    <!-- Subtle highlights in true Apple style -->
+                    <!-- Top reflection -->
+                    <path d="M35,40 Q100,30 165,40" fill="none" stroke="#ffffff" stroke-width="1"
+                        stroke-opacity="0.3" />
+                </svg>
+
             </div>
 
             <div class="header-controls">
@@ -1237,7 +1431,9 @@
                         <span class="tooltip">ערכות נושא</span>
                     </button>
                     <div class="theme-dropdown slide-in">
-                        <h4 style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">ערכות נושא לעורך</h4>
+                        <h4
+                            style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">
+                            ערכות נושא לעורך</h4>
                         <div class="theme-option active" data-theme="default">
                             <span>ברירת מחדל</span>
                             <div class="theme-color" style="background-color: #f8f9fa;"></div>
@@ -1270,12 +1466,18 @@
                             <span>XQ בהיר</span>
                             <div class="theme-color" style="background-color: #ffffff;"></div>
                         </div>
-                        <div style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);"></div>
+                        <div
+                            style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);">
+                        </div>
                         <div class="theme-option" data-theme="auto">
                             <span>אוטומטי לפי מצב</span>
                             <div style="display: flex;">
-                                <div class="theme-color" style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;"></div>
-                                <div class="theme-color" style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;"></div>
+                                <div class="theme-color"
+                                    style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                </div>
+                                <div class="theme-color"
+                                    style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1284,7 +1486,8 @@
                 <!-- Dark Mode Toggle -->
                 <div class="control-group">
                     <span class="switch-label">מצב כהה</span>
-                    <div class="toggle-switch" id="theme-toggle" tabindex="0" role="button" aria-pressed="false" data-active="false">
+                    <div class="toggle-switch" id="theme-toggle" tabindex="0" role="button" aria-pressed="false"
+                        data-active="false">
                         <div class="toggle-handle"></div>
                     </div>
                 </div>
@@ -1452,26 +1655,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Hide loading spinner when page is loaded
             const loadingElement = document.getElementById('loading');
             loadingElement.style.display = 'none';
 
             // Simple markdown mode that tags code and math sections with more specific classes
-            CodeMirror.defineMode("markdownWithCodeMath", function(config) {
+            CodeMirror.defineMode("markdownWithCodeMath", function (config) {
                 // Get the underlying markdown mode
                 const markdownMode = CodeMirror.getMode(config, "markdown");
 
                 // Create an overlay that catches code and math
                 const overlay = {
-                    startState: function() {
+                    startState: function () {
                         return {
                             inCodeBlock: false,
                             inMathBlock: false,
                             inMath: false
                         };
                     },
-                    token: function(stream, state) {
+                    token: function (stream, state) {
                         // Code blocks
                         if (stream.match(/^```/)) {
                             state.inCodeBlock = !state.inCodeBlock;
@@ -1586,7 +1789,7 @@
             });
 
             // Add direct event listener to handle keyboard shortcuts
-            editor.getWrapperElement().addEventListener('keydown', function(e) {
+            editor.getWrapperElement().addEventListener('keydown', function (e) {
                 // Check for keyboard shortcuts
                 if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
                     e.preventDefault(); // Prevent default browser behavior
@@ -1622,8 +1825,8 @@
                         cm.replaceSelection(`**${selection}**`);
                         // Keep the same text selected
                         cm.setSelection(
-                            {line: from.line, ch: from.ch},
-                            {line: to.line, ch: to.ch + 4}
+                            { line: from.line, ch: from.ch },
+                            { line: to.line, ch: to.ch + 4 }
                         );
                     }
                 } else {
@@ -1631,7 +1834,7 @@
                     cm.replaceSelection('**טקסט מודגש**');
                     // Position cursor between the asterisks
                     const cursor = cm.getCursor();
-                    cm.setCursor({line: cursor.line, ch: cursor.ch - 2});
+                    cm.setCursor({ line: cursor.line, ch: cursor.ch - 2 });
                 }
 
                 // Ensure focus remains on editor
@@ -1654,14 +1857,14 @@
                     } else {
                         cm.replaceSelection(`*${selection}*`);
                         cm.setSelection(
-                            {line: from.line, ch: from.ch},
-                            {line: to.line, ch: to.ch + 2}
+                            { line: from.line, ch: from.ch },
+                            { line: to.line, ch: to.ch + 2 }
                         );
                     }
                 } else {
                     cm.replaceSelection('*טקסט נטוי*');
                     const cursor = cm.getCursor();
-                    cm.setCursor({line: cursor.line, ch: cursor.ch - 1});
+                    cm.setCursor({ line: cursor.line, ch: cursor.ch - 1 });
                 }
 
                 cm.focus();
@@ -1679,7 +1882,7 @@
                     // Position cursor to edit the link text
                     const cursor = cm.getCursor();
                     const linkTextLength = 'טקסט קישור'.length;
-                    cm.setCursor({line: cursor.line, ch: cursor.ch - (linkTextLength + 18)});
+                    cm.setCursor({ line: cursor.line, ch: cursor.ch - (linkTextLength + 18) });
                 }
 
                 cm.focus();
@@ -1764,19 +1967,19 @@ document.addEventListener('click', function() {
             const renderer = new marked.Renderer();
 
             // Custom table renderer for RTL tables
-            renderer.table = function(header, body) {
+            renderer.table = function (header, body) {
                 return `<table class="rtl-table" dir="rtl">\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n`;
             };
 
             // Custom list renderer for RTL lists
-            renderer.list = function(body, ordered, start) {
+            renderer.list = function (body, ordered, start) {
                 const type = ordered ? 'ol' : 'ul';
                 const startAttr = (ordered && start && start !== 1) ? ` start="${start}"` : '';
                 return `<${type}${startAttr} dir="rtl">${body}</${type}>`;
             };
 
             // Custom list item renderer for RTL
-            renderer.listitem = function(text, task, checked) {
+            renderer.listitem = function (text, task, checked) {
                 if (task) {
                     return `<li style="direction: rtl; text-align: right;"><input type="checkbox" ${checked ? 'checked' : ''} disabled> <span>${text}</span></li>`;
                 }
@@ -1784,7 +1987,7 @@ document.addEventListener('click', function() {
             };
 
             // Custom code block renderer to ensure LTR
-            renderer.code = function(code, infostring, escaped) {
+            renderer.code = function (code, infostring, escaped) {
                 const lang = (infostring || '').match(/\S*/)[0];
 
                 // Add explicit LTR direction to code blocks
@@ -1792,7 +1995,7 @@ document.addEventListener('click', function() {
             };
 
             // Custom inline code renderer
-            renderer.codespan = function(code) {
+            renderer.codespan = function (code) {
                 return `<code dir="ltr" style="direction: ltr;">${code}</code>`;
             };
 
@@ -1822,7 +2025,7 @@ document.addEventListener('click', function() {
             // Function to process math expressions
             function processMath(text) {
                 // Replace block math
-                text = text.replace(/\$\$([\s\S]*?)\$\$/g, function(match, equation) {
+                text = text.replace(/\$\$([\s\S]*?)\$\$/g, function (match, equation) {
                     try {
                         return `<div class="katex-display" dir="ltr">${katex.renderToString(equation, { displayMode: true, throwOnError: false })}</div>`;
                     } catch (error) {
@@ -1831,7 +2034,7 @@ document.addEventListener('click', function() {
                 });
 
                 // Replace inline math
-                text = text.replace(/\$((?!\$)[\s\S]*?)\$/g, function(match, equation) {
+                text = text.replace(/\$((?!\$)[\s\S]*?)\$/g, function (match, equation) {
                     try {
                         return `<span dir="ltr" style="display: inline-block;">${katex.renderToString(equation, { displayMode: false, throwOnError: false })}</span>`;
                     } catch (error) {
@@ -1939,6 +2142,12 @@ document.addEventListener('click', function() {
 
             // Function to set the view mode
             function setViewMode(mode) {
+                console.log('Setting view mode to:', mode);
+                // Check if mode is valid
+                if (!mode) {
+                    console.log('Invalid view mode:', mode);
+                    mode = 'split'; // Default to split if invalid
+                }
                 const appContainer = document.querySelector('.app-container');
                 const viewBtns = document.querySelectorAll('.view-mode-btn');
 
@@ -2022,7 +2231,7 @@ document.addEventListener('click', function() {
 
             // Add event listeners to toolbar buttons
             document.querySelectorAll('.btn[data-command]').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const command = this.getAttribute('data-command');
                     insertMarkdown(editor, command);
                     editor.focus();
@@ -2031,7 +2240,7 @@ document.addEventListener('click', function() {
 
             // View mode buttons
             document.querySelectorAll('.view-mode-btn').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const mode = this.getAttribute('data-mode');
                     setViewMode(mode);
                 });
@@ -2041,13 +2250,13 @@ document.addEventListener('click', function() {
             const themeBtn = document.getElementById('theme-select-btn');
             const themeSelector = document.querySelector('.theme-selector');
 
-            themeBtn.addEventListener('click', function(e) {
+            themeBtn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 themeSelector.classList.toggle('open');
             });
 
             // Close theme dropdown when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!themeSelector.contains(e.target)) {
                     themeSelector.classList.remove('open');
                 }
@@ -2055,7 +2264,7 @@ document.addEventListener('click', function() {
 
             // Theme options
             document.querySelectorAll('.theme-option').forEach(option => {
-                option.addEventListener('click', function() {
+                option.addEventListener('click', function () {
                     const theme = this.getAttribute('data-theme');
                     setEditorTheme(theme);
                     themeSelector.classList.remove('open');
@@ -2091,7 +2300,7 @@ document.addEventListener('click', function() {
                 }
 
                 // Simple toggle function with direct DOM manipulation
-                hideToolbarBtn.addEventListener('click', function(e) {
+                hideToolbarBtn.addEventListener('click', function (e) {
                     e.preventDefault();
                     e.stopPropagation(); // Prevent event bubbling
 
@@ -2129,7 +2338,7 @@ document.addEventListener('click', function() {
             }
 
             // Clear button
-            document.getElementById('clear-btn').addEventListener('click', function() {
+            document.getElementById('clear-btn').addEventListener('click', function () {
                 if (confirm('האם אתה בטוח שברצונך לנקות את כל התוכן?')) {
                     editor.setValue('');
                     editor.focus();
@@ -2157,13 +2366,13 @@ document.addEventListener('click', function() {
             // Dark mode toggle
             const themeToggle = document.getElementById('theme-toggle');
 
-            themeToggle.addEventListener('click', function() {
+            themeToggle.addEventListener('click', function () {
                 const isActive = this.getAttribute('data-active') === 'true';
                 setDarkMode(!isActive);
             });
 
             // Keyboard navigation for toggle
-            themeToggle.addEventListener('keydown', function(e) {
+            themeToggle.addEventListener('keydown', function (e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     this.click();
@@ -2177,150 +2386,151 @@ document.addEventListener('click', function() {
 
             // Update preview and stats when editor changes
             editor.on('change', updatePreview);
-            editor.on('cursorActivity', function() {
+            editor.on('cursorActivity', function () {
                 updateStats(editor.getValue());
             });
 
             // Handle window resize events to make the editor responsive
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 editor.refresh();
             });
 
             // Initial update
             updatePreview();
 
-        function initResizablePanels() {
-            const appContainer = document.querySelector('.app-container');
-            const divider = document.querySelector('.divider');
-            const editorPanel = document.querySelector('.editor-panel');
-            const previewPanel = document.querySelector('.preview-panel');
+            function initResizablePanels() {
+                const appContainer = document.querySelector('.app-container');
+                const divider = document.querySelector('.divider');
+                const editorPanel = document.querySelector('.editor-panel');
+                const previewPanel = document.querySelector('.preview-panel');
 
-            if (!divider || !editorPanel || !previewPanel) {
-                return;
-            }
-
-            let isResizing = false;
-            let startX, startWidth;
-
-            // Load saved panel widths from localStorage
-            const savedEditorWidth = localStorage.getItem('editorPanelWidth');
-            const savedPreviewWidth = localStorage.getItem('previewPanelWidth');
-
-            if (savedEditorWidth && savedPreviewWidth) {
-                document.documentElement.style.setProperty('--editor-width', savedEditorWidth);
-                document.documentElement.style.setProperty('--preview-width', savedPreviewWidth);
-            }
-
-            // Mouse down event on the divider
-            divider.addEventListener('mousedown', startResize);
-
-            // Touch start event for mobile
-            divider.addEventListener('touchstart', function(e) {
-                startX = e.touches[0].clientX;
-                startWidth = editorPanel.getBoundingClientRect().width;
-                startResize(e);
-            });
-
-            function startResize(e) {
-                if (currentViewMode !== 'split') return;
-
-                isResizing = true;
-                if (e.type !== 'touchstart') {
-                    startX = e.clientX;
-                    startWidth = editorPanel.getBoundingClientRect().width;
+                if (!divider || !editorPanel || !previewPanel) {
+                    return;
                 }
 
-                // Add classes for styling during drag
-                divider.classList.add('dragging');
-                appContainer.classList.add('resizing');
+                let isResizing = false;
+                let startX, startWidth;
 
-                // Prevent text selection during resize
-                document.body.style.userSelect = 'none';
+                // Load saved panel widths from localStorage
+                const savedEditorWidth = localStorage.getItem('editorPanelWidth');
+                const savedPreviewWidth = localStorage.getItem('previewPanelWidth');
 
-                e.preventDefault();
+                if (savedEditorWidth && savedPreviewWidth) {
+                    document.documentElement.style.setProperty('--editor-width', savedEditorWidth);
+                    document.documentElement.style.setProperty('--preview-width', savedPreviewWidth);
+                }
+
+                // Mouse down event on the divider
+                divider.addEventListener('mousedown', startResize);
+
+                // Touch start event for mobile
+                divider.addEventListener('touchstart', function (e) {
+                    startX = e.touches[0].clientX;
+                    startWidth = editorPanel.getBoundingClientRect().width;
+                    startResize(e);
+                });
+
+                function startResize(e) {
+                    if (currentViewMode !== 'split') return;
+
+                    isResizing = true;
+                    if (e.type !== 'touchstart') {
+                        startX = e.clientX;
+                        startWidth = editorPanel.getBoundingClientRect().width;
+                    }
+
+                    // Add classes for styling during drag
+                    divider.classList.add('dragging');
+                    appContainer.classList.add('resizing');
+
+                    // Prevent text selection during resize
+                    document.body.style.userSelect = 'none';
+
+                    e.preventDefault();
+                }
+
+                // Mouse move event - calculate and set new widths
+                document.addEventListener('mousemove', resize);
+
+                // Touch move event for mobile
+                document.addEventListener('touchmove', function (e) {
+                    if (!isResizing) return;
+
+                    const touchX = e.touches[0].clientX;
+                    doResize(touchX);
+                    e.preventDefault(); // Prevent scrolling
+                });
+
+                function resize(e) {
+                    if (!isResizing) return;
+                    doResize(e.clientX);
+                }
+
+                function doResize(clientX) {
+                    // Calculate the new width based on mouse/touch movement
+                    const containerWidth = appContainer.clientWidth;
+                    const newWidth = startWidth - (clientX - startX);
+
+                    // Calculate percentages with limits
+                    const editorPercent = Math.min(Math.max((newWidth / containerWidth) * 100, 20), 80);
+                    const previewPercent = 100 - editorPercent;
+
+                    // Update CSS variables
+                    document.documentElement.style.setProperty('--editor-width', `${editorPercent}%`);
+                    document.documentElement.style.setProperty('--preview-width', `${previewPercent}%`);
+
+                    // Refresh CodeMirror
+                    editor.refresh();
+                }
+
+                // Mouse up and touch end events - finalize resize
+                function stopResize() {
+                    if (!isResizing) return;
+
+                    isResizing = false;
+
+                    // Remove drag-related classes
+                    divider.classList.remove('dragging');
+                    appContainer.classList.remove('resizing');
+
+                    // Re-enable text selection
+                    document.body.style.userSelect = '';
+
+                    // Get final widths
+                    const editorWidth = getComputedStyle(document.documentElement).getPropertyValue('--editor-width');
+                    const previewWidth = getComputedStyle(document.documentElement).getPropertyValue('--preview-width');
+
+                    // Save to localStorage
+                    localStorage.setItem('editorPanelWidth', editorWidth);
+                    localStorage.setItem('previewPanelWidth', previewWidth);
+
+                    // Final refresh of editor
+                    editor.refresh();
+                }
+
+                document.addEventListener('mouseup', stopResize);
+                document.addEventListener('touchend', stopResize);
+                document.addEventListener('touchcancel', stopResize);
             }
 
-            // Mouse move event - calculate and set new widths
-            document.addEventListener('mousemove', resize);
+            // Modify the existing setViewMode function to reinitialize resizable panels when needed
+            const originalSetViewMode = setViewMode;
+            setViewMode = function (mode) {
+                // Call the original function first
+                originalSetViewMode(mode);
 
-            // Touch move event for mobile
-            document.addEventListener('touchmove', function(e) {
-                if (!isResizing) return;
+                // If we switched to split view, make sure panels are resizable
+                if (mode === 'split') {
+                    // Need a small delay to ensure DOM is updated
+                    setTimeout(initResizablePanels, 100);
+                }
+            };
 
-                const touchX = e.touches[0].clientX;
-                doResize(touchX);
-                e.preventDefault(); // Prevent scrolling
-            });
-
-            function resize(e) {
-                if (!isResizing) return;
-                doResize(e.clientX);
-            }
-
-            function doResize(clientX) {
-                // Calculate the new width based on mouse/touch movement
-                const containerWidth = appContainer.clientWidth;
-                const newWidth = startWidth - (clientX - startX);
-
-                // Calculate percentages with limits
-                const editorPercent = Math.min(Math.max((newWidth / containerWidth) * 100, 20), 80);
-                const previewPercent = 100 - editorPercent;
-
-                // Update CSS variables
-                document.documentElement.style.setProperty('--editor-width', `${editorPercent}%`);
-                document.documentElement.style.setProperty('--preview-width', `${previewPercent}%`);
-
-                // Refresh CodeMirror
-                editor.refresh();
-            }
-
-            // Mouse up and touch end events - finalize resize
-            function stopResize() {
-                if (!isResizing) return;
-
-                isResizing = false;
-
-                // Remove drag-related classes
-                divider.classList.remove('dragging');
-                appContainer.classList.remove('resizing');
-
-                // Re-enable text selection
-                document.body.style.userSelect = '';
-
-                // Get final widths
-                const editorWidth = getComputedStyle(document.documentElement).getPropertyValue('--editor-width');
-                const previewWidth = getComputedStyle(document.documentElement).getPropertyValue('--preview-width');
-
-                // Save to localStorage
-                localStorage.setItem('editorPanelWidth', editorWidth);
-                localStorage.setItem('previewPanelWidth', previewWidth);
-
-                // Final refresh of editor
-                editor.refresh();
-            }
-
-            document.addEventListener('mouseup', stopResize);
-            document.addEventListener('touchend', stopResize);
-            document.addEventListener('touchcancel', stopResize);
-        }
-
-        // Modify the existing setViewMode function to reinitialize resizable panels when needed
-        const originalSetViewMode = setViewMode;
-        setViewMode = function(mode) {
-            // Call the original function first
-            originalSetViewMode(mode);
-
-            // If we switched to split view, make sure panels are resizable
-            if (mode === 'split') {
-                // Need a small delay to ensure DOM is updated
-                setTimeout(initResizablePanels, 100);
-            }
-        };
-
-        // Initialize resizable panels
-        initResizablePanels();
+            // Initialize resizable panels
+            initResizablePanels();
         });
         // Add this code to your existing JavaScript, just before the closing script tag
     </script>
 </body>
+
 </html>
