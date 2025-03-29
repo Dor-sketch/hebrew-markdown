@@ -358,17 +358,19 @@
         .toggle-switch::before {
             content: "\f185";
             /* sun */
-            right: 6px;
+            right: 8px;
             color: #ffcc00;
             opacity: 1;
+            z-index: 2;
         }
 
         .toggle-switch::after {
             content: "\f186";
             /* moon */
-            left: 6px;
-            color: #ffffff;
+            left: 8px;
+            color: #0070f3;
             opacity: 0;
+            z-index: 2;
         }
 
         .toggle-switch[data-active="true"]::before {
@@ -505,16 +507,14 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            justify-content: flex-end;
         }
 
         .toolbar.hidden {
             display: none;
         }
 
-        /* Or for a smoother transition: */
         .toolbar {
-            max-height: 50px;
-            /* Adjust based on your toolbar height */
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
@@ -1357,7 +1357,9 @@
         }
 
         #credit a {
-            color: var(--text-secondary);
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: underline;
             text-decoration: none;
             transition: color var(--transition-normal);
         }
@@ -1365,14 +1367,16 @@
         #credit a:hover {
             color: var(--text-primary);
         }
-
-        #credit svg {
-            width: 10px;
-            height: 10px;
-            fill: var(--text-secondary);
-            transition: fill var(--transition-normal);
-        }
     </style>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7HFKFX0PR');
+    </script>
+    <!-- End Google Tag Manager -->
 </head>
 
 <body>
@@ -1480,6 +1484,8 @@
                 <h1>Hebrew Markdown</h1>
             </div>
 
+
+
             <div class="header-controls">
                 <!-- View Mode Selector -->
                 <div class="view-modes">
@@ -1497,80 +1503,87 @@
                     </button>
                 </div>
 
-                <!-- Hide Toolbar Button -->
+                <!-- Find & Replace Control Group -->
                 <div class="control-group">
-                    <button class="view-mode-btn hide-toolbar-btn" aria-pressed="false" aria-label="הסתר סרגל כלים">
-                        <i class="fa-solid fa-angle-up"></i>
-                        <span class="tooltip">הסתר סרגל כלים</span>
+                    <button class="btn" id="find-btn" title="חיפוש">
+                        <i class="fa-solid fa-search"></i>
+                        <span class="tooltip">חיפוש (Ctrl+F)</span>
+                    </button>
+                    <button class="btn" id="replace-btn" title="החלפה">
+                        <i class="fa-solid fa-exchange-alt"></i>
+                        <span class="tooltip">החלפה (Ctrl+H)</span>
                     </button>
                 </div>
-
                 <!-- Theme Selector -->
-                <div class="control-group theme-selector">
-                    <button class="btn theme-btn" id="theme-select-btn">
-                        <i class="fa-solid fa-palette"></i>
-                        <span class="tooltip">ערכות נושא</span>
-                    </button>
-                    <div class="theme-dropdown slide-in">
-                        <h4
-                            style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">
-                            ערכות נושא לעורך</h4>
-                        <div class="theme-option active" data-theme="default">
-                            <span>ברירת מחדל</span>
-                            <div class="theme-color" style="background-color: #f8f9fa;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="material">
-                            <span>מטיריאל</span>
-                            <div class="theme-color" style="background-color: #263238;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="dracula">
-                            <span>דרקולה</span>
-                            <div class="theme-color" style="background-color: #282a36;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="nord">
-                            <span>נורד</span>
-                            <div class="theme-color" style="background-color: #2e3440;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="solarized">
-                            <span>סולאריז</span>
-                            <div class="theme-color" style="background-color: #fdf6e3;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="ayu-dark">
-                            <span>איו כהה</span>
-                            <div class="theme-color" style="background-color: #0a0e14;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="idea">
-                            <span>אידיאה</span>
-                            <div class="theme-color" style="background-color: #ffffff;"></div>
-                        </div>
-                        <div class="theme-option" data-theme="xq-light">
-                            <span>XQ בהיר</span>
-                            <div class="theme-color" style="background-color: #ffffff;"></div>
-                        </div>
-                        <div
-                            style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);">
-                        </div>
-                        <div class="theme-option" data-theme="auto">
-                            <span>אוטומטי לפי מצב</span>
-                            <div style="display: flex;">
-                                <div class="theme-color"
-                                    style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                </div>
-                                <div class="theme-color"
-                                    style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                <div class="control-group">
+                    <div class="theme-selector">
+                        <button class="btn theme-btn" id="theme-select-btn">
+                            <i class="fa-solid fa-palette"></i>
+                            <span class="tooltip">ערכות נושא</span>
+                        </button>
+                        <div class="theme-dropdown slide-in">
+                            <h4
+                                style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">
+                                ערכות נושא לעורך</h4>
+                            <div class="theme-option active" data-theme="default">
+                                <span>ברירת מחדל</span>
+                                <div class="theme-color" style="background-color: #f8f9fa;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="material">
+                                <span>מטיריאל</span>
+                                <div class="theme-color" style="background-color: #263238;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="dracula">
+                                <span>דרקולה</span>
+                                <div class="theme-color" style="background-color: #282a36;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="nord">
+                                <span>נורד</span>
+                                <div class="theme-color" style="background-color: #2e3440;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="solarized">
+                                <span>סולאריז</span>
+                                <div class="theme-color" style="background-color: #fdf6e3;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="ayu-dark">
+                                <span>איו כהה</span>
+                                <div class="theme-color" style="background-color: #0a0e14;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="idea">
+                                <span>אידיאה</span>
+                                <div class="theme-color" style="background-color: #ffffff;"></div>
+                            </div>
+                            <div class="theme-option" data-theme="xq-light">
+                                <span>XQ בהיר</span>
+                                <div class="theme-color" style="background-color: #ffffff;"></div>
+                            </div>
+                            <div
+                                style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);">
+                            </div>
+                            <div class="theme-option" data-theme="auto">
+                                <span>אוטומטי לפי מצב</span>
+                                <div style="display: flex;">
+                                    <div class="theme-color"
+                                        style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                    </div>
+                                    <div class="theme-color"
+                                        style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Dark Mode Toggle -->
-                <div class="control-group">
-                    <span class="switch-label">מצב כהה</span>
+                    <div class="tool-divider"></div>
                     <div class="toggle-switch" id="theme-toggle" tabindex="0" role="button" aria-pressed="false"
                         data-active="false">
                         <div class="toggle-handle"></div>
                     </div>
+                    <div class="tool-divider"></div>
+
+                    <!-- Hide Toolbar Button -->
+                    <button class="btn hide-toolbar-btn" aria-pressed="false" aria-label="הסתר סרגל כלים">
+                        <i class="fa-solid  fa-chevron-down"></i>
+                    </button>
                 </div>
             </div>
         </header>
@@ -1713,9 +1726,9 @@
             </div>
 
             <div id="credit" title="Visit Dor Pascal's website">
-                <a href="https://dorpascal.com" target="_blank" rel="noopener noreferrer"
+                By<a href="https://dorpascal.com" target="_blank" rel="noopener noreferrer"
                     aria-label="Dor Pascal's personal website">
-                    By Dor Pascal
+                    Dor Pascal
                 </a>
             </div>
 
@@ -1738,7 +1751,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/markdown/markdown.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/continuelist.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/mode/overlay.min.js"></script>
-
+    <!-- CodeMirror Search Addons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/searchcursor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/search.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/dialog/dialog.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/dialog/dialog.min.css">
     <!-- KaTeX for Math -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
@@ -1993,6 +2010,41 @@
                     return isDarkMode ? 'material' : 'default';
                 }
 
+                // update toggle icon
+                const themeToggle = document.getElementById('theme-toggle');
+                themeToggle.setAttribute('aria-pressed', isDarkMode);
+                themeToggle.setAttribute('data-active', isDarkMode);
+                themeToggle.classList.toggle('active', isDarkMode);
+                themeToggle.querySelector('.toggle-handle').style.backgroundColor = isDarkMode ? '#1a1a1a' : '#ffffff';
+                themeToggle.querySelector('.toggle-handle').style.boxShadow = isDarkMode ? '0 0 5px rgba(255, 255, 255, 0.2)' : '0 0 5px rgba(0, 0, 0, 0.2)';
+                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
+                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
+                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
+
+                // update primary color based on specific theme - each theme has its own primary color
+                const primaryColors = [
+                    '#007bff', // default
+                    '#2196F3', // material
+                    '#FF79C6', // dracula
+                    '#88C0D0', // nord
+                    '#268bd2', // solarized
+                    '#7aa2f7', // ayu-dark
+                    '#007bff', // idea
+                    '#007bff', // xq-light
+                ];
+                const themeIndex = Object.keys(editorThemes).indexOf(currentTheme);
+                const primaryColor = primaryColors[themeIndex];
+                document.documentElement.style.setProperty('--primary', primaryColor);
+                document.documentElement.style.setProperty('--primary-light', primaryColor + 'CC');
+                document.documentElement.style.setProperty('--primary-dark', primaryColor + 'FF');
+                document.documentElement.style.setProperty('--primary-color-hover', primaryColor + 'CC');
+                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
+                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
+                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
+                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
+                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
+                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
+                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
                 return themeInfo.theme;
             }
 
@@ -2000,7 +2052,7 @@
             setViewMode(currentViewMode);
 
             // Sample content
-            const sampleContent = `# עורך Markdown מודרני
+            const sampleContent = `# עורך Markdown Right-to-Left (RTL)
 
 ברוך הבא לעורך Markdown המודרני בעברית. עורך זה תומך בכל תכונות Markdown ובנוסחאות מתמטיות, עם ממשק מינימליסטי בהשראת מוצרי Apple.
 
@@ -2300,7 +2352,86 @@ document.addEventListener('click', function() {
                     metaThemeColor.setAttribute('content', enabled ? '#121212' : '#ffffff');
                 }
             }
+            // Find and Replace Functionality
+            (function () {
+                // Elements
+                const findBtn = document.getElementById('find-btn');
+                const replaceBtn = document.getElementById('replace-btn');
 
+                // Open find dialog using CodeMirror's built-in search
+                findBtn.addEventListener('click', function () {
+                    editor.execCommand('find');
+                });
+
+                // Open replace dialog using CodeMirror's built-in replace
+                replaceBtn.addEventListener('click', function () {
+                    editor.execCommand('replace');
+                });
+
+                // Add keyboard shortcuts to the editor configuration
+                editor.setOption('extraKeys', Object.assign(editor.getOption('extraKeys') || {}, {
+                    'Ctrl-F': 'find',
+                    'Cmd-F': 'find',
+                    'Ctrl-H': 'replace',
+                    'Cmd-H': 'replace'
+                }));
+
+                // Add some additional CSS to make the search dialog RTL-friendly
+                const style = document.createElement('style');
+                style.textContent = `
+        .CodeMirror-dialog {
+            direction: rtl;
+            background-color: var(--card) !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: var(--border-radius-md) !important;
+            box-shadow: var(--shadow-md);
+            padding: var(--spacing-sm);
+            z-index: 30;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+        }
+
+        .CodeMirror-dialog-top {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: var(--spacing-md);
+        }
+
+        .CodeMirror-dialog input {
+            direction: rtl;
+            background-color: var(--surface-1);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            margin-right: var(--spacing-sm);
+        }
+
+        .CodeMirror-searching {
+            background-color: var(--primary-light);
+        }
+
+        .CodeMirror-dialog button {
+            background-color: var(--surface-1);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            margin-right: var(--spacing-xs);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .CodeMirror-dialog button:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+    `;
+                document.head.appendChild(style);
+            })();
             // Function to set editor theme
             function setEditorTheme(themeName) {
                 if (!editorThemes[themeName]) return;
@@ -2388,10 +2519,10 @@ document.addEventListener('click', function() {
                     toolbar.classList.add('hidden');
                     hideToolbarBtn.classList.add('active');
                     hideToolbarBtn.setAttribute('aria-pressed', 'true');
-                    hideToolbarBtn.querySelector('i').classList.remove('fa-angle-up');
-                    hideToolbarBtn.querySelector('i').classList.add('fa-angle-down');
+                    hideToolbarBtn.querySelector('i').classList.remove('fa-chevron-up');
+                    hideToolbarBtn.querySelector('i').classList.add('fa-chevron-down');
                     const tooltipSpan = hideToolbarBtn.querySelector('.tooltip');
-                    if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+                    // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
                 }
 
                 // Simple toggle function with direct DOM manipulation
@@ -2406,18 +2537,18 @@ document.addEventListener('click', function() {
                         toolbar.classList.remove('hidden');
                         this.classList.remove('active');
                         this.setAttribute('aria-pressed', 'false');
-                        this.querySelector('i').classList.add('fa-angle-up');
-                        this.querySelector('i').classList.remove('fa-angle-down');
+                        this.querySelector('i').classList.add('fa-chevron-up');
+                        this.querySelector('i').classList.remove('fa-chevron-down');
                         const tooltipSpan = this.querySelector('.tooltip');
-                        if (tooltipSpan) tooltipSpan.textContent = 'הסתר סרגל כלים';
+                        // if (tooltipSpan) tooltipSpan.textContent = 'הסתר סרגל כלים';
                     } else {
                         toolbar.classList.add('hidden');
                         this.classList.add('active');
                         this.setAttribute('aria-pressed', 'true');
-                        this.querySelector('i').classList.remove('fa-angle-up');
-                        this.querySelector('i').classList.add('fa-angle-down');
+                        this.querySelector('i').classList.remove('fa-chevron-up');
+                        this.querySelector('i').classList.add('fa-chevron-down');
                         const tooltipSpan = this.querySelector('.tooltip');
-                        if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+                        // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
                     }
 
                     // Save state to localStorage
@@ -2624,7 +2755,6 @@ document.addEventListener('click', function() {
             // Initialize resizable panels
             initResizablePanels();
         });
-        // Add this code to your existing JavaScript, just before the closing script tag
     </script>
 </body>
 
