@@ -479,6 +479,23 @@
             z-index: 10;
         }
 
+        .toolbar.hidden {
+            display: none;
+        }
+        
+        /* Or for a smoother transition: */
+        .toolbar {
+            max-height: 50px; /* Adjust based on your toolbar height */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .toolbar.hidden {
+            max-height: 0;
+            padding: 0;
+            border-bottom: none;
+        }
+        
         .toolbar::-webkit-scrollbar {
             display: none; /* Chrome, Safari, Opera */
         }
@@ -1157,6 +1174,14 @@
                     </button>
                 </div>
 
+                <!-- Hide Toolbar Button -->
+                <div class="control-group">
+                    <button class="view-mode-btn hide-toolbar-btn" aria-pressed="false" aria-label="הסתר סרגל כלים">
+                        <i class="fa-solid fa-angle-up"></i>
+                        <span class="tooltip">הסתר סרגל כלים</span>
+                    </button>
+                </div>
+
                 <!-- Theme Selector -->
                 <div class="control-group theme-selector">
                     <button class="btn theme-btn" id="theme-select-btn">
@@ -1495,7 +1520,6 @@
             let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
             let currentViewMode = localStorage.getItem('viewMode') || 'split';
 
-            // Initialize CodeMirror with our custom mode
             const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
                 mode: "markdownWithCodeMath",
                 lineNumbers: true,
@@ -1509,13 +1533,110 @@
                 inputStyle: 'contenteditable',
                 specialChars: /[\u0000-\u001f\u007f-\u009f\u00ad\u061C\u200E\u200F\u2028\u2029\ufeff\u2066\u2067\u2068\u2069]/,
                 extraKeys: {
-                    'Enter': 'newlineAndIndentContinueMarkdownList',
-                    'Ctrl-B': function(cm) { insertMarkdown(cm, 'bold'); },
-                    'Ctrl-I': function(cm) { insertMarkdown(cm, 'italic'); },
-                    'Ctrl-K': function(cm) { insertMarkdown(cm, 'link'); },
-                    'Ctrl-S': function(cm) { saveDocument(); }
+                    'Enter': 'newlineAndIndentContinueMarkdownList'
                 }
             });
+
+            // Add direct event listener to handle keyboard shortcuts
+            editor.getWrapperElement().addEventListener('keydown', function(e) {
+                // Check for keyboard shortcuts
+                if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+                    e.preventDefault(); // Prevent default browser behavior
+                    applyBoldFormatting(editor);
+                }
+                else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+                    e.preventDefault();
+                    applyItalicFormatting(editor);
+                }
+                else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    applyLinkFormatting(editor);
+                }
+                else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveDocument();
+                }
+            });
+
+            // Specific formatting functions
+            function applyBoldFormatting(cm) {
+                const selection = cm.getSelection();
+                const from = cm.getCursor('from');
+                const to = cm.getCursor('to');
+
+                if (selection) {
+                    // Check if selection is already bold (surrounded by **)
+                    if (selection.startsWith('**') && selection.endsWith('**')) {
+                        // Remove formatting
+                        cm.replaceSelection(selection.substring(2, selection.length - 2));
+                    } else {
+                        // Add bold formatting
+                        cm.replaceSelection(`**${selection}**`);
+                        // Keep the same text selected
+                        cm.setSelection(
+                            {line: from.line, ch: from.ch},
+                            {line: to.line, ch: to.ch + 4}
+                        );
+                    }
+                } else {
+                    // No selection, insert placeholder
+                    cm.replaceSelection('**טקסט מודגש**');
+                    // Position cursor between the asterisks
+                    const cursor = cm.getCursor();
+                    cm.setCursor({line: cursor.line, ch: cursor.ch - 2});
+                }
+
+                // Ensure focus remains on editor
+                cm.focus();
+
+                // Force update preview
+                updatePreview();
+            }
+
+            // Similar functions for italic and link formatting
+            function applyItalicFormatting(cm) {
+                // Implementation similar to bold but with single asterisk
+                const selection = cm.getSelection();
+                const from = cm.getCursor('from');
+                const to = cm.getCursor('to');
+
+                if (selection) {
+                    if (selection.startsWith('*') && selection.endsWith('*')) {
+                        cm.replaceSelection(selection.substring(1, selection.length - 1));
+                    } else {
+                        cm.replaceSelection(`*${selection}*`);
+                        cm.setSelection(
+                            {line: from.line, ch: from.ch},
+                            {line: to.line, ch: to.ch + 2}
+                        );
+                    }
+                } else {
+                    cm.replaceSelection('*טקסט נטוי*');
+                    const cursor = cm.getCursor();
+                    cm.setCursor({line: cursor.line, ch: cursor.ch - 1});
+                }
+
+                cm.focus();
+                updatePreview();
+            }
+
+            function applyLinkFormatting(cm) {
+                const selection = cm.getSelection();
+                const from = cm.getCursor('from');
+
+                if (selection) {
+                    cm.replaceSelection(`[${selection}](http://example.com)`);
+                } else {
+                    cm.replaceSelection('[טקסט קישור](http://example.com)');
+                    // Position cursor to edit the link text
+                    const cursor = cm.getCursor();
+                    const linkTextLength = 'טקסט קישור'.length;
+                    cm.setCursor({line: cursor.line, ch: cursor.ch - (linkTextLength + 18)});
+                }
+
+                cm.focus();
+                updatePreview();
+            }
 
             // Function to get the correct editor theme based on current settings
             function getEditorTheme() {
@@ -1543,7 +1664,7 @@
 * תמיכה מלאה בעברית (RTL)
 * עיצוב טקסט **מודגש**, *נטוי* ו~~קו חוצה~~
 * תמיכה ברשימות ממוספרות ולא ממוספרות
-* אפשרות להוספת [קישורים](https://example.com) ותמונות
+* אפשרות להוספת [קישורים](https://dorpascal.com) ותמונות
 * תחביר קוד עם הדגשת תחביר
 * מצב כהה ובהיר עם מגוון ערכות נושא לעורך
 
@@ -1895,6 +2016,63 @@ document.addEventListener('click', function() {
                     option.classList.remove('active');
                 }
             });
+
+            const hideToolbarBtn = document.querySelector('.hide-toolbar-btn');
+            const toolbar = document.querySelector('.toolbar');
+
+            // Make sure elements exist before adding event listeners
+            if (hideToolbarBtn && toolbar) {
+                // Force initial state
+                const savedState = localStorage.getItem('hideToolbar') === 'true';
+
+                // Apply initial state immediately
+                if (savedState) {
+                    toolbar.classList.add('hidden');
+                    hideToolbarBtn.classList.add('active');
+                    hideToolbarBtn.setAttribute('aria-pressed', 'true');
+                    hideToolbarBtn.querySelector('i').classList.remove('fa-angle-up');
+                    hideToolbarBtn.querySelector('i').classList.add('fa-angle-down');
+                    const tooltipSpan = hideToolbarBtn.querySelector('.tooltip');
+                    if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+                }
+
+                // Simple toggle function with direct DOM manipulation
+                hideToolbarBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent event bubbling
+
+                    const isCurrentlyHidden = toolbar.classList.contains('hidden');
+
+                    // Toggle toolbar visibility
+                    if (isCurrentlyHidden) {
+                        toolbar.classList.remove('hidden');
+                        this.classList.remove('active');
+                        this.setAttribute('aria-pressed', 'false');
+                        this.querySelector('i').classList.add('fa-angle-up');
+                        this.querySelector('i').classList.remove('fa-angle-down');
+                        const tooltipSpan = this.querySelector('.tooltip');
+                        if (tooltipSpan) tooltipSpan.textContent = 'הסתר סרגל כלים';
+                    } else {
+                        toolbar.classList.add('hidden');
+                        this.classList.add('active');
+                        this.setAttribute('aria-pressed', 'true');
+                        this.querySelector('i').classList.remove('fa-angle-up');
+                        this.querySelector('i').classList.add('fa-angle-down');
+                        const tooltipSpan = this.querySelector('.tooltip');
+                        if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+                    }
+
+                    // Save state to localStorage
+                    localStorage.setItem('hideToolbar', !isCurrentlyHidden);
+
+                    // Force editor refresh
+                    setTimeout(() => {
+                        if (typeof editor !== 'undefined' && editor.refresh) {
+                            editor.refresh();
+                        }
+                    }, 50);
+                });
+            }
 
             // Clear button
             document.getElementById('clear-btn').addEventListener('click', function() {
