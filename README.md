@@ -1,4 +1,4 @@
-# Hebrew Markdown Editor
+# Hebrew Markdown Editor (RTL Markdown Editor)
 
 <img src="./images/icon.svg" alt="Hebrew Markdown Editor Logo" width="100" align="right">
 
