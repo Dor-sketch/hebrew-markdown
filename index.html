@@ -20,17 +20,7 @@
     <link rel="canonical" href="https://dorpascal.com/hebrew-markdown/">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/icons8-markdown-duo-32.png">
-
-    <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/icons8-markdown-duo-180.png">
-
-    <!-- Microsoft Tile Icon -->
-    <meta name="msapplication-TileImage" content="/images/icons/icons8-markdown-duo-144.png">
-    <meta name="msapplication-TileColor" content="#4a90e2">
-
-    <!-- Android Icon -->
-    <link rel="icon" type="image/png" sizes="192x192" href="/images/icons/icons8-markdown-duo-192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://dorpascal.com/hebrew-markdown/images/images/icon.svg">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -46,6 +36,11 @@
             "applicationCategory": "Content",
             "operatingSystem": "Web",
             "browserRequirements": "HTML5",
+            "screenshot": [
+                "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
+                "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
+                "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
+            ],
             "image": "https://dorpascal.com/hebrew-markdown/images/og-image.webp",
             "author": {
                 "@type": "Person",
@@ -63,7 +58,12 @@
             "applicationCategory": "Content",
             "operatingSystem": "Web",
             "browserRequirements": "HTML5",
-            "image": "https://dorpascal.com/hebrew-markdown/images/icons/icons8-markdown-duo-512.png",
+            "image": "https://dorpascal.com/hebrew-markdown/images/icon.svg",
+            "screenshot": [
+                "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
+                "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
+                "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
+            ],
             "author": {
                 "@type": "Person",
                 "name": "Dor Pascal"
@@ -234,12 +234,24 @@
         }
 
         .app-title {
-            font-size: 18px;
             font-weight: 600;
             color: var(--text-primary);
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
+            background-image: url(./images/icon.svg);
+            background-size: 36px 36px;
+            background-repeat: no-repeat;
+            background-position: left center;
+            padding-left: 34px;
+            text-decoration: none;
+            transition: color var(--transition-normal);
+        }
+
+        .app-title h1 {
+            margin: 0;
+            font-size: 1.2em;
+            color: var(--text-primary);
         }
 
         .app-title i {
@@ -251,6 +263,7 @@
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
+            align-items: stretch;
         }
 
         /* Controls group - enhanced */
@@ -260,7 +273,7 @@
             gap: var(--spacing-sm);
             background-color: var(--surface-1);
             border-radius: var(--border-radius-lg);
-            padding: var(--spacing-sm);
+            padding: var(--spacing-xs);
             box-shadow: var(--shadow-sm);
             transition: transform var(--transition-fast), box-shadow var(--transition-fast);
         }
@@ -965,6 +978,7 @@
             font-size: 12px;
             border-top: 1px solid var(--divider);
             transition: background-color var(--transition-normal);
+            white-space: nowrap;
         }
 
         .status-bar i {
@@ -1123,8 +1137,7 @@
         <!-- App Header -->
         <header class="app-header">
             <div class="app-title">
-                <i class="fa-solid fa-pen-to-square"></i>
-                <span>עורך Markdown מודרני</span>
+                <h1>Hebrew Markdown</h1>
             </div>
 
             <div class="header-controls">
