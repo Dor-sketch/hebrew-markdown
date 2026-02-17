@@ -1,223 +1,331 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description"
-        content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת. צורך בקלות מסמכים בפורמט Markdown והורד אותם כקובץ Markdown או PDF">
-    <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript">
-    <meta name="author" content="Dor Pascal">
-    <meta name="robots" content="index, follow">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="עורך Markdown בעברית">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://dorpascal.com/hebrew-markdown/images/icon.svg">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://dorpascal.com/hebrew-markdown/images/icon.svg">
-    <meta property="og:title" content="עורך Markdown בעברית">
-    <meta property="og:description" content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://dorpascal.com/hebrew-markdown/">
-    <meta property="og:image" content="https://dorpascal.com/hebrew-markdown/images/og-image.webp">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Dor Pascal">
-    <meta property="og:locale" content="he_IL">
-    <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:locale:alternate" content="fr_FR">
-    <meta property="og:updated_time" content="2025-03-29T00:00:00+03:00">
-    <meta property="og:image:alt" content="עורך Markdown בעברית">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="description"
+      content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת. צורך בקלות מסמכים בפורמט Markdown והורד אותם כקובץ Markdown או PDF"
+    />
+    <meta name="keywords" content="Markdown, עורך, עברית, HTML, JavaScript" />
+    <meta name="author" content="Dor Pascal" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="עורך Markdown בעברית" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://dorpascal.com/hebrew-markdown/images/icon.svg"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://dorpascal.com/hebrew-markdown/images/icon.svg"
+    />
+    <meta property="og:title" content="עורך Markdown בעברית" />
+    <meta
+      property="og:description"
+      content="עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dorpascal.com/hebrew-markdown/" />
+    <meta
+      property="og:image"
+      content="https://dorpascal.com/hebrew-markdown/images/og-image.webp"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Dor Pascal" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="fr_FR" />
+    <meta property="og:updated_time" content="2025-03-29T00:00:00+03:00" />
+    <meta property="og:image:alt" content="עורך Markdown בעברית" />
 
     <title>עורך Markdown בעברית</title>
-    <link rel="canonical" href="https://dorpascal.com/hebrew-markdown/">
+    <link rel="canonical" href="https://dorpascal.com/hebrew-markdown/" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://dorpascal.com/hebrew-markdown/images/icon.svg">
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://dorpascal.com/hebrew-markdown/images/icon.svg"
+    />
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <!-- json/ld schemas -->
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebApplication",
-            "name": "עורך Markdown בעברית",
-            "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
-            "url": "https://dorpascal.com/hebrew-markdown/",
-            "applicationCategory": "Content",
-            "operatingSystem": "Web",
-            "browserRequirements": "HTML5",
-            "screenshot": [
-                "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
-                "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
-                "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
-            ],
-            "image": "https://dorpascal.com/hebrew-markdown/images/og-image.webp",
-            "author": {
-                "@type": "Person",
-                "name": "Dor Pascal"
-            }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "עורך Markdown בעברית",
+        "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
+        "url": "https://dorpascal.com/hebrew-markdown/",
+        "applicationCategory": "Content",
+        "operatingSystem": "Web",
+        "browserRequirements": "HTML5",
+        "screenshot": [
+          "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
+          "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
+          "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
+        ],
+        "image": "https://dorpascal.com/hebrew-markdown/images/og-image.webp",
+        "author": {
+          "@type": "Person",
+          "name": "Dor Pascal"
         }
+      }
     </script>
 
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "עורך Markdown בעברית",
-            "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
-            "applicationCategory": "Content",
-            "operatingSystem": "Web",
-            "browserRequirements": "HTML5",
-            "image": "https://dorpascal.com/hebrew-markdown/images/icon.svg",
-            "screenshot": [
-                "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
-                "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
-                "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
-            ],
-            "author": {
-                "@type": "Person",
-                "name": "Dor Pascal"
-            }
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "עורך Markdown בעברית",
+        "description": "עורך Markdown בעברית עם תצוגה מקדימה בזמן אמת",
+        "applicationCategory": "Content",
+        "operatingSystem": "Web",
+        "browserRequirements": "HTML5",
+        "image": "https://dorpascal.com/hebrew-markdown/images/icon.svg",
+        "screenshot": [
+          "https://dorpascal.com/hebrew-markdown/images/light-mode.png",
+          "https://dorpascal.com/hebrew-markdown/images/light-mode2.png",
+          "https://dorpascal.com/hebrew-markdown/images/dark-mode.png"
+        ],
+        "author": {
+          "@type": "Person",
+          "name": "Dor Pascal"
         }
+      }
     </script>
 
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-                {
-                    "@type": "ListItem",
-                    "position": 1,
-                    "name": "דף הבית",
-                    "item": "https://dorpascal.com"
-                },
-                {
-                    "@type": "ListItem",
-                    "position": 2,
-                    "name": "עורך Markdown בעברית",
-                    "item": "https://dorpascal.com/hebrew-markdown/"
-                }
-            ]
-        }
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "דף הבית",
+            "item": "https://dorpascal.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "עורך Markdown בעברית",
+            "item": "https://dorpascal.com/hebrew-markdown/"
+          }
+        ]
+      }
     </script>
 
     <!-- Inter font for modern Apple-like UI -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
 
     <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
 
     <!-- CodeMirror with themes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/material.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/nord.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/solarized.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/ayu-dark.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/idea.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/xq-light.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/material.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/nord.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/solarized.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/ayu-dark.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/idea.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/xq-light.min.css"
+    />
 
     <!-- KaTeX for math rendering -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css"
+    />
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-T7HFKFX0PR"
+    ></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-T7HFKFX0PR');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-T7HFKFX0PR");
     </script>
     <!-- End Google Tag Manager -->
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="app-container" data-view-mode="split">
-        <!-- App Header -->
-        <header class="app-header">
-            <div class="app-title">
-                <a href="https://dorpascal.com/hebrew-markdown/" aria-label="Hebrew Markdown">
-                    <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                        <!-- Premium gradients and effects -->
-                        <defs>
-                            <!-- Rich background gradient with premium dark blue tones -->
-                            <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#010B18" />
-                                <stop offset="50%" stop-color="#0A1528" />
-                                <stop offset="100%" stop-color="#0F172A" />
-                            </linearGradient>
+      <!-- App Header -->
+      <header class="app-header">
+        <div class="app-title">
+          <a
+            href="https://dorpascal.com/hebrew-markdown/"
+            aria-label="Hebrew Markdown"
+          >
+            <svg
+              id="logo"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 200 200"
+            >
+              <!-- Premium gradients and effects -->
+              <defs>
+                <!-- Rich background gradient with premium dark blue tones -->
+                <linearGradient
+                  id="bg-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#010B18" />
+                  <stop offset="50%" stop-color="#0A1528" />
+                  <stop offset="100%" stop-color="#0F172A" />
+                </linearGradient>
 
-                            <!-- Luxury gold accent gradient -->
-                            <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#FDE68A" />
-                                <stop offset="50%" stop-color="#F59E0B" />
-                                <stop offset="100%" stop-color="#B45309" />
-                            </linearGradient>
+                <!-- Luxury gold accent gradient -->
+                <linearGradient
+                  id="gold-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#FDE68A" />
+                  <stop offset="50%" stop-color="#F59E0B" />
+                  <stop offset="100%" stop-color="#B45309" />
+                </linearGradient>
 
-                            <!-- Premium blue gradient -->
-                            <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#0EA5E9" />
-                                <stop offset="50%" stop-color="#0284C7" />
-                                <stop offset="100%" stop-color="#0369A1" />
-                            </linearGradient>
+                <!-- Premium blue gradient -->
+                <linearGradient
+                  id="blue-gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stop-color="#0EA5E9" />
+                  <stop offset="50%" stop-color="#0284C7" />
+                  <stop offset="100%" stop-color="#0369A1" />
+                </linearGradient>
 
-                            <!-- Enhanced glow effects -->
-                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="3" result="blur" />
-                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                            </filter>
+                <!-- Enhanced glow effects -->
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
 
-                            <!-- Premium drop shadow -->
-                            <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
-                                <feOffset dx="1" dy="1" result="offsetblur" />
-                                <feFlood flood-color="#000000" flood-opacity="0.2" />
-                                <feComposite in2="offsetblur" operator="in" />
-                                <feMerge>
-                                    <feMergeNode />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
+                <!-- Premium drop shadow -->
+                <filter
+                  id="drop-shadow"
+                  x="-20%"
+                  y="-20%"
+                  width="140%"
+                  height="140%"
+                >
+                  <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+                  <feOffset dx="1" dy="1" result="offsetblur" />
+                  <feFlood flood-color="#000000" flood-opacity="0.2" />
+                  <feComposite in2="offsetblur" operator="in" />
+                  <feMerge>
+                    <feMergeNode />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
 
-                            <!-- Subtle inner shadow -->
-                            <radialGradient id="innerShadow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                                <stop offset="85%" stop-color="transparent" />
-                                <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
-                            </radialGradient>
-                        </defs>
+                <!-- Subtle inner shadow -->
+                <radialGradient
+                  id="innerShadow"
+                  cx="50%"
+                  cy="50%"
+                  r="50%"
+                  fx="50%"
+                  fy="50%"
+                >
+                  <stop offset="85%" stop-color="transparent" />
+                  <stop offset="100%" stop-color="rgba(0,0,0,0.2)" />
+                </radialGradient>
+              </defs>
 
-                        <!-- Main app icon background - true iOS-style squircle with ~33% roundness (iPhone-like) -->
-                        <g filter="url(#drop-shadow)">
-                            <!-- The key is using this specific curve that has no visible transition between straight and curved sections -->
-                            <path d="M50,25
+              <!-- Main app icon background - true iOS-style squircle with ~33% roundness (iPhone-like) -->
+              <g filter="url(#drop-shadow)">
+                <!-- The key is using this specific curve that has no visible transition between straight and curved sections -->
+                <path
+                  d="M50,25
              C50,25 25,25 25,50
              L25,150
              C25,175 50,175 50,175
              L150,175
              C175,175 175,150 175,150
              L175,50
-             C175,25 150,25 150,25 Z" fill="url(#bg-gradient)" />
+             C175,25 150,25 150,25 Z"
+                  fill="url(#bg-gradient)"
+                />
 
-                            <!-- Inner shadow overlay -->
-                            <path d="M50,25
+                <!-- Inner shadow overlay -->
+                <path
+                  d="M50,25
              C50,25 25,25 25,50
              L25,150
              C25,175 50,175 50,175
              L150,175
              C175,175 175,150 175,150
              L175,50
-             C175,25 150,25 150,25 Z" fill="url(#innerShadow)" opacity="0.4" />
-                        </g>
+             C175,25 150,25 150,25 Z"
+                  fill="url(#innerShadow)"
+                  opacity="0.4"
+                />
+              </g>
 
-                        <!-- Main content elements - enlarged and centered -->
-                        <g filter="url(#glow)">
-                            <!-- Left-pointing arrow -->
-                            <path d="M80,100
+              <!-- Main content elements - enlarged and centered -->
+              <g filter="url(#glow)">
+                <!-- Left-pointing arrow -->
+                <path
+                  d="M80,100
              C80,96 80,92 80,88
              L60,88
              C60,86 60,82 60,78
@@ -225,281 +333,355 @@
              C44,108 56,116 60,122
              C60,118 60,114 60,112
              L80,112
-             C80,108 80,104 80,100 Z" fill="url(#blue-gradient)" />
+             C80,108 80,104 80,100 Z"
+                  fill="url(#blue-gradient)"
+                />
 
-                            <!-- Enlarged Markdown "M" logo, placed in center-right -->
-                            <path d="M95 125V70h14l16 22 16-22h14v55h-14V92l-16 20-16-20v33z"
-                                fill="url(#blue-gradient)" />
-                        </g>
+                <!-- Enlarged Markdown "M" logo, placed in center-right -->
+                <path
+                  d="M95 125V70h14l16 22 16-22h14v55h-14V92l-16 20-16-20v33z"
+                  fill="url(#blue-gradient)"
+                />
+              </g>
 
-                        <!-- Subtle highlights in true Apple style -->
-                        <!-- Top reflection -->
-                        <path d="M35,40 Q100,30 165,40" fill="none" stroke="#ffffff" stroke-width="1"
-                            stroke-opacity="0.3" />
-                    </svg>
-                </a>
-                <h1>Hebrew Markdown</h1>
-            </div>
-
-
-
-            <div class="header-controls">
-                <!-- View Mode Selector -->
-                <div class="view-modes">
-                    <button class="view-mode-btn" data-mode="editor-only">
-                        <i class="fa-solid fa-code"></i>
-                        עריכה
-                    </button>
-                    <button class="view-mode-btn active" data-mode="split">
-                        <i class="fa-solid fa-columns"></i>
-                        מפוצל
-                    </button>
-                    <button class="view-mode-btn" data-mode="preview-only">
-                        <i class="fa-solid fa-eye"></i>
-                        תצוגה
-                    </button>
-                </div>
-
-                <!-- Find & Replace Control Group -->
-                <div class="control-group">
-                    <button class="btn" id="find-btn" title="חיפוש">
-                        <i class="fa-solid fa-search"></i>
-                        <span class="tooltip">חיפוש (Ctrl+F)</span>
-                    </button>
-                    <button class="btn" id="replace-btn" title="החלפה">
-                        <i class="fa-solid fa-exchange-alt"></i>
-                        <span class="tooltip">החלפה (Ctrl+H)</span>
-                    </button>
-                </div>
-                <!-- Theme Selector -->
-                <div class="control-group">
-                    <div class="theme-selector">
-                        <button class="btn theme-btn" id="theme-select-btn">
-                            <i class="fa-solid fa-palette"></i>
-                            <span class="tooltip">ערכות נושא</span>
-                        </button>
-                        <div class="theme-dropdown slide-in">
-                            <h4
-                                style="padding: var(--spacing-sm); margin-bottom: var(--spacing-sm); border-bottom: 1px solid var(--divider);">
-                                ערכות נושא לעורך</h4>
-                            <div class="theme-option active" data-theme="default">
-                                <span>ברירת מחדל</span>
-                                <div class="theme-color" style="background-color: #f8f9fa;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="material">
-                                <span>מטיריאל</span>
-                                <div class="theme-color" style="background-color: #263238;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="dracula">
-                                <span>דרקולה</span>
-                                <div class="theme-color" style="background-color: #282a36;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="nord">
-                                <span>נורד</span>
-                                <div class="theme-color" style="background-color: #2e3440;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="solarized">
-                                <span>סולאריז</span>
-                                <div class="theme-color" style="background-color: #fdf6e3;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="ayu-dark">
-                                <span>איו כהה</span>
-                                <div class="theme-color" style="background-color: #0a0e14;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="idea">
-                                <span>אידיאה</span>
-                                <div class="theme-color" style="background-color: #ffffff;"></div>
-                            </div>
-                            <div class="theme-option" data-theme="xq-light">
-                                <span>XQ בהיר</span>
-                                <div class="theme-color" style="background-color: #ffffff;"></div>
-                            </div>
-                            <div
-                                style="border-top: 1px solid var(--divider); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm);">
-                            </div>
-                            <div class="theme-option" data-theme="auto">
-                                <span>אוטומטי לפי מצב</span>
-                                <div style="display: flex;">
-                                    <div class="theme-color"
-                                        style="background-color: #ffffff; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                    </div>
-                                    <div class="theme-color"
-                                        style="background-color: #1a1a1a; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tool-divider"></div>
-                    <div class="toggle-switch" id="theme-toggle" tabindex="0" role="button" aria-pressed="false"
-                        data-active="false">
-                        <div class="toggle-handle"></div>
-                    </div>
-                    <div class="tool-divider"></div>
-
-                    <!-- Hide Toolbar Button -->
-                    <button class="btn hide-toolbar-btn" aria-pressed="false" aria-label="הסתר סרגל כלים">
-                        <i class="fa-solid  fa-chevron-down"></i>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Toolbar -->
-        <div class="toolbar">
-            <div class="tool-group">
-                <button class="btn" data-command="bold" title="מודגש">
-                    <i class="fa-solid fa-bold"></i>
-                    <span class="tooltip">מודגש (Ctrl+B)</span>
-                </button>
-                <button class="btn" data-command="italic" title="נטוי">
-                    <i class="fa-solid fa-italic"></i>
-                    <span class="tooltip">נטוי (Ctrl+I)</span>
-                </button>
-                <button class="btn" data-command="strikethrough" title="קו חוצה">
-                    <i class="fa-solid fa-strikethrough"></i>
-                    <span class="tooltip">קו חוצה</span>
-                </button>
-            </div>
-
-            <div class="tool-divider"></div>
-
-            <div class="tool-group">
-                <button class="btn" data-command="heading1" title="כותרת 1">
-                    <i class="fa-solid fa-heading"></i>
-                    <span class="tooltip">כותרת 1</span>
-                </button>
-                <button class="btn" data-command="heading2" title="כותרת 2">
-                    <i class="fa-solid fa-heading" style="font-size: 0.9em;"></i>
-                    <span class="tooltip">כותרת 2</span>
-                </button>
-                <button class="btn" data-command="heading3" title="כותרת 3">
-                    <i class="fa-solid fa-heading" style="font-size: 0.8em;"></i>
-                    <span class="tooltip">כותרת 3</span>
-                </button>
-            </div>
-
-            <div class="tool-divider"></div>
-
-            <div class="tool-group">
-                <button class="btn" data-command="bulletList" title="רשימת תבליטים">
-                    <i class="fa-solid fa-list-ul"></i>
-                    <span class="tooltip">רשימת תבליטים</span>
-                </button>
-                <button class="btn" data-command="numberedList" title="רשימה ממוספרת">
-                    <i class="fa-solid fa-list-ol"></i>
-                    <span class="tooltip">רשימה ממוספרת</span>
-                </button>
-                <button class="btn" data-command="taskList" title="רשימת משימות">
-                    <i class="fa-solid fa-list-check"></i>
-                    <span class="tooltip">רשימת משימות</span>
-                </button>
-            </div>
-
-            <div class="tool-divider"></div>
-
-            <div class="tool-group">
-                <button class="btn" data-command="link" title="קישור">
-                    <i class="fa-solid fa-link"></i>
-                    <span class="tooltip">קישור (Ctrl+K)</span>
-                </button>
-                <button class="btn" data-command="image" title="תמונה">
-                    <i class="fa-solid fa-image"></i>
-                    <span class="tooltip">תמונה</span>
-                </button>
-                <button class="btn" data-command="code" title="קוד">
-                    <i class="fa-solid fa-code"></i>
-                    <span class="tooltip">קוד</span>
-                </button>
-                <button class="btn" data-command="blockquote" title="ציטוט">
-                    <i class="fa-solid fa-quote-right"></i>
-                    <span class="tooltip">ציטוט</span>
-                </button>
-            </div>
-
-            <div class="tool-divider"></div>
-
-            <div class="tool-group">
-                <button class="btn" data-command="table" title="טבלה">
-                    <i class="fa-solid fa-table"></i>
-                    <span class="tooltip">טבלה</span>
-                </button>
-                <button class="btn" data-command="inlineMath" title="נוסחה מוטמעת">
-                    <i class="fa-solid fa-square-root-variable"></i>
-                    <span class="tooltip">נוסחה מוטמעת ($)</span>
-                </button>
-                <button class="btn" data-command="blockMath" title="נוסחה בבלוק">
-                    <i class="fa-solid fa-superscript"></i>
-                    <span class="tooltip">נוסחה בבלוק ($$)</span>
-                </button>
-            </div>
-
-            <div class="tool-divider"></div>
-
-            <div class="tool-group">
-                <button class="btn" id="clear-btn" title="נקה">
-                    <i class="fa-solid fa-trash-can"></i>
-                    <span class="tooltip">נקה</span>
-                </button>
-                <button class="btn primary" id="save-btn" title="שמור">
-                    <i class="fa-solid fa-save"></i>
-                    <span class="tooltip">שמור (Ctrl+S)</span>
-                </button>
-            </div>
+              <!-- Subtle highlights in true Apple style -->
+              <!-- Top reflection -->
+              <path
+                d="M35,40 Q100,30 165,40"
+                fill="none"
+                stroke="#ffffff"
+                stroke-width="1"
+                stroke-opacity="0.3"
+              />
+            </svg>
+          </a>
+          <h1>Hebrew Markdown</h1>
         </div>
 
-        <!-- Main content -->
-        <div class="content-container">
-            <!-- Editor panel -->
-            <div class="editor-panel">
-                <div class="panel-header">
-                    <span><i class="fa-solid fa-code"></i> עריכה</span>
-                </div>
-                <div class="panel-content">
-                    <div class="editor-container">
-                        <textarea id="editor"></textarea>
-                    </div>
-                </div>
-            </div>
+        <div class="header-controls">
+          <!-- View Mode Selector -->
+          <div class="view-modes">
+            <button class="view-mode-btn" data-mode="editor-only">
+              <i class="fa-solid fa-code"></i>
+              עריכה
+            </button>
+            <button class="view-mode-btn active" data-mode="split">
+              <i class="fa-solid fa-columns"></i>
+              מפוצל
+            </button>
+            <button class="view-mode-btn" data-mode="preview-only">
+              <i class="fa-solid fa-eye"></i>
+              תצוגה
+            </button>
+          </div>
 
-            <!-- Divider -->
-            <div class="divider"></div>
-
-            <!-- Preview panel -->
-            <div class="preview-panel">
-                <div class="panel-header">
-                    <span><i class="fa-solid fa-eye"></i> תצוגה מקדימה</span>
+          <!-- Find & Replace Control Group -->
+          <div class="control-group">
+            <button class="btn" id="find-btn" title="חיפוש">
+              <i class="fa-solid fa-search"></i>
+              <span class="tooltip">חיפוש (Ctrl+F)</span>
+            </button>
+            <button class="btn" id="replace-btn" title="החלפה">
+              <i class="fa-solid fa-exchange-alt"></i>
+              <span class="tooltip">החלפה (Ctrl+H)</span>
+            </button>
+          </div>
+          <!-- Theme Selector -->
+          <div class="control-group">
+            <div class="theme-selector">
+              <button class="btn theme-btn" id="theme-select-btn">
+                <i class="fa-solid fa-palette"></i>
+                <span class="tooltip">ערכות נושא</span>
+              </button>
+              <div class="theme-dropdown slide-in">
+                <h4
+                  style="
+                    padding: var(--spacing-sm);
+                    margin-bottom: var(--spacing-sm);
+                    border-bottom: 1px solid var(--divider);
+                  "
+                >
+                  ערכות נושא לעורך
+                </h4>
+                <div class="theme-option active" data-theme="default">
+                  <span>ברירת מחדל</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #f8f9fa"
+                  ></div>
                 </div>
-                <div class="panel-content">
-                    <div class="preview-content" id="preview"></div>
+                <div class="theme-option" data-theme="material">
+                  <span>מטיריאל</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #263238"
+                  ></div>
                 </div>
+                <div class="theme-option" data-theme="dracula">
+                  <span>דרקולה</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #282a36"
+                  ></div>
+                </div>
+                <div class="theme-option" data-theme="nord">
+                  <span>נורד</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #2e3440"
+                  ></div>
+                </div>
+                <div class="theme-option" data-theme="solarized">
+                  <span>סולאריז</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #fdf6e3"
+                  ></div>
+                </div>
+                <div class="theme-option" data-theme="ayu-dark">
+                  <span>איו כהה</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #0a0e14"
+                  ></div>
+                </div>
+                <div class="theme-option" data-theme="idea">
+                  <span>אידיאה</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #ffffff"
+                  ></div>
+                </div>
+                <div class="theme-option" data-theme="xq-light">
+                  <span>XQ בהיר</span>
+                  <div
+                    class="theme-color"
+                    style="background-color: #ffffff"
+                  ></div>
+                </div>
+                <div
+                  style="
+                    border-top: 1px solid var(--divider);
+                    margin-top: var(--spacing-sm);
+                    padding-top: var(--spacing-sm);
+                  "
+                ></div>
+                <div class="theme-option" data-theme="auto">
+                  <span>אוטומטי לפי מצב</span>
+                  <div style="display: flex">
+                    <div
+                      class="theme-color"
+                      style="
+                        background-color: #ffffff;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                      "
+                    ></div>
+                    <div
+                      class="theme-color"
+                      style="
+                        background-color: #1a1a1a;
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="tool-divider"></div>
+            <div
+              class="toggle-switch"
+              id="theme-toggle"
+              tabindex="0"
+              role="button"
+              aria-pressed="false"
+              data-active="false"
+            >
+              <div class="toggle-handle"></div>
+            </div>
+            <div class="tool-divider"></div>
+
+            <!-- Hide Toolbar Button -->
+            <button
+              class="btn hide-toolbar-btn"
+              aria-pressed="false"
+              aria-label="הסתר סרגל כלים"
+            >
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
         </div>
-        <!-- Status Bar -->
-        <footer class="status-bar" aria-label="Editor status bar">
-            <div id="stats" title="Word and character count">
-                <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
-                <span>0 מילים | 0 תווים</span>
-            </div>
+      </header>
 
-            <div id="credit" title="Visit Dor Pascal's website">
-                By<a href="https://dorpascal.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Dor Pascal's personal website">
-                    Dor Pascal
-                </a>
-            </div>
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="tool-group">
+          <button class="btn" data-command="bold" title="מודגש">
+            <i class="fa-solid fa-bold"></i>
+            <span class="tooltip">מודגש (Ctrl+B)</span>
+          </button>
+          <button class="btn" data-command="italic" title="נטוי">
+            <i class="fa-solid fa-italic"></i>
+            <span class="tooltip">נטוי (Ctrl+I)</span>
+          </button>
+          <button class="btn" data-command="strikethrough" title="קו חוצה">
+            <i class="fa-solid fa-strikethrough"></i>
+            <span class="tooltip">קו חוצה</span>
+          </button>
+        </div>
 
-            <div id="cursor-position" title="Current cursor position">
-                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-                <span>שורה 1, עמודה 1</span>
-            </div>
-        </footer>
+        <div class="tool-divider"></div>
 
+        <div class="tool-group">
+          <button class="btn" data-command="heading1" title="כותרת 1">
+            <i class="fa-solid fa-heading"></i>
+            <span class="tooltip">כותרת 1</span>
+          </button>
+          <button class="btn" data-command="heading2" title="כותרת 2">
+            <i class="fa-solid fa-heading" style="font-size: 0.9em"></i>
+            <span class="tooltip">כותרת 2</span>
+          </button>
+          <button class="btn" data-command="heading3" title="כותרת 3">
+            <i class="fa-solid fa-heading" style="font-size: 0.8em"></i>
+            <span class="tooltip">כותרת 3</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-group">
+          <button class="btn" data-command="bulletList" title="רשימת תבליטים">
+            <i class="fa-solid fa-list-ul"></i>
+            <span class="tooltip">רשימת תבליטים</span>
+          </button>
+          <button class="btn" data-command="numberedList" title="רשימה ממוספרת">
+            <i class="fa-solid fa-list-ol"></i>
+            <span class="tooltip">רשימה ממוספרת</span>
+          </button>
+          <button class="btn" data-command="taskList" title="רשימת משימות">
+            <i class="fa-solid fa-list-check"></i>
+            <span class="tooltip">רשימת משימות</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-group">
+          <button class="btn" data-command="link" title="קישור">
+            <i class="fa-solid fa-link"></i>
+            <span class="tooltip">קישור (Ctrl+K)</span>
+          </button>
+          <button class="btn" data-command="image" title="תמונה">
+            <i class="fa-solid fa-image"></i>
+            <span class="tooltip">תמונה</span>
+          </button>
+          <button class="btn" data-command="code" title="קוד">
+            <i class="fa-solid fa-code"></i>
+            <span class="tooltip">קוד</span>
+          </button>
+          <button class="btn" data-command="blockquote" title="ציטוט">
+            <i class="fa-solid fa-quote-right"></i>
+            <span class="tooltip">ציטוט</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-group">
+          <button class="btn" data-command="table" title="טבלה">
+            <i class="fa-solid fa-table"></i>
+            <span class="tooltip">טבלה</span>
+          </button>
+          <button class="btn" data-command="inlineMath" title="נוסחה מוטמעת">
+            <i class="fa-solid fa-square-root-variable"></i>
+            <span class="tooltip">נוסחה מוטמעת ($)</span>
+          </button>
+          <button class="btn" data-command="blockMath" title="נוסחה בבלוק">
+            <i class="fa-solid fa-superscript"></i>
+            <span class="tooltip">נוסחה בבלוק ($$)</span>
+          </button>
+        </div>
+
+        <div class="tool-divider"></div>
+
+        <div class="tool-group">
+          <button class="btn" id="clear-btn" title="נקה">
+            <i class="fa-solid fa-trash-can"></i>
+            <span class="tooltip">נקה</span>
+          </button>
+          <button
+            class="btn"
+            id="open-btn"
+            title="פתח"
+            onclick="document.getElementById('open-file-input').click()"
+          >
+            <i class="fa-solid fa-folder"></i>
+            <span class="tooltip">פתח (Ctrl+O)</span>
+          </button>
+          <input type="file" id="open-file-input" style="display: none" />
+          <button class="btn primary" id="save-btn" title="שמור">
+            <i class="fa-solid fa-save"></i>
+            <span class="tooltip">שמור (Ctrl+S)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <div class="content-container">
+        <!-- Editor panel -->
+        <div class="editor-panel">
+          <div class="panel-header">
+            <span><i class="fa-solid fa-code"></i> עריכה</span>
+          </div>
+          <div class="panel-content">
+            <div class="editor-container">
+              <textarea id="editor"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="divider"></div>
+
+        <!-- Preview panel -->
+        <div class="preview-panel">
+          <div class="panel-header">
+            <span><i class="fa-solid fa-eye"></i> תצוגה מקדימה</span>
+          </div>
+          <div class="panel-content">
+            <div class="preview-content" id="preview"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Status Bar -->
+      <footer class="status-bar" aria-label="Editor status bar">
+        <div id="stats" title="Word and character count">
+          <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+          <span>0 מילים | 0 תווים</span>
+        </div>
+
+        <div id="credit" title="Visit Dor Pascal's website">
+          By<a
+            href="https://dorpascal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Dor Pascal's personal website"
+          >
+            Dor Pascal
+          </a>
+        </div>
+
+        <div id="cursor-position" title="Current cursor position">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <span>שורה 1, עמודה 1</span>
+        </div>
+      </footer>
     </div>
 
     <!-- Loading spinner -->
     <div class="loading" id="loading">
-        <div class="loading-spinner"></div>
+      <div class="loading-spinner"></div>
     </div>
 
     <!-- Scripts -->
@@ -512,7 +694,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/searchcursor.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/search/search.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/dialog/dialog.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/dialog/dialog.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/dialog/dialog.min.css"
+    />
     <!-- KaTeX for Math -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/contrib/auto-render.min.js"></script>
@@ -524,1006 +709,1114 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Hide loading spinner when page is loaded
-            const loadingElement = document.getElementById('loading');
-            loadingElement.style.display = 'none';
+      document.addEventListener("DOMContentLoaded", function () {
+        // Hide loading spinner when page is loaded
+        const loadingElement = document.getElementById("loading");
+        loadingElement.style.display = "none";
 
-            // Simple markdown mode that tags code and math sections with more specific classes
-            CodeMirror.defineMode("markdownWithCodeMath", function (config) {
-                // Get the underlying markdown mode
-                const markdownMode = CodeMirror.getMode(config, "markdown");
+        // Simple markdown mode that tags code and math sections with more specific classes
+        CodeMirror.defineMode("markdownWithCodeMath", function (config) {
+          // Get the underlying markdown mode
+          const markdownMode = CodeMirror.getMode(config, "markdown");
 
-                // Create an overlay that catches code and math
-                const overlay = {
-                    startState: function () {
-                        return {
-                            inCodeBlock: false,
-                            inMathBlock: false,
-                            inMath: false
-                        };
-                    },
-                    token: function (stream, state) {
-                        // Code blocks
-                        if (stream.match(/^```/)) {
-                            state.inCodeBlock = !state.inCodeBlock;
-                            return "comment";
-                        }
+          // Create an overlay that catches code and math
+          const overlay = {
+            startState: function () {
+              return {
+                inCodeBlock: false,
+                inMathBlock: false,
+                inMath: false,
+              };
+            },
+            token: function (stream, state) {
+              // Code blocks
+              if (stream.match(/^```/)) {
+                state.inCodeBlock = !state.inCodeBlock;
+                return "comment";
+              }
 
-                        if (state.inCodeBlock) {
-                            stream.skipToEnd();
-                            return "comment";
-                        }
+              if (state.inCodeBlock) {
+                stream.skipToEnd();
+                return "comment";
+              }
 
-                        // Math blocks
-                        if (stream.match(/^\$\$/)) {
-                            state.inMathBlock = !state.inMathBlock;
-                            return state.inMathBlock ? "math-block formatting-math" : "math-block formatting-math";
-                        }
+              // Math blocks
+              if (stream.match(/^\$\$/)) {
+                state.inMathBlock = !state.inMathBlock;
+                return state.inMathBlock
+                  ? "math-block formatting-math"
+                  : "math-block formatting-math";
+              }
 
-                        if (state.inMathBlock) {
-                            stream.skipToEnd();
-                            return "math-block";
-                        }
+              if (state.inMathBlock) {
+                stream.skipToEnd();
+                return "math-block";
+              }
 
-                        // Inline math
-                        if (stream.match(/^\$/)) {
-                            state.inMath = !state.inMath;
-                            return state.inMath ? "math-inline formatting-math" : "math-inline formatting-math";
-                        }
+              // Inline math
+              if (stream.match(/^\$/)) {
+                state.inMath = !state.inMath;
+                return state.inMath
+                  ? "math-inline formatting-math"
+                  : "math-inline formatting-math";
+              }
 
-                        if (state.inMath) {
-                            // Look for closing $
-                            let match = stream.match(/^[^\$]+\$/, false);
-                            if (match) {
-                                // Consume up to but not including the closing $
-                                stream.match(/^[^\$]+/);
-                                return "math-inline";
-                            } else {
-                                stream.skipToEnd();
-                                return "math-inline";
-                            }
-                        }
-
-                        // If we're not in a special section, skip this token
-                        stream.skipToEnd();
-                        return null;
-                    }
-                };
-
-                return CodeMirror.overlayMode(markdownMode, overlay);
-            });
-
-            // Define available editor themes
-            const editorThemes = {
-                'default': {
-                    theme: 'default',
-                    isDark: false
-                },
-                'material': {
-                    theme: 'material',
-                    isDark: true
-                },
-                'dracula': {
-                    theme: 'dracula',
-                    isDark: true
-                },
-                'nord': {
-                    theme: 'nord',
-                    isDark: true
-                },
-                'solarized': {
-                    theme: 'solarized',
-                    isDark: false
-                },
-                'ayu-dark': {
-                    theme: 'ayu-dark',
-                    isDark: true
-                },
-                'idea': {
-                    theme: 'idea',
-                    isDark: false
-                },
-                'xq-light': {
-                    theme: 'xq-light',
-                    isDark: false
-                },
-                'auto': {
-                    theme: 'default', // Will be changed based on dark mode
-                    isDark: false,
-                    isAuto: true
-                }
-            };
-
-            // Initialize state variables
-            let currentTheme = localStorage.getItem('editorTheme') || 'default';
-            let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
-            let currentViewMode = localStorage.getItem('viewMode') || 'split';
-
-            const editor = CodeMirror.fromTextArea(document.getElementById('editor'), {
-                mode: "markdownWithCodeMath",
-                lineNumbers: false,
-                lineWrapping: true,
-                scrollbarStyle: null,
-                direction: 'rtl',
-                rtlMoveVisually: true,
-                theme: getEditorTheme(),
-                autofocus: true,
-                viewportMargin: Infinity,
-                inputStyle: 'contenteditable',
-                specialChars: /[\u0000-\u001f\u007f-\u009f\u00ad\u061C\u200E\u200F\u2028\u2029\ufeff\u2066\u2067\u2068\u2069]/,
-                extraKeys: {
-                    'Enter': 'newlineAndIndentContinueMarkdownList'
-                }
-            });
-
-            // Add direct event listener to handle keyboard shortcuts
-            editor.getWrapperElement().addEventListener('keydown', function (e) {
-                // Check for keyboard shortcuts
-                if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
-                    e.preventDefault(); // Prevent default browser behavior
-                    applyBoldFormatting(editor);
-                }
-                else if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
-                    e.preventDefault();
-                    applyItalicFormatting(editor);
-                }
-                else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                    e.preventDefault();
-                    applyLinkFormatting(editor);
-                }
-                else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
-                    e.preventDefault();
-                    saveDocument();
-                }
-            });
-
-            // Specific formatting functions
-            function applyBoldFormatting(cm) {
-                const selection = cm.getSelection();
-                const from = cm.getCursor('from');
-                const to = cm.getCursor('to');
-
-                if (selection) {
-                    // Check if selection is already bold (surrounded by **)
-                    if (selection.startsWith('**') && selection.endsWith('**')) {
-                        // Remove formatting
-                        cm.replaceSelection(selection.substring(2, selection.length - 2));
-                    } else {
-                        // Add bold formatting
-                        cm.replaceSelection(`**${selection}**`);
-                        // Keep the same text selected
-                        cm.setSelection(
-                            { line: from.line, ch: from.ch },
-                            { line: to.line, ch: to.ch + 4 }
-                        );
-                    }
+              if (state.inMath) {
+                // Look for closing $
+                let match = stream.match(/^[^\$]+\$/, false);
+                if (match) {
+                  // Consume up to but not including the closing $
+                  stream.match(/^[^\$]+/);
+                  return "math-inline";
                 } else {
-                    // No selection, insert placeholder
-                    cm.replaceSelection('**טקסט מודגש**');
-                    // Position cursor between the asterisks
-                    const cursor = cm.getCursor();
-                    cm.setCursor({ line: cursor.line, ch: cursor.ch - 2 });
+                  stream.skipToEnd();
+                  return "math-inline";
                 }
-
-                // Ensure focus remains on editor
-                cm.focus();
-
-                // Force update preview
-                updatePreview();
-            }
-
-            // Similar functions for italic and link formatting
-            function applyItalicFormatting(cm) {
-                // Implementation similar to bold but with single asterisk
-                const selection = cm.getSelection();
-                const from = cm.getCursor('from');
-                const to = cm.getCursor('to');
-
-                if (selection) {
-                    if (selection.startsWith('*') && selection.endsWith('*')) {
-                        cm.replaceSelection(selection.substring(1, selection.length - 1));
-                    } else {
-                        cm.replaceSelection(`*${selection}*`);
-                        cm.setSelection(
-                            { line: from.line, ch: from.ch },
-                            { line: to.line, ch: to.ch + 2 }
-                        );
-                    }
-                } else {
-                    cm.replaceSelection('*טקסט נטוי*');
-                    const cursor = cm.getCursor();
-                    cm.setCursor({ line: cursor.line, ch: cursor.ch - 1 });
-                }
-
-                cm.focus();
-                updatePreview();
-            }
-
-            function applyLinkFormatting(cm) {
-                const selection = cm.getSelection();
-                const from = cm.getCursor('from');
-
-                if (selection) {
-                    cm.replaceSelection(`[${selection}](http://example.com)`);
-                } else {
-                    cm.replaceSelection('[טקסט קישור](http://example.com)');
-                    // Position cursor to edit the link text
-                    const cursor = cm.getCursor();
-                    const linkTextLength = 'טקסט קישור'.length;
-                    cm.setCursor({ line: cursor.line, ch: cursor.ch - (linkTextLength + 18) });
-                }
-
-                cm.focus();
-                updatePreview();
-            }
-
-            // Function to get the correct editor theme based on current settings
-            function getEditorTheme() {
-                const themeInfo = editorThemes[currentTheme];
-
-                // If auto theme, pick based on dark mode
-                if (themeInfo.isAuto) {
-                    return isDarkMode ? 'material' : 'default';
-                }
-
-                // update toggle icon
-                const themeToggle = document.getElementById('theme-toggle');
-                themeToggle.setAttribute('aria-pressed', isDarkMode);
-                themeToggle.setAttribute('data-active', isDarkMode);
-                themeToggle.classList.toggle('active', isDarkMode);
-                themeToggle.querySelector('.toggle-handle').style.backgroundColor = isDarkMode ? '#1a1a1a' : '#ffffff';
-                themeToggle.querySelector('.toggle-handle').style.boxShadow = isDarkMode ? '0 0 5px rgba(255, 255, 255, 0.2)' : '0 0 5px rgba(0, 0, 0, 0.2)';
-                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
-                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
-                themeToggle.querySelector('.toggle-handle').style.transition = 'transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease';
-
-                // update primary color based on specific theme - each theme has its own primary color
-                const primaryColors = [
-                    '#007bff', // default
-                    '#2196F3', // material
-                    '#FF79C6', // dracula
-                    '#88C0D0', // nord
-                    '#268bd2', // solarized
-                    '#7aa2f7', // ayu-dark
-                    '#007bff', // idea
-                    '#007bff', // xq-light
-                ];
-                const themeIndex = Object.keys(editorThemes).indexOf(currentTheme);
-                const primaryColor = primaryColors[themeIndex];
-                document.documentElement.style.setProperty('--primary', primaryColor);
-                document.documentElement.style.setProperty('--primary-light', primaryColor + 'CC');
-                document.documentElement.style.setProperty('--primary-dark', primaryColor + 'FF');
-                document.documentElement.style.setProperty('--primary-color-hover', primaryColor + 'CC');
-                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
-                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
-                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
-                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
-                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
-                document.documentElement.style.setProperty('--primary-color-disabled', primaryColor + 'AA');
-                document.documentElement.style.setProperty('--primary-color-active', primaryColor + 'FF');
-                return themeInfo.theme;
-            }
-
-            // Set up the view mode
-            setViewMode(currentViewMode);
-
-            // Sample content
-            const sampleContent = `# עורך Markdown Right-to-Left (RTL)
-
-ברוך הבא לעורך Markdown המודרני בעברית. עורך זה תומך בכל תכונות Markdown ובנוסחאות מתמטיות, עם ממשק מינימליסטי בהשראת מוצרי Apple.
-
-## תכונות המערכת
-
-* עיצוב נקי ומודרני בהשראת מוצרי Apple
-* תמיכה מלאה בעברית (RTL)
-* עיצוב טקסט **מודגש**, *נטוי* ו~~קו חוצה~~
-* תמיכה ברשימות ממוספרות ולא ממוספרות
-* אפשרות להוספת [קישורים](https://dorpascal.com) ותמונות
-* תחביר קוד עם הדגשת תחביר
-* מצב כהה ובהיר עם מגוון ערכות נושא לעורך
-
-## תמיכה בנוסחאות מתמטיות
-
-ניתן להשתמש בנוסחאות מתמטיות בתוך השורה כמו $E = mc^2$ או בתור בלוק:
-
-$$
-\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}
-$$
-
-## קוד מקור
-
-\`\`\`javascript
-// דוגמת קוד בג'אווהסקריפט
-function hello() {
-    console.log("שלום עולם!");
-    return true;
-}
-
-// טיפול באירועים
-document.addEventListener('click', function() {
-    const message = "נלחץ כפתור!";
-    console.log(message);
-});
-\`\`\`
-
-## טבלאות
-
-| שם      | גיל | עיר         |
-|---------|-----|-------------|
-| ישראל   | 30  | תל אביב     |
-| שרה     | 25  | ירושלים     |
-| דוד     | 40  | חיפה        |
-
-## רשימת משימות
-
-- [x] עיצוב מודרני
-- [x] תמיכה בנוסחאות מתמטיות
-- [x] עימוד קוד
-- [ ] ייצוא ל-PDF
-- [ ] תמיכה בתמונות מקומיות
-
-נסה לערוך את הטקסט ולראות את התצוגה המקדימה בזמן אמת!`;
-
-            editor.setValue(sampleContent);
-
-            // Configure Marked renderer for RTL
-            const renderer = new marked.Renderer();
-
-            // Custom table renderer for RTL tables
-            renderer.table = function (header, body) {
-                return `<table class="rtl-table" dir="rtl">\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n`;
-            };
-
-            // Custom list renderer for RTL lists
-            renderer.list = function (body, ordered, start) {
-                const type = ordered ? 'ol' : 'ul';
-                const startAttr = (ordered && start && start !== 1) ? ` start="${start}"` : '';
-                return `<${type}${startAttr} dir="rtl">${body}</${type}>`;
-            };
-
-            // Custom list item renderer for RTL
-            renderer.listitem = function (text, task, checked) {
-                if (task) {
-                    return `<li style="direction: rtl; text-align: right;"><input type="checkbox" ${checked ? 'checked' : ''} disabled> <span>${text}</span></li>`;
-                }
-                return `<li style="direction: rtl; text-align: right;">${text}</li>`;
-            };
-
-            // Custom code block renderer to ensure LTR
-            renderer.code = function (code, infostring, escaped) {
-                const lang = (infostring || '').match(/\S*/)[0];
-
-                // Add explicit LTR direction to code blocks
-                return `<pre dir="ltr" style="direction: ltr; text-align: left;"><code class="language-${lang}">${escaped ? code : escape(code)}</code></pre>`;
-            };
-
-            // Custom inline code renderer
-            renderer.codespan = function (code) {
-                return `<code dir="ltr" style="direction: ltr;">${code}</code>`;
-            };
-
-            // Setup Marked
-            marked.setOptions({
-                renderer: renderer,
-                headerIds: true,
-                gfm: true,
-                breaks: false,
-                pedantic: false,
-                sanitize: false,
-                smartLists: true,
-                smartypants: false,
-                xhtml: false
-            });
-
-            // Helper function to escape HTML
-            function escape(html) {
-                return html
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;')
-                    .replace(/'/g, '&#39;');
-            }
-
-            // Function to process math expressions
-            function processMath(text) {
-                // Replace block math
-                text = text.replace(/\$\$([\s\S]*?)\$\$/g, function (match, equation) {
-                    try {
-                        return `<div class="katex-display" dir="ltr">${katex.renderToString(equation, { displayMode: true, throwOnError: false })}</div>`;
-                    } catch (error) {
-                        return `<div class="katex-error">Error in equation: ${error.message}</div>`;
-                    }
-                });
-
-                // Replace inline math
-                text = text.replace(/\$((?!\$)[\s\S]*?)\$/g, function (match, equation) {
-                    try {
-                        return `<span dir="ltr" style="display: inline-block;">${katex.renderToString(equation, { displayMode: false, throwOnError: false })}</span>`;
-                    } catch (error) {
-                        return `<span class="katex-error">Error in equation: ${error.message}</span>`;
-                    }
-                });
-
-                return text;
-            }
-
-            // Function to update preview
-            function updatePreview() {
-                const markdown = editor.getValue();
-
-                // First parse markdown
-                let html = marked.parse(markdown);
-
-                // Then process math expressions
-                html = processMath(html);
-
-                // Sanitize HTML
-                const sanitizedHtml = DOMPurify.sanitize(html, {
-                    ADD_TAGS: ['math', 'mrow', 'mi', 'mo', 'mn', 'msup', 'msub', 'mfrac'],
-                    ADD_ATTR: ['display', 'dir', 'style']
-                });
-
-                // Update preview
-                document.getElementById('preview').innerHTML = sanitizedHtml;
-
-                // Update document stats
-                updateStats(markdown);
-            }
-
-            // Function to update document stats
-            function updateStats(text) {
-                const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
-                const chars = text.length;
-                const cursor = editor.getCursor();
-
-                document.getElementById('stats').innerHTML = `<i class="fa-solid fa-chart-simple"></i> ${words} מילים | ${chars} תווים`;
-                document.getElementById('cursor-position').innerHTML = `<i class="fa-solid fa-location-dot"></i> שורה ${cursor.line + 1}, עמודה ${cursor.ch + 1}`;
-            }
-
-            // Function to insert markdown syntax
-            function insertMarkdown(cm, type) {
-                const selection = cm.getSelection();
-                let replacement = '';
-
-                switch (type) {
-                    case 'bold':
-                        replacement = `**${selection || 'טקסט מודגש'}**`;
-                        break;
-                    case 'italic':
-                        replacement = `*${selection || 'טקסט נטוי'}*`;
-                        break;
-                    case 'strikethrough':
-                        replacement = `~~${selection || 'טקסט עם קו חוצה'}~~`;
-                        break;
-                    case 'heading1':
-                        replacement = `# ${selection || 'כותרת ראשית'}`;
-                        break;
-                    case 'heading2':
-                        replacement = `## ${selection || 'כותרת משנית'}`;
-                        break;
-                    case 'heading3':
-                        replacement = `### ${selection || 'כותרת שלישית'}`;
-                        break;
-                    case 'link':
-                        replacement = `[${selection || 'טקסט קישור'}](http://example.com)`;
-                        break;
-                    case 'image':
-                        replacement = `![${selection || 'תיאור תמונה'}](http://example.com/image.jpg)`;
-                        break;
-                    case 'code':
-                        replacement = selection ? `\`${selection}\`` : "```\nקוד כאן\n```";
-                        break;
-                    case 'blockquote':
-                        replacement = `> ${selection || 'ציטוט'}`;
-                        break;
-                    case 'bulletList':
-                        replacement = `* ${selection || 'פריט ברשימה'}`;
-                        break;
-                    case 'numberedList':
-                        replacement = `1. ${selection || 'פריט ברשימה'}`;
-                        break;
-                    case 'taskList':
-                        replacement = `- [ ] ${selection || 'משימה לביצוע'}`;
-                        break;
-                    case 'inlineMath':
-                        replacement = `$${selection || 'E = mc^2'}$`;
-                        break;
-                    case 'blockMath':
-                        replacement = `$$\n${selection || '\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}'}\n$$`;
-                        break;
-                    case 'table':
-                        replacement = `| כותרת 1 | כותרת 2 | כותרת 3 |\n| ------- | ------- | ------- |\n| תוכן 1  | תוכן 2  | תוכן 3  |\n| תוכן 4  | תוכן 5  | תוכן 6  |`;
-                        break;
-                    default:
-                        replacement = selection;
-                }
-
-                cm.replaceSelection(replacement);
-                updatePreview();
-            }
-
-            // Function to set the view mode
-            function setViewMode(mode) {
-                console.log('Setting view mode to:', mode);
-                // Check if mode is valid
-                if (!mode) {
-                    console.log('Invalid view mode:', mode);
-                    mode = 'split'; // Default to split if invalid
-                }
-                const appContainer = document.querySelector('.app-container');
-                const viewBtns = document.querySelectorAll('.view-mode-btn');
-
-                // Update container data attribute
-                appContainer.setAttribute('data-view-mode', mode);
-
-                // Update active button
-                viewBtns.forEach(btn => {
-                    if (btn.getAttribute('data-mode') === mode) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-
-                // Store in localStorage
-                localStorage.setItem('viewMode', mode);
-                currentViewMode = mode;
-
-                // Refresh editor when switching view modes
-                setTimeout(() => {
-                    editor.refresh();
-                    updatePreview();
-                }, 100);
-            }
-
-            // Function to set dark mode
-            function setDarkMode(enabled) {
-                const themeToggle = document.getElementById('theme-toggle');
-
-                // Update dark mode state
-                isDarkMode = enabled;
-
-                // Update toggle visual state
-                themeToggle.setAttribute('data-active', enabled);
-                themeToggle.setAttribute('aria-pressed', enabled);
-
-                // Set body data-theme attribute
-                if (enabled) {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    localStorage.setItem('darkMode', 'enabled');
-                } else {
-                    document.documentElement.removeAttribute('data-theme');
-                    localStorage.removeItem('darkMode');
-                }
-
-                // Update editor theme if using auto theme
-                if (editorThemes[currentTheme].isAuto) {
-                    editor.setOption('theme', getEditorTheme());
-                }
-
-                // update page color-theme meta tag
-                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-                if (metaThemeColor) {
-                    metaThemeColor.setAttribute('content', enabled ? '#121212' : '#ffffff');
-                }
-            }
-            // Find and Replace Functionality
-            (function () {
-                // Elements
-                const findBtn = document.getElementById('find-btn');
-                const replaceBtn = document.getElementById('replace-btn');
-
-                // Open find dialog using CodeMirror's built-in search
-                findBtn.addEventListener('click', function () {
-                    editor.execCommand('find');
-                });
-
-                // Open replace dialog using CodeMirror's built-in replace
-                replaceBtn.addEventListener('click', function () {
-                    editor.execCommand('replace');
-                });
-
-                // Add keyboard shortcuts to the editor configuration
-                editor.setOption('extraKeys', Object.assign(editor.getOption('extraKeys') || {}, {
-                    'Ctrl-F': 'find',
-                    'Cmd-F': 'find',
-                    'Ctrl-H': 'replace',
-                    'Cmd-H': 'replace'
-                }));
-
-                // Add some additional CSS to make the search dialog RTL-friendly
-                const style = document.createElement('style');
-                style.textContent = `
-        .CodeMirror-dialog {
-            direction: rtl;
-            background-color: var(--card) !important;
-            color: var(--text-primary) !important;
-            border: 1px solid var(--border) !important;
-            border-radius: var(--border-radius-md) !important;
-            box-shadow: var(--shadow-md);
-            padding: var(--spacing-sm);
-            z-index: 30;
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            font-size: 16px !important;
-        }
-
-        .CodeMirror-dialog input {
-            width: 100%;
-            padding: var(--spacing-xs) var(--spacing-sm);
-            border: 1px solid var(--border) !important;
-            border-radius: var(--border-radius-sm) !important;
-            background-color: var(--surface-1) !important;
-            color: var(--text-primary) !important;
-            font-size: 16px !important;
-        }
-
-        .CodeMirror-dialog-top {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-top: var(--spacing-md);
-        }
-
-        .CodeMirror-dialog input {
-            direction: rtl;
-            background-color: var(--surface-1);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--border-radius-sm);
-            padding: var(--spacing-xs) var(--spacing-sm);
-            margin-right: var(--spacing-sm);
-        }
-
-        .CodeMirror-searching {
-            background-color: var(--primary-light);
-        }
-
-        .CodeMirror-dialog button {
-            background-color: var(--surface-1);
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--border-radius-sm);
-            padding: var(--spacing-xs) var(--spacing-sm);
-            margin-right: var(--spacing-xs);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .CodeMirror-dialog button:hover {
-            background-color: var(--primary-light);
-            color: var(--primary);
-        }
-    `;
-                document.head.appendChild(style);
-            })();
-            // Function to set editor theme
-            function setEditorTheme(themeName) {
-                if (!editorThemes[themeName]) return;
-
-                // Update active theme
-                currentTheme = themeName;
-
-                // Update editor theme
-                editor.setOption('theme', getEditorTheme());
-
-                // Store in localStorage
-                localStorage.setItem('editorTheme', themeName);
-
-                // Update theme option UI
-                document.querySelectorAll('.theme-option').forEach(option => {
-                    if (option.getAttribute('data-theme') === themeName) {
-                        option.classList.add('active');
-                    } else {
-                        option.classList.remove('active');
-                    }
-                });
-            }
-
-            // Add event listeners to toolbar buttons
-            document.querySelectorAll('.btn[data-command]').forEach(button => {
-                button.addEventListener('click', function () {
-                    const command = this.getAttribute('data-command');
-                    insertMarkdown(editor, command);
-                    editor.focus();
-                });
-            });
-
-            // View mode buttons
-            document.querySelectorAll('.view-mode-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    const mode = this.getAttribute('data-mode');
-                    setViewMode(mode);
-                });
-            });
-
-            // Theme dropdown toggle
-            const themeBtn = document.getElementById('theme-select-btn');
-            const themeSelector = document.querySelector('.theme-selector');
-
-            themeBtn.addEventListener('click', function (e) {
-                e.stopPropagation();
-                themeSelector.classList.toggle('open');
-            });
-
-            // Close theme dropdown when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!themeSelector.contains(e.target)) {
-                    themeSelector.classList.remove('open');
-                }
-            });
-
-            // Theme options
-            document.querySelectorAll('.theme-option').forEach(option => {
-                option.addEventListener('click', function () {
-                    const theme = this.getAttribute('data-theme');
-                    setEditorTheme(theme);
-                    themeSelector.classList.remove('open');
-                });
-            });
-
-            // Set active theme option
-            document.querySelectorAll('.theme-option').forEach(option => {
-                if (option.getAttribute('data-theme') === currentTheme) {
-                    option.classList.add('active');
-                } else {
-                    option.classList.remove('active');
-                }
-            });
-
-            const hideToolbarBtn = document.querySelector('.hide-toolbar-btn');
-            const toolbar = document.querySelector('.toolbar');
-
-            // Make sure elements exist before adding event listeners
-            if (hideToolbarBtn && toolbar) {
-                // Force initial state
-                const savedState = localStorage.getItem('hideToolbar') === 'true';
-
-                // Apply initial state immediately
-                if (savedState) {
-                    toolbar.classList.add('hidden');
-                    hideToolbarBtn.classList.add('active');
-                    hideToolbarBtn.setAttribute('aria-pressed', 'true');
-                    hideToolbarBtn.querySelector('i').classList.remove('fa-chevron-up');
-                    hideToolbarBtn.querySelector('i').classList.add('fa-chevron-down');
-                    const tooltipSpan = hideToolbarBtn.querySelector('.tooltip');
-                    // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
-                }
-
-                // Simple toggle function with direct DOM manipulation
-                hideToolbarBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation(); // Prevent event bubbling
-
-                    const isCurrentlyHidden = toolbar.classList.contains('hidden');
-
-                    // Toggle toolbar visibility
-                    if (isCurrentlyHidden) {
-                        toolbar.classList.remove('hidden');
-                        this.classList.remove('active');
-                        this.setAttribute('aria-pressed', 'false');
-                        this.querySelector('i').classList.add('fa-chevron-up');
-                        this.querySelector('i').classList.remove('fa-chevron-down');
-                        const tooltipSpan = this.querySelector('.tooltip');
-                        // if (tooltipSpan) tooltipSpan.textContent = 'הסתר סרגל כלים';
-                    } else {
-                        toolbar.classList.add('hidden');
-                        this.classList.add('active');
-                        this.setAttribute('aria-pressed', 'true');
-                        this.querySelector('i').classList.remove('fa-chevron-up');
-                        this.querySelector('i').classList.add('fa-chevron-down');
-                        const tooltipSpan = this.querySelector('.tooltip');
-                        // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
-                    }
-
-                    // Save state to localStorage
-                    localStorage.setItem('hideToolbar', !isCurrentlyHidden);
-
-                    // Force editor refresh
-                    setTimeout(() => {
-                        if (typeof editor !== 'undefined' && editor.refresh) {
-                            editor.refresh();
-                        }
-                    }, 50);
-                });
-            }
-
-            // Clear button
-            document.getElementById('clear-btn').addEventListener('click', function () {
-                if (confirm('האם אתה בטוח שברצונך לנקות את כל התוכן?')) {
-                    editor.setValue('');
-                    editor.focus();
-                }
-            });
-
-            // Save button
-            document.getElementById('save-btn').addEventListener('click', saveDocument);
-
-            function saveDocument() {
-                const content = editor.getValue();
-                const filename = 'markdown_document.md';
-
-                const blob = new Blob([content], { type: 'text/markdown' });
-                const url = URL.createObjectURL(blob);
-
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = filename;
-                a.click();
-
-                URL.revokeObjectURL(url);
-            }
-
-            // Dark mode toggle
-            const themeToggle = document.getElementById('theme-toggle');
-
-            themeToggle.addEventListener('click', function () {
-                const isActive = this.getAttribute('data-active') === 'true';
-                setDarkMode(!isActive);
-            });
-
-            // Keyboard navigation for toggle
-            themeToggle.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
-            });
-
-            // Check for saved theme preference
-            if (localStorage.getItem('darkMode') === 'enabled') {
-                setDarkMode(true);
-            }
-
-            // Update preview and stats when editor changes
-            editor.on('change', updatePreview);
-            editor.on('cursorActivity', function () {
-                updateStats(editor.getValue());
-            });
-
-            // Handle window resize events to make the editor responsive
-            window.addEventListener('resize', function () {
-                editor.refresh();
-            });
-
-            // Initial update
-            updatePreview();
-
-            function initResizablePanels() {
-                const appContainer = document.querySelector('.app-container');
-                const divider = document.querySelector('.divider');
-                const editorPanel = document.querySelector('.editor-panel');
-                const previewPanel = document.querySelector('.preview-panel');
-
-                if (!divider || !editorPanel || !previewPanel) {
-                    return;
-                }
-
-                let isResizing = false;
-                let startX, startWidth;
-
-                // Load saved panel widths from localStorage
-                const savedEditorWidth = localStorage.getItem('editorPanelWidth');
-                const savedPreviewWidth = localStorage.getItem('previewPanelWidth');
-
-                if (savedEditorWidth && savedPreviewWidth) {
-                    document.documentElement.style.setProperty('--editor-width', savedEditorWidth);
-                    document.documentElement.style.setProperty('--preview-width', savedPreviewWidth);
-                }
-
-                // Mouse down event on the divider
-                divider.addEventListener('mousedown', startResize);
-
-                // Touch start event for mobile
-                divider.addEventListener('touchstart', function (e) {
-                    startX = e.touches[0].clientX;
-                    startWidth = editorPanel.getBoundingClientRect().width;
-                    startResize(e);
-                });
-
-                function startResize(e) {
-                    if (currentViewMode !== 'split') return;
-
-                    isResizing = true;
-                    if (e.type !== 'touchstart') {
-                        startX = e.clientX;
-                        startWidth = editorPanel.getBoundingClientRect().width;
-                    }
-
-                    // Add classes for styling during drag
-                    divider.classList.add('dragging');
-                    appContainer.classList.add('resizing');
-
-                    // Prevent text selection during resize
-                    document.body.style.userSelect = 'none';
-
-                    e.preventDefault();
-                }
-
-                // Mouse move event - calculate and set new widths
-                document.addEventListener('mousemove', resize);
-
-                // Touch move event for mobile
-                document.addEventListener('touchmove', function (e) {
-                    if (!isResizing) return;
-
-                    const touchX = e.touches[0].clientX;
-                    doResize(touchX);
-                    e.preventDefault(); // Prevent scrolling
-                });
-
-                function resize(e) {
-                    if (!isResizing) return;
-                    doResize(e.clientX);
-                }
-
-                function doResize(clientX) {
-                    // Calculate the new width based on mouse/touch movement
-                    const containerWidth = appContainer.clientWidth;
-                    const newWidth = startWidth - (clientX - startX);
-
-                    // Calculate percentages with limits
-                    const editorPercent = Math.min(Math.max((newWidth / containerWidth) * 100, 20), 80);
-                    const previewPercent = 100 - editorPercent;
-
-                    // Update CSS variables
-                    document.documentElement.style.setProperty('--editor-width', `${editorPercent}%`);
-                    document.documentElement.style.setProperty('--preview-width', `${previewPercent}%`);
-
-                    // Refresh CodeMirror
-                    editor.refresh();
-                }
-
-                // Mouse up and touch end events - finalize resize
-                function stopResize() {
-                    if (!isResizing) return;
-
-                    isResizing = false;
-
-                    // Remove drag-related classes
-                    divider.classList.remove('dragging');
-                    appContainer.classList.remove('resizing');
-
-                    // Re-enable text selection
-                    document.body.style.userSelect = '';
-
-                    // Get final widths
-                    const editorWidth = getComputedStyle(document.documentElement).getPropertyValue('--editor-width');
-                    const previewWidth = getComputedStyle(document.documentElement).getPropertyValue('--preview-width');
-
-                    // Save to localStorage
-                    localStorage.setItem('editorPanelWidth', editorWidth);
-                    localStorage.setItem('previewPanelWidth', previewWidth);
-
-                    // Final refresh of editor
-                    editor.refresh();
-                }
-
-                document.addEventListener('mouseup', stopResize);
-                document.addEventListener('touchend', stopResize);
-                document.addEventListener('touchcancel', stopResize);
-            }
-
-            // Modify the existing setViewMode function to reinitialize resizable panels when needed
-            const originalSetViewMode = setViewMode;
-            setViewMode = function (mode) {
-                // Call the original function first
-                originalSetViewMode(mode);
-
-                // If we switched to split view, make sure panels are resizable
-                if (mode === 'split') {
-                    // Need a small delay to ensure DOM is updated
-                    setTimeout(initResizablePanels, 100);
-                }
-            };
-
-            // Initialize resizable panels
-            initResizablePanels();
+              }
+
+              // If we're not in a special section, skip this token
+              stream.skipToEnd();
+              return null;
+            },
+          };
+
+          return CodeMirror.overlayMode(markdownMode, overlay);
         });
-    </script>
-</body>
 
+        // Define available editor themes
+        const editorThemes = {
+          default: {
+            theme: "default",
+            isDark: false,
+          },
+          material: {
+            theme: "material",
+            isDark: true,
+          },
+          dracula: {
+            theme: "dracula",
+            isDark: true,
+          },
+          nord: {
+            theme: "nord",
+            isDark: true,
+          },
+          solarized: {
+            theme: "solarized",
+            isDark: false,
+          },
+          "ayu-dark": {
+            theme: "ayu-dark",
+            isDark: true,
+          },
+          idea: {
+            theme: "idea",
+            isDark: false,
+          },
+          "xq-light": {
+            theme: "xq-light",
+            isDark: false,
+          },
+          auto: {
+            theme: "default", // Will be changed based on dark mode
+            isDark: false,
+            isAuto: true,
+          },
+        };
+
+        // Initialize state variables
+        let currentTheme = localStorage.getItem("editorTheme") || "default";
+        let isDarkMode = localStorage.getItem("darkMode") === "enabled";
+        let currentViewMode = localStorage.getItem("viewMode") || "split";
+
+        const editor = CodeMirror.fromTextArea(
+          document.getElementById("editor"),
+          {
+            mode: "markdownWithCodeMath",
+            lineNumbers: false,
+            lineWrapping: true,
+            scrollbarStyle: null,
+            direction: "rtl",
+            rtlMoveVisually: true,
+            theme: getEditorTheme(),
+            autofocus: true,
+            viewportMargin: Infinity,
+            inputStyle: "contenteditable",
+            specialChars:
+              /[\u0000-\u001f\u007f-\u009f\u00ad\u061C\u200E\u200F\u2028\u2029\ufeff\u2066\u2067\u2068\u2069]/,
+            extraKeys: {
+              Enter: "newlineAndIndentContinueMarkdownList",
+            },
+          },
+        );
+
+        // Add direct event listener to handle keyboard shortcuts
+        editor.getWrapperElement().addEventListener("keydown", function (e) {
+          // Check for keyboard shortcuts
+          if ((e.ctrlKey || e.metaKey) && e.key === "b") {
+            e.preventDefault(); // Prevent default browser behavior
+            applyBoldFormatting(editor);
+          } else if ((e.ctrlKey || e.metaKey) && e.key === "i") {
+            e.preventDefault();
+            applyItalicFormatting(editor);
+          } else if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+            e.preventDefault();
+            applyLinkFormatting(editor);
+          } else if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+            e.preventDefault();
+            saveDocument();
+          }
+        });
+
+        // Specific formatting functions
+        function applyBoldFormatting(cm) {
+          const selection = cm.getSelection();
+          const from = cm.getCursor("from");
+          const to = cm.getCursor("to");
+
+          if (selection) {
+            // Check if selection is already bold (surrounded by **)
+            if (selection.startsWith("**") && selection.endsWith("**")) {
+              // Remove formatting
+              cm.replaceSelection(selection.substring(2, selection.length - 2));
+            } else {
+              // Add bold formatting
+              cm.replaceSelection(`**${selection}**`);
+              // Keep the same text selected
+              cm.setSelection(
+                { line: from.line, ch: from.ch },
+                { line: to.line, ch: to.ch + 4 },
+              );
+            }
+          } else {
+            // No selection, insert placeholder
+            cm.replaceSelection("**טקסט מודגש**");
+            // Position cursor between the asterisks
+            const cursor = cm.getCursor();
+            cm.setCursor({ line: cursor.line, ch: cursor.ch - 2 });
+          }
+
+          // Ensure focus remains on editor
+          cm.focus();
+
+          // Force update preview
+          updatePreview();
+        }
+
+        // Similar functions for italic and link formatting
+        function applyItalicFormatting(cm) {
+          // Implementation similar to bold but with single asterisk
+          const selection = cm.getSelection();
+          const from = cm.getCursor("from");
+          const to = cm.getCursor("to");
+
+          if (selection) {
+            if (selection.startsWith("*") && selection.endsWith("*")) {
+              cm.replaceSelection(selection.substring(1, selection.length - 1));
+            } else {
+              cm.replaceSelection(`*${selection}*`);
+              cm.setSelection(
+                { line: from.line, ch: from.ch },
+                { line: to.line, ch: to.ch + 2 },
+              );
+            }
+          } else {
+            cm.replaceSelection("*טקסט נטוי*");
+            const cursor = cm.getCursor();
+            cm.setCursor({ line: cursor.line, ch: cursor.ch - 1 });
+          }
+
+          cm.focus();
+          updatePreview();
+        }
+
+        function applyLinkFormatting(cm) {
+          const selection = cm.getSelection();
+          const from = cm.getCursor("from");
+
+          if (selection) {
+            cm.replaceSelection(`[${selection}](http://example.com)`);
+          } else {
+            cm.replaceSelection("[טקסט קישור](http://example.com)");
+            // Position cursor to edit the link text
+            const cursor = cm.getCursor();
+            const linkTextLength = "טקסט קישור".length;
+            cm.setCursor({
+              line: cursor.line,
+              ch: cursor.ch - (linkTextLength + 18),
+            });
+          }
+
+          cm.focus();
+          updatePreview();
+        }
+
+        // Function to get the correct editor theme based on current settings
+        function getEditorTheme() {
+          const themeInfo = editorThemes[currentTheme];
+
+          // If auto theme, pick based on dark mode
+          if (themeInfo.isAuto) {
+            return isDarkMode ? "material" : "default";
+          }
+
+          // update toggle icon
+          const themeToggle = document.getElementById("theme-toggle");
+          themeToggle.setAttribute("aria-pressed", isDarkMode);
+          themeToggle.setAttribute("data-active", isDarkMode);
+          themeToggle.classList.toggle("active", isDarkMode);
+          themeToggle.querySelector(".toggle-handle").style.backgroundColor =
+            isDarkMode ? "#1a1a1a" : "#ffffff";
+          themeToggle.querySelector(".toggle-handle").style.boxShadow =
+            isDarkMode
+              ? "0 0 5px rgba(255, 255, 255, 0.2)"
+              : "0 0 5px rgba(0, 0, 0, 0.2)";
+          themeToggle.querySelector(".toggle-handle").style.transition =
+            "transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease";
+          themeToggle.querySelector(".toggle-handle").style.transition =
+            "transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease";
+          themeToggle.querySelector(".toggle-handle").style.transition =
+            "transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease";
+
+          // update primary color based on specific theme - each theme has its own primary color
+          const primaryColors = [
+            "#007bff", // default
+            "#2196F3", // material
+            "#FF79C6", // dracula
+            "#88C0D0", // nord
+            "#268bd2", // solarized
+            "#7aa2f7", // ayu-dark
+            "#007bff", // idea
+            "#007bff", // xq-light
+          ];
+          const themeIndex = Object.keys(editorThemes).indexOf(currentTheme);
+          const primaryColor = primaryColors[themeIndex];
+          document.documentElement.style.setProperty("--primary", primaryColor);
+          document.documentElement.style.setProperty(
+            "--primary-light",
+            primaryColor + "CC",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-dark",
+            primaryColor + "FF",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-hover",
+            primaryColor + "CC",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-active",
+            primaryColor + "FF",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-disabled",
+            primaryColor + "AA",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-active",
+            primaryColor + "FF",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-disabled",
+            primaryColor + "AA",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-active",
+            primaryColor + "FF",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-disabled",
+            primaryColor + "AA",
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color-active",
+            primaryColor + "FF",
+          );
+          return themeInfo.theme;
+        }
+
+        // Set up the view mode
+        setViewMode(currentViewMode);
+
+        // Sample content
+        const sampleContent = `# עורך Markdown Right-to-Left (RTL)
+
+      ברוך הבא לעורך Markdown המודרני בעברית. עורך זה תומך בכל תכונות Markdown ובנוסחאות מתמטיות, עם ממשק מינימליסטי בהשראת מוצרי Apple.
+
+      ## תכונות המערכת
+
+      * עיצוב נקי ומודרני בהשראת מוצרי Apple
+      * תמיכה מלאה בעברית (RTL)
+      * עיצוב טקסט **מודגש**, *נטוי* ו~~קו חוצה~~
+      * תמיכה ברשימות ממוספרות ולא ממוספרות
+      * אפשרות להוספת [קישורים](https://dorpascal.com) ותמונות
+      * תחביר קוד עם הדגשת תחביר
+      * מצב כהה ובהיר עם מגוון ערכות נושא לעורך
+
+      ## תמיכה בנוסחאות מתמטיות
+
+      ניתן להשתמש בנוסחאות מתמטיות בתוך השורה כמו $E = mc^2$ או בתור בלוק:
+
+      $$
+      \\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}
+      $$
+
+      ## קוד מקור
+
+      \`\`\`javascript
+      // דוגמת קוד בג'אווהסקריפט
+      function hello() {
+          console.log("שלום עולם!");
+          return true;
+      }
+
+      // טיפול באירועים
+      document.addEventListener('click', function() {
+          const message = "נלחץ כפתור!";
+          console.log(message);
+      });
+      \`\`\`
+
+      ## טבלאות
+
+      | שם      | גיל | עיר         |
+      |---------|-----|-------------|
+      | ישראל   | 30  | תל אביב     |
+      | שרה     | 25  | ירושלים     |
+      | דוד     | 40  | חיפה        |
+
+      ## רשימת משימות
+
+      - [x] עיצוב מודרני
+      - [x] תמיכה בנוסחאות מתמטיות
+      - [x] עימוד קוד
+      - [ ] ייצוא ל-PDF
+      - [ ] תמיכה בתמונות מקומיות
+
+      נסה לערוך את הטקסט ולראות את התצוגה המקדימה בזמן אמת!`;
+
+        editor.setValue(sampleContent);
+
+        // Configure Marked renderer for RTL
+        const renderer = new marked.Renderer();
+
+        // Custom table renderer for RTL tables
+        renderer.table = function (header, body) {
+          return `<table class="rtl-table" dir="rtl">\n<thead>\n${header}</thead>\n<tbody>\n${body}</tbody>\n</table>\n`;
+        };
+
+        // Custom list renderer for RTL lists
+        renderer.list = function (body, ordered, start) {
+          const type = ordered ? "ol" : "ul";
+          const startAttr =
+            ordered && start && start !== 1 ? ` start="${start}"` : "";
+          return `<${type}${startAttr} dir="rtl">${body}</${type}>`;
+        };
+
+        // Custom list item renderer for RTL
+        renderer.listitem = function (text, task, checked) {
+          if (task) {
+            return `<li style="direction: rtl; text-align: right;"><input type="checkbox" ${checked ? "checked" : ""} disabled> <span>${text}</span></li>`;
+          }
+          return `<li style="direction: rtl; text-align: right;">${text}</li>`;
+        };
+
+        // Custom code block renderer to ensure LTR
+        renderer.code = function (code, infostring, escaped) {
+          const lang = (infostring || "").match(/\S*/)[0];
+
+          // Add explicit LTR direction to code blocks
+          return `<pre dir="ltr" style="direction: ltr; text-align: left;"><code class="language-${lang}">${escaped ? code : escape(code)}</code></pre>`;
+        };
+
+        // Custom inline code renderer
+        renderer.codespan = function (code) {
+          return `<code dir="ltr" style="direction: ltr;">${code}</code>`;
+        };
+
+        // Setup Marked
+        marked.setOptions({
+          renderer: renderer,
+          headerIds: true,
+          gfm: true,
+          breaks: false,
+          pedantic: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
+          xhtml: false,
+        });
+
+        // Helper function to escape HTML
+        function escape(html) {
+          return html
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+        }
+
+        // Function to process math expressions
+        function processMath(text) {
+          // Replace block math
+          text = text.replace(
+            /\$\$([\s\S]*?)\$\$/g,
+            function (match, equation) {
+              try {
+                return `<div class="katex-display" dir="ltr">${katex.renderToString(equation, { displayMode: true, throwOnError: false })}</div>`;
+              } catch (error) {
+                return `<div class="katex-error">Error in equation: ${error.message}</div>`;
+              }
+            },
+          );
+
+          // Replace inline math
+          text = text.replace(
+            /\$((?!\$)[\s\S]*?)\$/g,
+            function (match, equation) {
+              try {
+                return `<span dir="ltr" style="display: inline-block;">${katex.renderToString(equation, { displayMode: false, throwOnError: false })}</span>`;
+              } catch (error) {
+                return `<span class="katex-error">Error in equation: ${error.message}</span>`;
+              }
+            },
+          );
+
+          return text;
+        }
+
+        // Function to update preview
+        function updatePreview() {
+          const markdown = editor.getValue();
+
+          // First parse markdown
+          let html = marked.parse(markdown);
+
+          // Then process math expressions
+          html = processMath(html);
+
+          // Sanitize HTML
+          const sanitizedHtml = DOMPurify.sanitize(html, {
+            ADD_TAGS: [
+              "math",
+              "mrow",
+              "mi",
+              "mo",
+              "mn",
+              "msup",
+              "msub",
+              "mfrac",
+            ],
+            ADD_ATTR: ["display", "dir", "style"],
+          });
+
+          // Update preview
+          document.getElementById("preview").innerHTML = sanitizedHtml;
+
+          // Update document stats
+          updateStats(markdown);
+        }
+
+        // Function to update document stats
+        function updateStats(text) {
+          const words = text
+            .trim()
+            .split(/\s+/)
+            .filter((word) => word.length > 0).length;
+          const chars = text.length;
+          const cursor = editor.getCursor();
+
+          document.getElementById("stats").innerHTML =
+            `<i class="fa-solid fa-chart-simple"></i> ${words} מילים | ${chars} תווים`;
+          document.getElementById("cursor-position").innerHTML =
+            `<i class="fa-solid fa-location-dot"></i> שורה ${cursor.line + 1}, עמודה ${cursor.ch + 1}`;
+        }
+
+        // Function to insert markdown syntax
+        function insertMarkdown(cm, type) {
+          const selection = cm.getSelection();
+          let replacement = "";
+
+          switch (type) {
+            case "bold":
+              replacement = `**${selection || "טקסט מודגש"}**`;
+              break;
+            case "italic":
+              replacement = `*${selection || "טקסט נטוי"}*`;
+              break;
+            case "strikethrough":
+              replacement = `~~${selection || "טקסט עם קו חוצה"}~~`;
+              break;
+            case "heading1":
+              replacement = `# ${selection || "כותרת ראשית"}`;
+              break;
+            case "heading2":
+              replacement = `## ${selection || "כותרת משנית"}`;
+              break;
+            case "heading3":
+              replacement = `### ${selection || "כותרת שלישית"}`;
+              break;
+            case "link":
+              replacement = `[${selection || "טקסט קישור"}](http://example.com)`;
+              break;
+            case "image":
+              replacement = `![${selection || "תיאור תמונה"}](http://example.com/image.jpg)`;
+              break;
+            case "code":
+              replacement = selection
+                ? `\`${selection}\``
+                : "```\nקוד כאן\n```";
+              break;
+            case "blockquote":
+              replacement = `> ${selection || "ציטוט"}`;
+              break;
+            case "bulletList":
+              replacement = `* ${selection || "פריט ברשימה"}`;
+              break;
+            case "numberedList":
+              replacement = `1. ${selection || "פריט ברשימה"}`;
+              break;
+            case "taskList":
+              replacement = `- [ ] ${selection || "משימה לביצוע"}`;
+              break;
+            case "inlineMath":
+              replacement = `$${selection || "E = mc^2"}$`;
+              break;
+            case "blockMath":
+              replacement = `$$\n${selection || "\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}"}\n$$`;
+              break;
+            case "table":
+              replacement = `| כותרת 1 | כותרת 2 | כותרת 3 |\n| ------- | ------- | ------- |\n| תוכן 1  | תוכן 2  | תוכן 3  |\n| תוכן 4  | תוכן 5  | תוכן 6  |`;
+              break;
+            default:
+              replacement = selection;
+          }
+
+          cm.replaceSelection(replacement);
+          updatePreview();
+        }
+
+        // Function to set the view mode
+        function setViewMode(mode) {
+          console.log("Setting view mode to:", mode);
+          // Check if mode is valid
+          if (!mode) {
+            console.log("Invalid view mode:", mode);
+            mode = "split"; // Default to split if invalid
+          }
+          const appContainer = document.querySelector(".app-container");
+          const viewBtns = document.querySelectorAll(".view-mode-btn");
+
+          // Update container data attribute
+          appContainer.setAttribute("data-view-mode", mode);
+
+          // Update active button
+          viewBtns.forEach((btn) => {
+            if (btn.getAttribute("data-mode") === mode) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+
+          // Store in localStorage
+          localStorage.setItem("viewMode", mode);
+          currentViewMode = mode;
+
+          // Refresh editor when switching view modes
+          setTimeout(() => {
+            editor.refresh();
+            updatePreview();
+          }, 100);
+        }
+
+        // Function to set dark mode
+        function setDarkMode(enabled) {
+          const themeToggle = document.getElementById("theme-toggle");
+
+          // Update dark mode state
+          isDarkMode = enabled;
+
+          // Update toggle visual state
+          themeToggle.setAttribute("data-active", enabled);
+          themeToggle.setAttribute("aria-pressed", enabled);
+
+          // Set body data-theme attribute
+          if (enabled) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("darkMode", "enabled");
+          } else {
+            document.documentElement.removeAttribute("data-theme");
+            localStorage.removeItem("darkMode");
+          }
+
+          // Update editor theme if using auto theme
+          if (editorThemes[currentTheme].isAuto) {
+            editor.setOption("theme", getEditorTheme());
+          }
+
+          // update page color-theme meta tag
+          const metaThemeColor = document.querySelector(
+            'meta[name="theme-color"]',
+          );
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute(
+              "content",
+              enabled ? "#121212" : "#ffffff",
+            );
+          }
+        }
+        // Find and Replace Functionality
+        (function () {
+          // Elements
+          const findBtn = document.getElementById("find-btn");
+          const replaceBtn = document.getElementById("replace-btn");
+
+          // Open find dialog using CodeMirror's built-in search
+          findBtn.addEventListener("click", function () {
+            editor.execCommand("find");
+          });
+
+          // Open replace dialog using CodeMirror's built-in replace
+          replaceBtn.addEventListener("click", function () {
+            editor.execCommand("replace");
+          });
+
+          // Add keyboard shortcuts to the editor configuration
+          editor.setOption(
+            "extraKeys",
+            Object.assign(editor.getOption("extraKeys") || {}, {
+              "Ctrl-F": "find",
+              "Cmd-F": "find",
+              "Ctrl-H": "replace",
+              "Cmd-H": "replace",
+            }),
+          );
+
+          // Add some additional CSS to make the search dialog RTL-friendly
+          const style = document.createElement("style");
+          style.textContent = `
+              .CodeMirror-dialog {
+                  direction: rtl;
+                  background-color: var(--card) !important;
+                  color: var(--text-primary) !important;
+                  border: 1px solid var(--border) !important;
+                  border-radius: var(--border-radius-md) !important;
+                  box-shadow: var(--shadow-md);
+                  padding: var(--spacing-sm);
+                  z-index: 30;
+                  left: 50% !important;
+                  transform: translateX(-50%) !important;
+                  font-size: 16px !important;
+              }
+
+              .CodeMirror-dialog input {
+                  width: 100%;
+                  padding: var(--spacing-xs) var(--spacing-sm);
+                  border: 1px solid var(--border) !important;
+                  border-radius: var(--border-radius-sm) !important;
+                  background-color: var(--surface-1) !important;
+                  color: var(--text-primary) !important;
+                  font-size: 16px !important;
+              }
+
+              .CodeMirror-dialog-top {
+                  position: absolute;
+                  top: 0;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  margin-top: var(--spacing-md);
+              }
+
+              .CodeMirror-dialog input {
+                  direction: rtl;
+                  background-color: var(--surface-1);
+                  color: var(--text-primary);
+                  border: 1px solid var(--border);
+                  border-radius: var(--border-radius-sm);
+                  padding: var(--spacing-xs) var(--spacing-sm);
+                  margin-right: var(--spacing-sm);
+              }
+
+              .CodeMirror-searching {
+                  background-color: var(--primary-light);
+              }
+
+              .CodeMirror-dialog button {
+                  background-color: var(--surface-1);
+                  color: var(--text-secondary);
+                  border: 1px solid var(--border);
+                  border-radius: var(--border-radius-sm);
+                  padding: var(--spacing-xs) var(--spacing-sm);
+                  margin-right: var(--spacing-xs);
+                  cursor: pointer;
+                  transition: all var(--transition-fast);
+              }
+
+              .CodeMirror-dialog button:hover {
+                  background-color: var(--primary-light);
+                  color: var(--primary);
+              }
+          `;
+          document.head.appendChild(style);
+        })();
+        // Function to set editor theme
+        function setEditorTheme(themeName) {
+          if (!editorThemes[themeName]) return;
+
+          // Update active theme
+          currentTheme = themeName;
+
+          // Update editor theme
+          editor.setOption("theme", getEditorTheme());
+
+          // Store in localStorage
+          localStorage.setItem("editorTheme", themeName);
+
+          // Update theme option UI
+          document.querySelectorAll(".theme-option").forEach((option) => {
+            if (option.getAttribute("data-theme") === themeName) {
+              option.classList.add("active");
+            } else {
+              option.classList.remove("active");
+            }
+          });
+        }
+
+        // Add event listeners to toolbar buttons
+        document.querySelectorAll(".btn[data-command]").forEach((button) => {
+          button.addEventListener("click", function () {
+            const command = this.getAttribute("data-command");
+            insertMarkdown(editor, command);
+            editor.focus();
+          });
+        });
+
+        // View mode buttons
+        document.querySelectorAll(".view-mode-btn").forEach((button) => {
+          button.addEventListener("click", function () {
+            const mode = this.getAttribute("data-mode");
+            setViewMode(mode);
+          });
+        });
+
+        // Theme dropdown toggle
+        const themeBtn = document.getElementById("theme-select-btn");
+        const themeSelector = document.querySelector(".theme-selector");
+
+        themeBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          themeSelector.classList.toggle("open");
+        });
+
+        // Close theme dropdown when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!themeSelector.contains(e.target)) {
+            themeSelector.classList.remove("open");
+          }
+        });
+
+        // Theme options
+        document.querySelectorAll(".theme-option").forEach((option) => {
+          option.addEventListener("click", function () {
+            const theme = this.getAttribute("data-theme");
+            setEditorTheme(theme);
+            themeSelector.classList.remove("open");
+          });
+        });
+
+        // Set active theme option
+        document.querySelectorAll(".theme-option").forEach((option) => {
+          if (option.getAttribute("data-theme") === currentTheme) {
+            option.classList.add("active");
+          } else {
+            option.classList.remove("active");
+          }
+        });
+
+        const hideToolbarBtn = document.querySelector(".hide-toolbar-btn");
+        const toolbar = document.querySelector(".toolbar");
+
+        // Make sure elements exist before adding event listeners
+        if (hideToolbarBtn && toolbar) {
+          // Force initial state
+          const savedState = localStorage.getItem("hideToolbar") === "true";
+
+          // Apply initial state immediately
+          if (savedState) {
+            toolbar.classList.add("hidden");
+            hideToolbarBtn.classList.add("active");
+            hideToolbarBtn.setAttribute("aria-pressed", "true");
+            hideToolbarBtn.querySelector("i").classList.remove("fa-chevron-up");
+            hideToolbarBtn.querySelector("i").classList.add("fa-chevron-down");
+            const tooltipSpan = hideToolbarBtn.querySelector(".tooltip");
+            // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+          }
+
+          // Simple toggle function with direct DOM manipulation
+          hideToolbarBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent event bubbling
+
+            const isCurrentlyHidden = toolbar.classList.contains("hidden");
+
+            // Toggle toolbar visibility
+            if (isCurrentlyHidden) {
+              toolbar.classList.remove("hidden");
+              this.classList.remove("active");
+              this.setAttribute("aria-pressed", "false");
+              this.querySelector("i").classList.add("fa-chevron-up");
+              this.querySelector("i").classList.remove("fa-chevron-down");
+              const tooltipSpan = this.querySelector(".tooltip");
+              // if (tooltipSpan) tooltipSpan.textContent = 'הסתר סרגל כלים';
+            } else {
+              toolbar.classList.add("hidden");
+              this.classList.add("active");
+              this.setAttribute("aria-pressed", "true");
+              this.querySelector("i").classList.remove("fa-chevron-up");
+              this.querySelector("i").classList.add("fa-chevron-down");
+              const tooltipSpan = this.querySelector(".tooltip");
+              // if (tooltipSpan) tooltipSpan.textContent = 'הצג סרגל כלים';
+            }
+
+            // Save state to localStorage
+            localStorage.setItem("hideToolbar", !isCurrentlyHidden);
+
+            // Force editor refresh
+            setTimeout(() => {
+              if (typeof editor !== "undefined" && editor.refresh) {
+                editor.refresh();
+              }
+            }, 50);
+          });
+        }
+
+        // Clear button
+        document
+          .getElementById("clear-btn")
+          .addEventListener("click", function () {
+            if (confirm("האם אתה בטוח שברצונך לנקות את כל התוכן?")) {
+              editor.setValue("");
+              editor.focus();
+            }
+          });
+        // open button
+        document
+          .getElementById("open-file-input")
+          .addEventListener("change", (e) => {
+            let fr = new FileReader();
+            fr.onload = function () {
+              console.log(fr.result);
+              editor.setValue(`${fr.result}`);
+            };
+            fr.readAsText(e.target.files[0]);
+          });
+        // Save button
+        document
+          .getElementById("save-btn")
+          .addEventListener("click", saveDocument);
+
+        function saveDocument() {
+          const content = editor.getValue();
+          const filename = "markdown_document.md";
+
+          const blob = new Blob([content], { type: "text/markdown" });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = filename;
+          a.click();
+
+          URL.revokeObjectURL(url);
+        }
+
+        // Dark mode toggle
+        const themeToggle = document.getElementById("theme-toggle");
+
+        themeToggle.addEventListener("click", function () {
+          const isActive = this.getAttribute("data-active") === "true";
+          setDarkMode(!isActive);
+        });
+
+        // Keyboard navigation for toggle
+        themeToggle.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            this.click();
+          }
+        });
+
+        // Check for saved theme preference
+        if (localStorage.getItem("darkMode") === "enabled") {
+          setDarkMode(true);
+        }
+
+        // Update preview and stats when editor changes
+        editor.on("change", updatePreview);
+        editor.on("cursorActivity", function () {
+          updateStats(editor.getValue());
+        });
+
+        // Handle window resize events to make the editor responsive
+        window.addEventListener("resize", function () {
+          editor.refresh();
+        });
+
+        // Initial update
+        updatePreview();
+
+        function initResizablePanels() {
+          const appContainer = document.querySelector(".app-container");
+          const divider = document.querySelector(".divider");
+          const editorPanel = document.querySelector(".editor-panel");
+          const previewPanel = document.querySelector(".preview-panel");
+
+          if (!divider || !editorPanel || !previewPanel) {
+            return;
+          }
+
+          let isResizing = false;
+          let startX, startWidth;
+
+          // Load saved panel widths from localStorage
+          const savedEditorWidth = localStorage.getItem("editorPanelWidth");
+          const savedPreviewWidth = localStorage.getItem("previewPanelWidth");
+
+          if (savedEditorWidth && savedPreviewWidth) {
+            document.documentElement.style.setProperty(
+              "--editor-width",
+              savedEditorWidth,
+            );
+            document.documentElement.style.setProperty(
+              "--preview-width",
+              savedPreviewWidth,
+            );
+          }
+
+          // Mouse down event on the divider
+          divider.addEventListener("mousedown", startResize);
+
+          // Touch start event for mobile
+          divider.addEventListener("touchstart", function (e) {
+            startX = e.touches[0].clientX;
+            startWidth = editorPanel.getBoundingClientRect().width;
+            startResize(e);
+          });
+
+          function startResize(e) {
+            if (currentViewMode !== "split") return;
+
+            isResizing = true;
+            if (e.type !== "touchstart") {
+              startX = e.clientX;
+              startWidth = editorPanel.getBoundingClientRect().width;
+            }
+
+            // Add classes for styling during drag
+            divider.classList.add("dragging");
+            appContainer.classList.add("resizing");
+
+            // Prevent text selection during resize
+            document.body.style.userSelect = "none";
+
+            e.preventDefault();
+          }
+
+          // Mouse move event - calculate and set new widths
+          document.addEventListener("mousemove", resize);
+
+          // Touch move event for mobile
+          document.addEventListener("touchmove", function (e) {
+            if (!isResizing) return;
+
+            const touchX = e.touches[0].clientX;
+            doResize(touchX);
+            e.preventDefault(); // Prevent scrolling
+          });
+
+          function resize(e) {
+            if (!isResizing) return;
+            doResize(e.clientX);
+          }
+
+          function doResize(clientX) {
+            // Calculate the new width based on mouse/touch movement
+            const containerWidth = appContainer.clientWidth;
+            const newWidth = startWidth - (clientX - startX);
+
+            // Calculate percentages with limits
+            const editorPercent = Math.min(
+              Math.max((newWidth / containerWidth) * 100, 20),
+              80,
+            );
+            const previewPercent = 100 - editorPercent;
+
+            // Update CSS variables
+            document.documentElement.style.setProperty(
+              "--editor-width",
+              `${editorPercent}%`,
+            );
+            document.documentElement.style.setProperty(
+              "--preview-width",
+              `${previewPercent}%`,
+            );
+
+            // Refresh CodeMirror
+            editor.refresh();
+          }
+
+          // Mouse up and touch end events - finalize resize
+          function stopResize() {
+            if (!isResizing) return;
+
+            isResizing = false;
+
+            // Remove drag-related classes
+            divider.classList.remove("dragging");
+            appContainer.classList.remove("resizing");
+
+            // Re-enable text selection
+            document.body.style.userSelect = "";
+
+            // Get final widths
+            const editorWidth = getComputedStyle(
+              document.documentElement,
+            ).getPropertyValue("--editor-width");
+            const previewWidth = getComputedStyle(
+              document.documentElement,
+            ).getPropertyValue("--preview-width");
+
+            // Save to localStorage
+            localStorage.setItem("editorPanelWidth", editorWidth);
+            localStorage.setItem("previewPanelWidth", previewWidth);
+
+            // Final refresh of editor
+            editor.refresh();
+          }
+
+          document.addEventListener("mouseup", stopResize);
+          document.addEventListener("touchend", stopResize);
+          document.addEventListener("touchcancel", stopResize);
+        }
+
+        // Modify the existing setViewMode function to reinitialize resizable panels when needed
+        const originalSetViewMode = setViewMode;
+        setViewMode = function (mode) {
+          // Call the original function first
+          originalSetViewMode(mode);
+
+          // If we switched to split view, make sure panels are resizable
+          if (mode === "split") {
+            // Need a small delay to ensure DOM is updated
+            setTimeout(initResizablePanels, 100);
+          }
+        };
+
+        // Initialize resizable panels
+        initResizablePanels();
+      });
+    </script>
+  </body>
 </html>
