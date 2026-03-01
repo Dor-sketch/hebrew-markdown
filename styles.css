@@ -485,6 +485,22 @@ button {
   color: var(--text-primary);
 }
 
+/* File indicator in status bar */
+.file-indicator {
+  color: var(--text-tertiary);
+  font-size: var(--fs-xs);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline;
+}
+
+.file-indicator i {
+  color: var(--primary);
+  margin-inline-end: 3px;
+}
+
 /* ===== UI COMPONENTS ===== */
 /* Buttons */
 .btn {

@@ -437,6 +437,10 @@
             <div class="tool-divider"></div>
 
             <div class="tool-group">
+                <button class="btn" id="open-btn" title="פתח קובץ">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span class="tooltip">פתח קובץ (Ctrl+O)</span>
+                </button>
                 <button class="btn" id="clear-btn" title="נקה">
                     <i class="fa-solid fa-trash-can"></i>
                     <span class="tooltip">נקה</span>
@@ -496,6 +500,9 @@
         </footer>
 
     </div>
+
+    <!-- Hidden file input for upload -->
+    <input type="file" id="file-input" accept=".md,.markdown,.txt,.text,.mdown,.mkdn,.mkd,.mdwn,.mdtxt,.mdtext" style="display:none">
 
     <!-- Loading spinner -->
     <div class="loading" id="loading">
@@ -675,6 +682,10 @@
                 else if ((e.ctrlKey || e.metaKey) && e.key === 's') {
                     e.preventDefault();
                     saveDocument();
+                }
+                else if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+                    e.preventDefault();
+                    openDocument();
                 }
             });
 
@@ -1339,22 +1350,246 @@ document.addEventListener('click', function() {
                 }
             });
 
-            // Save button
+            // ===== FILE OPERATIONS SYSTEM =====
+            // Track the current file handle (File System Access API) and filename
+            let currentFileHandle = null;
+            let currentFileName = 'markdown_document.md';
+            let isElectron = !!(window.electronAPI);
+
+            // Detect platform for path separator hints
+            function getPlatformInfo() {
+                const ua = navigator.userAgent.toLowerCase();
+                if (ua.includes('win')) return { os: 'windows', sep: '\\' };
+                if (ua.includes('mac')) return { os: 'mac', sep: '/' };
+                return { os: 'linux', sep: '/' };
+            }
+
+            // Check if File System Access API is available (Chrome/Edge on Windows/Mac/Linux desktop)
+            function hasFileSystemAccess() {
+                return 'showSaveFilePicker' in window && 'showOpenFilePicker' in window;
+            }
+
+            // Update status bar with current filename
+            function updateFileStatus(name) {
+                currentFileName = name || 'markdown_document.md';
+                const statsEl = document.getElementById('stats');
+                const text = editor.getValue();
+                const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+                const chars = text.length;
+                statsEl.innerHTML = `<i class="fa-solid fa-chart-simple"></i> ${words} מילים | ${chars} תווים` +
+                    `<span class="file-indicator" title="${currentFileName}"> | <i class="fa-solid fa-file"></i> ${currentFileName}</span>`;
+            }
+
+            // === SAVE DOCUMENT ===
             document.getElementById('save-btn').addEventListener('click', saveDocument);
 
-            function saveDocument() {
+            async function saveDocument() {
                 const content = editor.getValue();
-                const filename = 'markdown_document.md';
 
-                const blob = new Blob([content], { type: 'text/markdown' });
+                // 1) Electron native save
+                if (isElectron) {
+                    try {
+                        const result = await window.electronAPI.saveFile(content, currentFileName);
+                        if (result.success) {
+                            currentFileName = result.fileName;
+                            updateFileStatus(currentFileName);
+                        }
+                    } catch (err) {
+                        console.error('Electron save error:', err);
+                    }
+                    return;
+                }
+
+                // 2) File System Access API (modern Chrome/Edge - works great on Windows)
+                if (hasFileSystemAccess()) {
+                    try {
+                        // If we have a handle from a previous save/open, write directly
+                        if (currentFileHandle) {
+                            const writable = await currentFileHandle.createWritable();
+                            await writable.write(content);
+                            await writable.close();
+                            updateFileStatus(currentFileHandle.name);
+                            return;
+                        }
+
+                        // Otherwise show save picker
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: currentFileName,
+                            types: [{
+                                description: 'Markdown Files',
+                                accept: { 'text/markdown': ['.md', '.markdown'] }
+                            }, {
+                                description: 'Text Files',
+                                accept: { 'text/plain': ['.txt'] }
+                            }]
+                        });
+
+                        const writable = await handle.createWritable();
+                        await writable.write(content);
+                        await writable.close();
+
+                        currentFileHandle = handle;
+                        currentFileName = handle.name;
+                        updateFileStatus(currentFileName);
+                    } catch (err) {
+                        // User cancelled the dialog - not an error
+                        if (err.name !== 'AbortError') {
+                            console.error('Save error:', err);
+                            fallbackSave(content);
+                        }
+                    }
+                    return;
+                }
+
+                // 3) Fallback: Blob download (works everywhere including Linux/remote)
+                fallbackSave(content);
+            }
+
+            function fallbackSave(content) {
+                const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
                 const url = URL.createObjectURL(blob);
-
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = filename;
+                a.download = currentFileName;
+                document.body.appendChild(a);
                 a.click();
-
+                document.body.removeChild(a);
                 URL.revokeObjectURL(url);
+                updateFileStatus(currentFileName);
+            }
+
+            // === SAVE AS (always show picker) ===
+            async function saveDocumentAs() {
+                const content = editor.getValue();
+
+                if (isElectron) {
+                    try {
+                        const result = await window.electronAPI.saveFileAs(content, currentFileName);
+                        if (result.success) {
+                            currentFileName = result.fileName;
+                            updateFileStatus(currentFileName);
+                        }
+                    } catch (err) {
+                        console.error('Electron saveAs error:', err);
+                    }
+                    return;
+                }
+
+                if (hasFileSystemAccess()) {
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: currentFileName,
+                            types: [{
+                                description: 'Markdown Files',
+                                accept: { 'text/markdown': ['.md', '.markdown'] }
+                            }, {
+                                description: 'Text Files',
+                                accept: { 'text/plain': ['.txt'] }
+                            }]
+                        });
+
+                        const writable = await handle.createWritable();
+                        await writable.write(content);
+                        await writable.close();
+
+                        currentFileHandle = handle;
+                        currentFileName = handle.name;
+                        updateFileStatus(currentFileName);
+                    } catch (err) {
+                        if (err.name !== 'AbortError') {
+                            console.error('SaveAs error:', err);
+                            fallbackSave(content);
+                        }
+                    }
+                    return;
+                }
+
+                fallbackSave(content);
+            }
+
+            // === OPEN DOCUMENT ===
+            document.getElementById('open-btn').addEventListener('click', openDocument);
+
+            async function openDocument() {
+                // 1) Electron native open
+                if (isElectron) {
+                    try {
+                        const result = await window.electronAPI.openFile();
+                        if (result.success) {
+                            editor.setValue(result.content);
+                            currentFileName = result.fileName;
+                            updateFileStatus(currentFileName);
+                            currentFileHandle = null;
+                            editor.clearHistory();
+                        }
+                    } catch (err) {
+                        console.error('Electron open error:', err);
+                    }
+                    return;
+                }
+
+                // 2) File System Access API
+                if (hasFileSystemAccess()) {
+                    try {
+                        const [handle] = await window.showOpenFilePicker({
+                            types: [{
+                                description: 'Markdown Files',
+                                accept: {
+                                    'text/markdown': ['.md', '.markdown'],
+                                    'text/plain': ['.txt', '.text']
+                                }
+                            }],
+                            multiple: false
+                        });
+
+                        const file = await handle.getFile();
+                        const content = await file.text();
+
+                        editor.setValue(content);
+                        currentFileHandle = handle;
+                        currentFileName = handle.name;
+                        updateFileStatus(currentFileName);
+                        editor.clearHistory();
+                    } catch (err) {
+                        if (err.name !== 'AbortError') {
+                            console.error('Open error:', err);
+                            fallbackOpen();
+                        }
+                    }
+                    return;
+                }
+
+                // 3) Fallback: HTML file input (works on Linux / remote servers)
+                fallbackOpen();
+            }
+
+            function fallbackOpen() {
+                const fileInput = document.getElementById('file-input');
+                fileInput.value = ''; // Reset so the same file can be re-opened
+                fileInput.click();
+            }
+
+            // Handle file input change (fallback open)
+            document.getElementById('file-input').addEventListener('change', function (e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    editor.setValue(event.target.result);
+                    currentFileName = file.name;
+                    currentFileHandle = null;
+                    updateFileStatus(currentFileName);
+                    editor.clearHistory();
+                };
+                reader.readAsText(file, 'UTF-8');
+            });
+
+            // === Electron menu event listeners ===
+            if (isElectron) {
+                window.electronAPI.onMenuOpen(() => openDocument());
+                window.electronAPI.onMenuSave(() => saveDocument());
+                window.electronAPI.onMenuSaveAs(() => saveDocumentAs());
             }
 
             // Dark mode toggle
@@ -1382,6 +1617,14 @@ document.addEventListener('click', function() {
             editor.on('change', updatePreview);
             editor.on('cursorActivity', function () {
                 updateStats(editor.getValue());
+            });
+
+            // Global keyboard shortcut for open (outside editor too)
+            document.addEventListener('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
+                    e.preventDefault();
+                    openDocument();
+                }
             });
 
             // Handle window resize events to make the editor responsive

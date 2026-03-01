@@ -1,0 +1,45 @@
+{
+  "name": "hebrew-markdown",
+  "version": "1.0.0",
+  "description": "Hebrew Markdown Editor - RTL Markdown editor with live preview",
+  "main": "electron/main.js",
+  "author": "Dor Pascal",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack:win": "electron-builder --win portable",
+    "pack:linux": "electron-builder --linux AppImage",
+    "pack:mac": "electron-builder --mac dmg"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.dorpascal.hebrew-markdown",
+    "productName": "Hebrew Markdown",
+    "files": [
+      "index.html",
+      "styles.css",
+      "images/**/*",
+      "electron/**/*"
+    ],
+    "win": {
+      "target": "portable",
+      "icon": "images/icon.svg"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "images/icon.svg",
+      "category": "Office"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "images/icon.svg",
+      "category": "public.app-category.productivity"
+    },
+    "portable": {
+      "artifactName": "HebrewMarkdown-Portable.exe"
+    }
+  }
+}
