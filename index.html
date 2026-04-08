@@ -449,6 +449,10 @@
                     <i class="fa-solid fa-save"></i>
                     <span class="tooltip">שמור (Ctrl+S)</span>
                 </button>
+                <button class="btn" id="print-btn" title="הדפס">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="tooltip">הדפס (Ctrl+P)</span>
+                </button>
             </div>
         </div>
 
@@ -1383,6 +1387,143 @@ document.addEventListener('click', function() {
             // === SAVE DOCUMENT ===
             document.getElementById('save-btn').addEventListener('click', saveDocument);
 
+            // Print functionality
+            document.getElementById('print-btn').addEventListener('click', function() {
+                printDocument();
+            });
+
+            async function printDocument() {
+                const markdown = editor.getValue();
+                let html = marked.parse(markdown);
+                html = processMath(html);
+                const sanitizedHtml = DOMPurify.sanitize(html, {
+                    ADD_TAGS: ['math', 'mrow', 'mi', 'mo', 'mn', 'msup', 'msub', 'mfrac'],
+                    ADD_ATTR: ['display', 'dir', 'style']
+                });
+
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html lang="he" dir="rtl">
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>הדפסת מסמך Markdown</title>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css">
+                        <style>
+                            * {
+                                box-sizing: border-box;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            body {
+                                font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                                line-height: 1.6;
+                                padding: 40px;
+                                max-width: 800px;
+                                margin: 0 auto;
+                                color: #000;
+                            }
+                            h1, h2, h3, h4, h5, h6 {
+                                margin-top: 1.5em;
+                                margin-bottom: 0.75em;
+                                font-weight: 600;
+                            }
+                            h1 {
+                                font-size: 2em;
+                                border-bottom: 1px solid #ccc;
+                                padding-bottom: 0.3em;
+                            }
+                            h2 {
+                                font-size: 1.5em;
+                                border-bottom: 1px solid #ccc;
+                                padding-bottom: 0.3em;
+                            }
+                            h3 { font-size: 1.25em; }
+                            p { margin-bottom: 1.25em; }
+                            a { color: #0070f3; }
+                            blockquote {
+                                border-right: 4px solid #0070f3;
+                                margin: 1.5em 0;
+                                padding: 0.8em 1.4em;
+                                background-color: #f7f9fc;
+                            }
+                            pre {
+                                background-color: #f7f9fc;
+                                padding: 1.2em;
+                                border-radius: 4px;
+                                overflow-x: auto;
+                                direction: ltr;
+                                text-align: left;
+                                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                                font-size: 14px;
+                            }
+                            code {
+                                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                                background-color: #f7f9fc;
+                                padding: 0.2em 0.4em;
+                                border-radius: 4px;
+                                font-size: 0.9em;
+                                direction: ltr;
+                            }
+                            pre code {
+                                background: none;
+                                padding: 0;
+                            }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin: 1.5em 0;
+                            }
+                            table th, table td {
+                                padding: 0.8em 1.2em;
+                                border: 1px solid #ccc;
+                                text-align: right;
+                            }
+                            table th {
+                                background-color: #f7f9fc;
+                                font-weight: 600;
+                            }
+                            table tr:nth-child(even) {
+                                background-color: #f7f9fc;
+                            }
+                            img {
+                                max-width: 100%;
+                                height: auto;
+                            }
+                            ul, ol {
+                                margin: 1.25em 1.5em 1.25em 0;
+                            }
+                            li {
+                                margin-bottom: 0.5em;
+                            }
+                            .katex-display {
+                                margin: 1.5em 0;
+                                overflow-x: auto;
+                                text-align: center;
+                            }
+                            @media print {
+                                body {
+                                    padding: 0;
+                                }
+                                pre {
+                                    white-space: pre-wrap;
+                                    word-wrap: break-word;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${sanitizedHtml}
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.focus();
+                setTimeout(() => {
+                    printWindow.print();
+                }, 250);
+            }
+
             async function saveDocument() {
                 const content = editor.getValue();
 
@@ -1624,6 +1765,10 @@ document.addEventListener('click', function() {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'o') {
                     e.preventDefault();
                     openDocument();
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                    e.preventDefault();
+                    printDocument();
                 }
             });
 

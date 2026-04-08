@@ -1363,3 +1363,59 @@ button {
   left: 0;
   top: 0;
 }
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .app-container,
+  .app-header,
+  .toolbar,
+  .status-bar,
+  .editor-panel,
+  .divider {
+    display: none !important;
+  }
+
+  .preview-panel {
+    display: block !important;
+    max-width: 100% !important;
+  }
+
+  .preview-content {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .preview-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .preview-content a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+
+  .preview-content img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  .preview-content h1,
+  .preview-content h2,
+  .preview-content h3,
+  .preview-content h4,
+  .preview-content h5,
+  .preview-content h6 {
+    page-break-after: avoid;
+  }
+
+  .preview-content pre,
+  .preview-content code {
+    page-break-inside: avoid;
+  }
+}
