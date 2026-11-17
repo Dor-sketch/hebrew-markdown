@@ -14,7 +14,9 @@ Live demo: [dorpascal.com/hebrew-markdown](https://dorpascal.com/hebrew-markdown
 ## 🌟 Features
 
 - **Full Hebrew (RTL) Support**: Optimized for right-to-left Hebrew text editing with proper directional handling
-- **Live Preview**: See your formatted content in real-time as you type
+- **Live Preview**: See your formatted content in real time as you type
+- **Synchronized Scrolling**: Scroll either pane to move both through the document in split view
+- **Mermaid Diagrams**: Render `mermaid` code fences in the preview and printed output
 - **Multiple View Modes**: Choose between editor-only, split view, or preview-only modes
 - **Theme Selection**: Multiple editor themes including Material, Dracula, Nord, Solarized, and more
 - **Dark/Light Mode**: Toggle between dark and light interface modes
@@ -57,7 +59,7 @@ Live demo: [dorpascal.com/hebrew-markdown](https://dorpascal.com/hebrew-markdown
 
 2. Open `index.html` in your web browser or deploy to any web server.
 
-No build process or dependencies installation required! Everything is loaded from CDNs.
+The web editor has no build step. It loads pinned libraries with integrity checks. The Electron build uses local copies of those libraries.
 
 ## 🚀 Usage
 
@@ -68,8 +70,24 @@ No build process or dependencies installation required! Everything is loaded fro
 5. Switch between themes or dark/light mode as preferred
 6. Save your document using the save button (💾)
 
+### Mermaid diagrams
+
+Add a fenced block with the language `mermaid`. Mermaid loads from a CDN when the document first uses a diagram.
+
+````markdown
+```mermaid
+flowchart LR
+    A["טיוטה"] --> B["תצוגה מקדימה"]
+```
+````
+
+### Opening documents
+
+Raw HTML is shown as text. Images hosted on other sites appear as links, and open only when clicked. Embedded raster images and same-site web images still render inline. Both versions can open files up to 10 MiB. Preview and print rendering are capped at 500,000 characters.
+
 ### Keyboard Shortcuts
 
+- `Ctrl+Shift`: Press and release both keys in the editor to toggle between RTL and LTR
 - `Ctrl+B`: Bold text
 - `Ctrl+I`: Italic text
 - `Ctrl+K`: Insert link

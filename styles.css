@@ -823,7 +823,6 @@ button {
 
 .CodeMirror {
   height: 100% !important;
-  direction: rtl;
   font-family: var(--font-mono);
   font-size: 16px;
   line-height: 1.6;
@@ -834,27 +833,11 @@ button {
     color var(--transition-normal);
   z-index: 1;
   padding: 0;
-  padding-right: var(--space-lg);
+  padding-inline-start: var(--space-lg);
 }
 
-/* Special handling for code blocks and math in RTL context */
-.CodeMirror .cm-comment,
-.CodeMirror .cm-math-block,
-.CodeMirror .cm-math-inline,
-.CodeMirror span[class*="cm-math"],
-.CodeMirror .cm-formatting-math {
-  direction: ltr !important;
-  text-align: left !important;
-}
-
-.CodeMirror-line:has(.cm-math-block),
-.CodeMirror-line:has(.cm-math-inline),
-.CodeMirror-line:has(.cm-comment) {
-  direction: ltr !important;
-}
-
-.CodeMirror-rtl pre {
-  direction: unset;
+.CodeMirror[dir="rtl"] {
+  direction: rtl;
 }
 
 /* Search Dialog */
@@ -920,6 +903,37 @@ button {
   line-height: 1.6;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.preview-panel .panel-content,
+.CodeMirror-scroll {
+  scroll-behavior: auto;
+}
+
+.preview-content .mermaid-diagram {
+  background: #fff;
+  border-radius: var(--radius-md);
+  margin: 1em 0;
+  overflow-x: auto;
+  padding: var(--space-sm);
+  text-align: center;
+}
+
+.mermaid-measurement {
+  position: fixed;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preview-content .mermaid-diagram > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .preview-content blockquote {
