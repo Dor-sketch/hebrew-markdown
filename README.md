@@ -59,7 +59,7 @@ Live demo: [dorpascal.com/hebrew-markdown](https://dorpascal.com/hebrew-markdown
 
 2. Open `index.html` in your web browser or deploy to any web server.
 
-No build process or dependencies installation required! Everything is loaded from CDNs.
+The web editor has no build step. It loads pinned libraries with integrity checks. The Electron build uses local copies of those libraries.
 
 ## 🚀 Usage
 
@@ -80,6 +80,10 @@ flowchart LR
     A["טיוטה"] --> B["תצוגה מקדימה"]
 ```
 ````
+
+### Opening documents
+
+Raw HTML is shown as text. Images hosted on other sites appear as links, and open only when clicked. Embedded raster images and same-site web images still render inline. Both versions can open files up to 10 MiB. Preview and print rendering are capped at 500,000 characters.
 
 ### Keyboard Shortcuts
 

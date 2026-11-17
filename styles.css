@@ -927,11 +927,13 @@ button {
   pointer-events: none;
 }
 
-.preview-content .mermaid-diagram > svg {
+.preview-content .mermaid-diagram > img {
   display: block;
   max-width: 100%;
   height: auto;
-  margin-inline: auto;
+  margin: 0 auto;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .preview-content blockquote {

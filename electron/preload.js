@@ -8,7 +8,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     saveFileAs: (content, suggestedName) => ipcRenderer.invoke('save-file-as', content, suggestedName),
 
     // Menu event listeners
-    onMenuOpen: (callback) => ipcRenderer.on('menu-open', callback),
-    onMenuSave: (callback) => ipcRenderer.on('menu-save', callback),
-    onMenuSaveAs: (callback) => ipcRenderer.on('menu-save-as', callback)
+    onMenuOpen: (callback) => { ipcRenderer.on('menu-open', () => callback()); },
+    onMenuSave: (callback) => { ipcRenderer.on('menu-save', () => callback()); },
+    onMenuSaveAs: (callback) => { ipcRenderer.on('menu-save-as', () => callback()); }
 });

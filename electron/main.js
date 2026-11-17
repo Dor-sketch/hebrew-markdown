@@ -1,11 +1,89 @@
-const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu, shell } = require('electron');
 const path = require('path');
-const fs = require('fs');
+const fs = require('node:fs');
+const { pathToFileURL } = require('node:url');
+
+const editorPath = path.join(__dirname, '..', 'index.electron.html');
+const editorUrl = pathToFileURL(editorPath).href;
+const maxFileBytes = 10 * 1024 * 1024;
 
 let mainWindow;
 let currentFilePath = null;
 
+function isEditorUrl(value) {
+    try {
+        const url = new URL(value);
+        url.hash = '';
+        return url.href === editorUrl;
+    } catch {
+        return false;
+    }
+}
+
+function openWebLink(value) {
+    try {
+        const url = new URL(value);
+        if (url.protocol === 'https:' || url.protocol === 'http:') {
+            shell.openExternal(url.href).catch(console.error);
+        }
+    } catch {
+        // Malformed links have no external destination.
+    }
+}
+
+function restrictNavigation(contents, allowPrint = false) {
+    contents.on('will-frame-navigate', event => {
+        event.preventDefault();
+        if (event.isMainFrame) openWebLink(event.url);
+    });
+    contents.on('will-redirect', event => event.preventDefault());
+    contents.setWindowOpenHandler(({ url, frameName }) => {
+        if (allowPrint && isEditorUrl(contents.getURL()) && url === 'about:blank' && frameName === 'markdown-print') {
+            return { action: 'allow' };
+        }
+        openWebLink(url);
+        return { action: 'deny' };
+    });
+    contents.on('did-create-window', child => restrictNavigation(child.webContents));
+}
+
+function fromEditor(event) {
+    const contents = mainWindow?.webContents;
+    const frame = event.senderFrame;
+    return Boolean(contents && frame && event.sender === contents &&
+        frame === contents.mainFrame && isEditorUrl(frame.url));
+}
+
+function validContent(content) {
+    return typeof content === 'string' && Buffer.byteLength(content, 'utf8') <= maxFileBytes;
+}
+
+function safeFilename(name) {
+    if (typeof name !== 'string' || name.length > 255) return 'markdown_document.md';
+    const filename = path.win32.basename(name);
+    return filename && filename !== '.' && filename !== '..' && !/[\x00-\x1f]/.test(filename)
+        ? filename : 'markdown_document.md';
+}
+
+async function readDocument(filePath) {
+    const handle = await fs.promises.open(filePath, fs.constants.O_RDONLY | fs.constants.O_NONBLOCK);
+    try {
+        const stat = await handle.stat();
+        if (!stat.isFile() || stat.size > maxFileBytes) throw new Error('Only regular files up to 10 MiB can be opened.');
+        const chunks = [];
+        for await (const chunk of handle.createReadStream({ end: maxFileBytes, autoClose: false })) {
+            chunks.push(chunk);
+        }
+        const contents = Buffer.concat(chunks);
+        if (contents.length > maxFileBytes) throw new Error('Only files up to 10 MiB can be opened.');
+        return contents.toString('utf8');
+    } finally {
+        await handle.close();
+    }
+}
+
 function createWindow() {
+    currentFilePath = null;
     mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
@@ -15,13 +93,21 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
-            nodeIntegration: false
+            nodeIntegration: false,
+            sandbox: true
         },
         title: 'Hebrew Markdown',
         show: false
     });
 
-    mainWindow.loadFile(path.join(__dirname, '..', 'index.html'));
+    const contents = mainWindow.webContents;
+    restrictNavigation(contents, true);
+    contents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
+    contents.session.setPermissionCheckHandler(() => false);
+    contents.session.webRequest.onBeforeRequest({ urls: ['http://*/*', 'https://*/*'] }, (_details, callback) => {
+        callback({ cancel: true });
+    });
+    mainWindow.loadFile(editorPath);
 
     mainWindow.once('ready-to-show', () => {
         mainWindow.show();
@@ -86,7 +172,8 @@ function createWindow() {
 // === IPC Handlers for file operations ===
 
 // Open file dialog
-ipcMain.handle('open-file', async () => {
+ipcMain.handle('open-file', async event => {
+    if (!fromEditor(event)) return { success: false };
     const result = await dialog.showOpenDialog(mainWindow, {
         title: 'פתח קובץ Markdown',
         filters: [
@@ -103,11 +190,11 @@ ipcMain.handle('open-file', async () => {
 
     const filePath = result.filePaths[0];
     try {
-        const content = fs.readFileSync(filePath, 'utf-8');
+        const content = await readDocument(filePath);
         currentFilePath = filePath;
         const fileName = path.basename(filePath);
         mainWindow.setTitle(`Hebrew Markdown - ${fileName}`);
-        return { success: true, content, fileName, filePath };
+        return { success: true, content, fileName };
     } catch (err) {
         dialog.showErrorBox('שגיאה בפתיחת קובץ', err.message);
         return { success: false, error: err.message };
@@ -116,11 +203,12 @@ ipcMain.handle('open-file', async () => {
 
 // Save file (to current path or show dialog)
 ipcMain.handle('save-file', async (event, content, suggestedName) => {
-    if (currentFilePath) {
+    if (!fromEditor(event) || !validContent(content)) return { success: false };
+    const filePath = currentFilePath;
+    if (filePath) {
         try {
-            fs.writeFileSync(currentFilePath, content, 'utf-8');
-            const fileName = path.basename(currentFilePath);
-            return { success: true, fileName, filePath: currentFilePath };
+            fs.writeFileSync(filePath, content, 'utf8');
+            return { success: true, fileName: path.basename(filePath) };
         } catch (err) {
             dialog.showErrorBox('שגיאה בשמירת קובץ', err.message);
             return { success: false, error: err.message };
@@ -133,13 +221,14 @@ ipcMain.handle('save-file', async (event, content, suggestedName) => {
 
 // Save file As (always show dialog)
 ipcMain.handle('save-file-as', async (event, content, suggestedName) => {
+    if (!fromEditor(event) || !validContent(content)) return { success: false };
     return await saveFileAs(content, suggestedName);
 });
 
 async function saveFileAs(content, suggestedName) {
     const result = await dialog.showSaveDialog(mainWindow, {
         title: 'שמור קובץ Markdown',
-        defaultPath: suggestedName || 'markdown_document.md',
+        defaultPath: safeFilename(suggestedName),
         filters: [
             { name: 'Markdown Files', extensions: ['md', 'markdown'] },
             { name: 'Text Files', extensions: ['txt'] },
@@ -152,11 +241,11 @@ async function saveFileAs(content, suggestedName) {
     }
 
     try {
-        fs.writeFileSync(result.filePath, content, 'utf-8');
+        fs.writeFileSync(result.filePath, content, 'utf8');
         currentFilePath = result.filePath;
         const fileName = path.basename(result.filePath);
         mainWindow.setTitle(`Hebrew Markdown - ${fileName}`);
-        return { success: true, fileName, filePath: result.filePath };
+        return { success: true, fileName };
     } catch (err) {
         dialog.showErrorBox('שגיאה בשמירת קובץ', err.message);
         return { success: false, error: err.message };
