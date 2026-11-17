@@ -1073,6 +1073,49 @@ document.addEventListener('click', function() {
                 return mermaidLoader;
             }
 
+            async function renderMermaidSvg(mermaid, source) {
+                // Measure in the same LTR context as the preview and print output.
+                const measurement = document.createElement('div');
+                measurement.className = 'mermaid-measurement';
+                measurement.dir = 'ltr';
+                measurement.setAttribute('aria-hidden', 'true');
+                document.body.append(measurement);
+
+                try {
+                    await document.fonts.ready;
+                    const { svg } = await mermaid.render(`markdown-mermaid-${++diagramId}`, source, measurement);
+                    measurement.innerHTML = DOMPurify.sanitize(svg, {
+                        USE_PROFILES: { svg: true, svgFilters: true }
+                    });
+                    const chart = measurement.querySelector('svg');
+                    if (!chart) throw new Error('Mermaid did not return an SVG');
+                    await document.fonts.ready;
+                    fitMermaidSvg(chart);
+                    return chart;
+                } finally {
+                    measurement.remove();
+                }
+            }
+
+            function fitMermaidSvg(chart) {
+                const viewBox = chart.viewBox.baseVal;
+                if (viewBox.width <= 0 || viewBox.height <= 0) return;
+
+                // Include any artwork extending past Mermaid's original viewport.
+                const bounds = chart.getBBox();
+                const left = Math.min(viewBox.x, bounds.x - 2);
+                const top = Math.min(viewBox.y, bounds.y - 2);
+                const right = Math.max(viewBox.x + viewBox.width, bounds.x + bounds.width + 2);
+                const bottom = Math.max(viewBox.y + viewBox.height, bounds.y + bounds.height + 2);
+                const width = right - left;
+                const height = bottom - top;
+
+                chart.setAttribute('viewBox', `${left} ${top} ${width} ${height}`);
+                chart.setAttribute('width', width);
+                chart.setAttribute('height', height);
+                chart.style.removeProperty('max-width');
+            }
+
             async function renderMermaid(container) {
                 const blocks = container.querySelectorAll('pre > code.language-mermaid');
                 for (const code of blocks) {
@@ -1084,10 +1127,7 @@ document.addEventListener('click', function() {
                     try {
                         const mermaid = await loadMermaid();
                         if (!code.isConnected) continue;
-                        const { svg } = await mermaid.render(`markdown-mermaid-${++diagramId}`, code.textContent);
-                        diagram.innerHTML = DOMPurify.sanitize(svg, {
-                            USE_PROFILES: { svg: true, svgFilters: true }
-                        });
+                        diagram.append(await renderMermaidSvg(mermaid, code.textContent));
                     } catch {
                         diagram.className = 'mermaid-error';
                         diagram.dir = 'rtl';
@@ -1623,9 +1663,11 @@ document.addEventListener('click', function() {
                                 text-align: center;
                                 break-inside: avoid;
                             }
-                            .mermaid-diagram svg {
+                            .mermaid-diagram > svg {
+                                display: block;
                                 max-width: 100%;
                                 height: auto;
+                                margin-inline: auto;
                             }
                             .katex-display {
                                 margin: 1.5em 0;
