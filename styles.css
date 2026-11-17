@@ -823,7 +823,6 @@ button {
 
 .CodeMirror {
   height: 100% !important;
-  direction: rtl;
   font-family: var(--font-mono);
   font-size: 16px;
   line-height: 1.6;
@@ -834,7 +833,11 @@ button {
     color var(--transition-normal);
   z-index: 1;
   padding: 0;
-  padding-right: var(--space-lg);
+  padding-inline-start: var(--space-lg);
+}
+
+.CodeMirror[dir="rtl"] {
+  direction: rtl;
 }
 
 /* Special handling for code blocks and math in RTL context */

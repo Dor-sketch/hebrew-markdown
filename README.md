@@ -83,6 +83,7 @@ flowchart LR
 
 ### Keyboard Shortcuts
 
+- `Ctrl+Shift`: Press and release both keys in the editor to toggle between RTL and LTR
 - `Ctrl+B`: Bold text
 - `Ctrl+I`: Italic text
 - `Ctrl+K`: Insert link

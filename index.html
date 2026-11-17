@@ -700,8 +700,37 @@
                 syncedPreviewTop = undefined;
             });
 
+            const editorWrapper = editor.getWrapperElement();
+            editorWrapper.dir = editor.getOption('direction');
+            let directionShortcutPending = false;
+
+            // Wait for release so Ctrl+Shift shortcuts with a third key still work.
+            editorWrapper.addEventListener('keydown', (event) => {
+                if (event.key !== 'Control' && event.key !== 'Shift') {
+                    directionShortcutPending = false;
+                } else if (!event.repeat) {
+                    directionShortcutPending = event.ctrlKey && event.shiftKey && !event.altKey && !event.metaKey;
+                }
+            }, true);
+
+            editorWrapper.addEventListener('keyup', (event) => {
+                if (!directionShortcutPending || (event.key !== 'Control' && event.key !== 'Shift')) return;
+                directionShortcutPending = false;
+                event.preventDefault();
+                const direction = editor.getOption('direction') === 'rtl' ? 'ltr' : 'rtl';
+                editorWrapper.dir = direction;
+                editor.setOption('direction', direction);
+            }, true);
+
+            function cancelDirectionShortcut() {
+                directionShortcutPending = false;
+            }
+
+            editorWrapper.addEventListener('focusout', cancelDirectionShortcut);
+            window.addEventListener('blur', cancelDirectionShortcut);
+
             // Add direct event listener to handle keyboard shortcuts
-            editor.getWrapperElement().addEventListener('keydown', function (e) {
+            editorWrapper.addEventListener('keydown', function (e) {
                 // Check for keyboard shortcuts
                 if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
                     e.preventDefault(); // Prevent default browser behavior
