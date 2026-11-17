@@ -668,6 +668,38 @@
                 }
             });
 
+            const preview = document.getElementById('preview');
+            const previewScroller = preview.parentElement;
+            let syncedEditorTop;
+            let syncedPreviewTop;
+
+            function syncScroll(fromEditor) {
+                if (currentViewMode !== 'split') return;
+
+                const editorScroll = editor.getScrollInfo();
+                const editorRange = editorScroll.height - editorScroll.clientHeight;
+                const previewRange = previewScroller.scrollHeight - previewScroller.clientHeight;
+                if (editorRange <= 0 || previewRange <= 0) return;
+
+                if (fromEditor) {
+                    previewScroller.scrollTop = editorScroll.top / editorRange * previewRange;
+                    syncedPreviewTop = previewScroller.scrollTop;
+                } else {
+                    editor.scrollTo(null, previewScroller.scrollTop / previewRange * editorRange);
+                    syncedEditorTop = editor.getScrollInfo().top;
+                }
+            }
+
+            editor.on('scroll', () => {
+                const top = editor.getScrollInfo().top;
+                if (top !== syncedEditorTop) syncScroll(true);
+                syncedEditorTop = undefined;
+            });
+            previewScroller.addEventListener('scroll', () => {
+                if (previewScroller.scrollTop !== syncedPreviewTop) syncScroll(false);
+                syncedPreviewTop = undefined;
+            });
+
             // Add direct event listener to handle keyboard shortcuts
             editor.getWrapperElement().addEventListener('keydown', function (e) {
                 // Check for keyboard shortcuts
@@ -964,26 +996,94 @@ document.addEventListener('click', function() {
                 return text;
             }
 
-            // Function to update preview
-            function updatePreview() {
-                const markdown = editor.getValue();
-
-                // First parse markdown
-                let html = marked.parse(markdown);
-
-                // Then process math expressions
-                html = processMath(html);
-
-                // Sanitize HTML
-                const sanitizedHtml = DOMPurify.sanitize(html, {
+            function renderMarkdown(markdown) {
+                // Keep math substitutions out of fenced code, including Mermaid source.
+                const html = marked.parse(markdown).split(/(<pre\b[^>]*>[\s\S]*?<\/pre\s*>)/gi)
+                    .map((part, index) => index % 2 ? part : processMath(part))
+                    .join('');
+                return DOMPurify.sanitize(html, {
                     ADD_TAGS: ['math', 'mrow', 'mi', 'mo', 'mn', 'msup', 'msub', 'mfrac'],
                     ADD_ATTR: ['display', 'dir', 'style']
                 });
+            }
 
-                // Update preview
-                document.getElementById('preview').innerHTML = sanitizedHtml;
+            let mermaidLoader;
+            let diagramId = 0;
+            let previewDiagramTimer;
+            let previewVersion = 0;
 
-                // Update document stats
+            function loadMermaid() {
+                if (!mermaidLoader) {
+                    mermaidLoader = new Promise((resolve, reject) => {
+                        const script = document.createElement('script');
+                        script.src = 'https://cdn.jsdelivr.net/npm/mermaid@11.14.0/dist/mermaid.min.js';
+                        script.onload = () => {
+                            try {
+                                window.mermaid.initialize({
+                                    startOnLoad: false,
+                                    securityLevel: 'strict',
+                                    htmlLabels: false,
+                                    suppressErrorRendering: true
+                                });
+                                resolve(window.mermaid);
+                            } catch (error) {
+                                script.remove();
+                                reject(error);
+                            }
+                        };
+                        script.onerror = () => {
+                            script.remove();
+                            reject(new Error('Mermaid failed to load'));
+                        };
+                        document.head.append(script);
+                    }).catch(error => {
+                        mermaidLoader = undefined;
+                        throw error;
+                    });
+                }
+                return mermaidLoader;
+            }
+
+            async function renderMermaid(container) {
+                const blocks = container.querySelectorAll('pre > code.language-mermaid');
+                for (const code of blocks) {
+                    if (!code.isConnected) continue;
+
+                    const diagram = code.ownerDocument.createElement('div');
+                    diagram.className = 'mermaid-diagram';
+                    diagram.dir = 'ltr';
+                    try {
+                        const mermaid = await loadMermaid();
+                        if (!code.isConnected) continue;
+                        const { svg } = await mermaid.render(`markdown-mermaid-${++diagramId}`, code.textContent);
+                        diagram.innerHTML = DOMPurify.sanitize(svg, {
+                            USE_PROFILES: { svg: true, svgFilters: true }
+                        });
+                    } catch {
+                        diagram.className = 'mermaid-error';
+                        diagram.dir = 'rtl';
+                        const message = code.ownerDocument.createElement('p');
+                        message.textContent = 'לא ניתן להציג את תרשים Mermaid.';
+                        diagram.append(message, code.parentElement.cloneNode(true));
+                    }
+                    if (code.isConnected) code.parentElement.replaceWith(diagram);
+                }
+            }
+
+            function updatePreview() {
+                const markdown = editor.getValue();
+                const previousTop = previewScroller.scrollTop;
+                preview.innerHTML = renderMarkdown(markdown);
+                previewScroller.scrollTop = previousTop;
+                syncedPreviewTop = previewScroller.scrollTop;
+                syncScroll(true);
+
+                const version = ++previewVersion;
+                clearTimeout(previewDiagramTimer);
+                previewDiagramTimer = setTimeout(async () => {
+                    await renderMermaid(preview);
+                    if (version === previewVersion) syncScroll(true);
+                }, 200);
                 updateStats(markdown);
             }
 
@@ -1393,15 +1493,9 @@ document.addEventListener('click', function() {
             });
 
             async function printDocument() {
-                const markdown = editor.getValue();
-                let html = marked.parse(markdown);
-                html = processMath(html);
-                const sanitizedHtml = DOMPurify.sanitize(html, {
-                    ADD_TAGS: ['math', 'mrow', 'mi', 'mo', 'mn', 'msup', 'msub', 'mfrac'],
-                    ADD_ATTR: ['display', 'dir', 'style']
-                });
-
                 const printWindow = window.open('', '_blank');
+                if (!printWindow) return;
+                const sanitizedHtml = renderMarkdown(editor.getValue());
                 printWindow.document.write(`
                     <!DOCTYPE html>
                     <html lang="he" dir="rtl">
@@ -1496,6 +1590,14 @@ document.addEventListener('click', function() {
                             li {
                                 margin-bottom: 0.5em;
                             }
+                            .mermaid-diagram {
+                                text-align: center;
+                                break-inside: avoid;
+                            }
+                            .mermaid-diagram svg {
+                                max-width: 100%;
+                                height: auto;
+                            }
                             .katex-display {
                                 margin: 1.5em 0;
                                 overflow-x: auto;
@@ -1518,6 +1620,7 @@ document.addEventListener('click', function() {
                     </html>
                 `);
                 printWindow.document.close();
+                await renderMermaid(printWindow.document.body);
                 printWindow.focus();
                 setTimeout(() => {
                     printWindow.print();

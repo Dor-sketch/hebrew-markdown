@@ -922,6 +922,25 @@ button {
   margin: 0 auto;
 }
 
+.preview-panel .panel-content,
+.CodeMirror-scroll {
+  scroll-behavior: auto;
+}
+
+.preview-content .mermaid-diagram {
+  background: #fff;
+  border-radius: var(--radius-md);
+  margin: 1em 0;
+  overflow-x: auto;
+  padding: var(--space-sm);
+  text-align: center;
+}
+
+.preview-content .mermaid-diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+
 .preview-content blockquote {
   border-right: 4px solid var(--primary);
   margin: 1.5em 0;

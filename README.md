@@ -14,7 +14,9 @@ Live demo: [dorpascal.com/hebrew-markdown](https://dorpascal.com/hebrew-markdown
 ## 🌟 Features
 
 - **Full Hebrew (RTL) Support**: Optimized for right-to-left Hebrew text editing with proper directional handling
-- **Live Preview**: See your formatted content in real-time as you type
+- **Live Preview**: See your formatted content in real time as you type
+- **Synchronized Scrolling**: Scroll either pane to move both through the document in split view
+- **Mermaid Diagrams**: Render `mermaid` code fences in the preview and printed output
 - **Multiple View Modes**: Choose between editor-only, split view, or preview-only modes
 - **Theme Selection**: Multiple editor themes including Material, Dracula, Nord, Solarized, and more
 - **Dark/Light Mode**: Toggle between dark and light interface modes
@@ -67,6 +69,17 @@ No build process or dependencies installation required! Everything is loaded fro
 4. Toggle between different view modes using the buttons in the header
 5. Switch between themes or dark/light mode as preferred
 6. Save your document using the save button (💾)
+
+### Mermaid diagrams
+
+Add a fenced block with the language `mermaid`. Mermaid loads from a CDN when the document first uses a diagram.
+
+````markdown
+```mermaid
+flowchart LR
+    A["טיוטה"] --> B["תצוגה מקדימה"]
+```
+````
 
 ### Keyboard Shortcuts
 
